@@ -19,8 +19,7 @@ export default function TodoPage() {
     }, 
   ];
 
-  const currentDate = new Date(2023, 1, 25);
-  const views = ['week', 'month'];
+  const currentDate = new Date();
 
   return (
     <>
@@ -37,7 +36,7 @@ export default function TodoPage() {
         <Scheduler
         timeZone="America/New_York"
         dataSource={data}
-        views={views}
+        views={['week', 'month']}
         defaultCurrentView="month"
         defaultCurrentDate={currentDate}
         height={600}
