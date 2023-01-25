@@ -32,7 +32,7 @@ export default function Header() {
           if (scrollY < 10) setHeaderTransparent(true);
         }}
       >
-        <Link href="/">
+        <Link href="/" onClick={() => {setShowMenu(false)}}>
           <Image src="https://upload.wikimedia.org/wikipedia/en/thumb/a/ac/North_Florida_Ospreys_logo.svg/800px-North_Florida_Ospreys_logo.svg.png" />
         </Link>
         <MenuButton
