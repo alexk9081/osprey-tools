@@ -24,7 +24,7 @@ export default function TodoPage() {
   return (
     <>
       <Head>
-        <title>Create Next App</title>
+        <title>Calendar | UNF App</title>
       </Head>
       <main>
         <Hero></Hero>

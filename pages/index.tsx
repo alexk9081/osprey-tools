@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Create Next App</title>
+        <title>Home | UNF App</title>
       </Head>
       <main>
         <Hero>

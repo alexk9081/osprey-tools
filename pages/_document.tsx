@@ -1,4 +1,4 @@
-import { Html, Head, Main, NextScript } from 'next/document'
+import { Html, Head, Main, NextScript } from "next/document";
 
 export default function Document() {
   return (
@@ -10,11 +10,14 @@ export default function Document() {
         href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Merriweather:wght@400;700;900&display=swap"
         rel="stylesheet"
       />
-
+      <link
+        href="https://www.unf.edu/images/logos/favicon.ico"
+        rel="SHORTCUT ICON"
+      />
       <body className="dx-viewport">
         <Main />
         <NextScript />
       </body>
     </Html>
-  )
+  );
 }
