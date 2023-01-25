@@ -10,6 +10,8 @@ export const colors = {
 
   translucentNearWhite: "rgba( 240, 240, 240, 0.95 )",
   translucentDarkWhite: "rgba( 224, 224, 224, 0.95 )",
+
+  unfBlue: "#0a233f",
 };
 
 export const fonts = {

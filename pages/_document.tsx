@@ -11,7 +11,7 @@ export default function Document() {
         rel="stylesheet"
       />
 
-      <body>
+      <body className="dx-viewport">
         <Main />
         <NextScript />
       </body>
