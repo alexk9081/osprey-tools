@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { colors, fonts } from "@/styles/styleConstants";
-import { Menu2 } from "tabler-icons-react";
+import { colors, fonts, screen } from "@/styles/styleConstants";
+import { Menu2, Search } from "tabler-icons-react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function Header() {
   const [headerTransparent, setHeaderTransparent] = useState(true);
@@ -23,6 +24,24 @@ export default function Header() {
 
   const [showMenu, setShowMenu] = useState(false);
 
+  //Chagne active route to be underlined
+  const router = useRouter();
+  const [url, setURL] = useState("");
+
+  useEffect(() => {
+    setURL(router.pathname);
+
+    const handleRouteChange = (url: string, { shallow }: any) => {
+      setURL(url);
+    };
+
+    router.events.on("routeChangeStart", handleRouteChange);
+
+    return () => {
+      router.events.off("routeChangeStart", handleRouteChange);
+    };
+  }, []);
+
   return (
     <>
       <UpperHeader
@@ -40,12 +59,18 @@ export default function Header() {
         >
           <Image src="https://upload.wikimedia.org/wikipedia/en/thumb/a/ac/North_Florida_Ospreys_logo.svg/800px-North_Florida_Ospreys_logo.svg.png" />
         </Link>
-        <MenuButton
-          size="3rem"
-          strokeWidth={3}
-          color={colors.unfBlue}
-          onClick={() => setShowMenu(!showMenu)}
-        />
+        <SearchAndMenu>
+          <SearchComponent>
+            <SearchBar />
+            <Search />
+          </SearchComponent>
+          <MenuButton
+            size="3rem"
+            strokeWidth={3}
+            color={colors.unfBlue}
+            onClick={() => setShowMenu(!showMenu)}
+          />
+        </SearchAndMenu>
       </UpperHeader>
       <Menu
         show={showMenu}
@@ -56,6 +81,31 @@ export default function Header() {
     </>
   );
 }
+
+const SearchBar = styled.input`
+background-color: transparent;
+border: none;
+
+ @media (max-width: ${screen.mobile}) {
+  width: 5rem;
+ }
+`;
+
+const SearchComponent = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  
+  border-radius: 3rem;
+  border: 2px solid #0005;
+
+  padding: 0 0.5rem;
+`;
+
+const SearchAndMenu = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 function Menu({ show, closeMenu }: { show: boolean; closeMenu: () => void }) {
   return (
@@ -148,7 +198,9 @@ const UpperHeader = styled.header<{ isTransparent: boolean }>`
     props.isTransparent ? "none" : "0 1px 12px rgba(0, 0, 0, 0.25)"};
 
   border-bottom: ${(props: { isTransparent: boolean }) =>
-    props.isTransparent ? "1px solid transparent" : "1px solid rgba(255, 255, 255, 0.3)"};
+    props.isTransparent
+      ? "1px solid transparent"
+      : "1px solid rgba(255, 255, 255, 0.3)"};
 
   a {
     color: ${colors.nearBlack};
