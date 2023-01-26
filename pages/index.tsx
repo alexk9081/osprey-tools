@@ -47,6 +47,11 @@ const Test = styled.div`
 
   margin-right: -20rem;
   padding: 1rem 20rem 1rem 1rem;
+
+  @media (max-width: ${screen.tablet}) {
+    margin: 0;
+    padding: 1rem;
+  }
 `;
 
 const StickyBox = styled.div`
