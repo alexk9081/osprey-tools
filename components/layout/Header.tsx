@@ -32,7 +32,12 @@ export default function Header() {
           if (scrollY < 10) setHeaderTransparent(true);
         }}
       >
-        <Link href="/" onClick={() => {setShowMenu(false)}}>
+        <Link
+          href="/"
+          onClick={() => {
+            setShowMenu(false);
+          }}
+        >
           <Image src="https://upload.wikimedia.org/wikipedia/en/thumb/a/ac/North_Florida_Ospreys_logo.svg/800px-North_Florida_Ospreys_logo.svg.png" />
         </Link>
         <MenuButton
@@ -42,12 +47,17 @@ export default function Header() {
           onClick={() => setShowMenu(!showMenu)}
         />
       </UpperHeader>
-      <Menu show={showMenu} closeMenu={() => {setShowMenu(false)}} />
+      <Menu
+        show={showMenu}
+        closeMenu={() => {
+          setShowMenu(false);
+        }}
+      />
     </>
   );
 }
 
-function Menu({ show, closeMenu }: { show: boolean, closeMenu: () => void }) {
+function Menu({ show, closeMenu }: { show: boolean; closeMenu: () => void }) {
   return (
     <>
       <MenuWrapper show={show}>
@@ -133,6 +143,12 @@ const UpperHeader = styled.header<{ isTransparent: boolean }>`
 
   background-color: ${(props: { isTransparent: boolean }) =>
     props.isTransparent ? "transparent" : colors.translucentNearWhite};
+
+  box-shadow: ${(props: { isTransparent: boolean }) =>
+    props.isTransparent ? "none" : "0 1px 12px rgba(0, 0, 0, 0.25)"};
+
+  border-bottom: ${(props: { isTransparent: boolean }) =>
+    props.isTransparent ? "none" : "1px solid rgba(255, 255, 255, 0.3)"};
 
   a {
     color: ${colors.nearBlack};
