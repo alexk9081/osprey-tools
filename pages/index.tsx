@@ -43,7 +43,7 @@ export default function Home() {
 const Test = styled.div`
   height: 15rem;
 
-  background-color: #aaa;
+  background-color: #ddd;
 
   margin-right: -20rem;
   padding: 1rem 20rem 1rem 1rem;
@@ -113,15 +113,18 @@ const TaskWrapper = styled.div`
   margin: 1rem;
   padding: 1rem;
 
-  border: 1px solid #666;
+  /* border: 1px solid #666; */
   border-radius: 1rem;
+
+  box-shadow: 0.1rem 0.3rem 0.75rem #00000040;
 
   transition: 0.1s ease all;
 
   &:hover {
     cursor: pointer;
 
-    background-color: #f1f1f1e8;
+    background-color: #e2e2e2e8;
+    box-shadow: 0.1rem 0.3rem 0.75rem #00000060;
   }
 `;
 
@@ -132,7 +135,7 @@ const TaskHeader = styled.div`
 
 const TaskTitle = styled.div`
   font-size: 1.5rem;
-  font-weight: 800;
+  font-weight: 700;
 `;
 
 const Date = styled.div``;
