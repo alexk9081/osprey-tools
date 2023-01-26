@@ -12,6 +12,7 @@ export const colors = {
   translucentDarkWhite: "rgba( 224, 224, 224, 0.95 )",
 
   unfBlue: "#0a233f",
+  unfBlueLight: "#1a334f",
 };
 
 export const fonts = {

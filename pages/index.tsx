@@ -1,5 +1,6 @@
 import { fonts, screen } from "@/styles/styleConstants";
 import Head from "next/head";
+import Link from "next/link";
 import { ReactComponentElement, ReactElement, ReactFragment } from "react";
 import styled from "styled-components";
 
@@ -11,10 +12,12 @@ export default function Home() {
       </Head>
       <main>
         <Hero>
-          <Image
-            src="http://fakeimg.pl/1500x600?text=Map Placeholder&font=bebas"
-            alt=""
-          />
+          <Link href="/map">
+            <Image
+              src="http://fakeimg.pl/1500x600?text=Map Placeholder&font=bebas"
+              alt=""
+            />
+          </Link>
         </Hero>
 
         <MainContent>

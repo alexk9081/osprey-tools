@@ -148,7 +148,7 @@ const UpperHeader = styled.header<{ isTransparent: boolean }>`
     props.isTransparent ? "none" : "0 1px 12px rgba(0, 0, 0, 0.25)"};
 
   border-bottom: ${(props: { isTransparent: boolean }) =>
-    props.isTransparent ? "none" : "1px solid rgba(255, 255, 255, 0.3)"};
+    props.isTransparent ? "1px solid transparent" : "1px solid rgba(255, 255, 255, 0.3)"};
 
   a {
     color: ${colors.nearBlack};
