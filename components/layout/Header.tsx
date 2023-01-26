@@ -60,7 +60,7 @@ export default function Header() {
           <Image src="https://upload.wikimedia.org/wikipedia/en/thumb/a/ac/North_Florida_Ospreys_logo.svg/800px-North_Florida_Ospreys_logo.svg.png" />
         </Link>
         <SearchAndMenu>
-          <SearchComponent>
+          <SearchComponent show={url.startsWith("/map")}>
             <SearchBar />
             <Search />
           </SearchComponent>
@@ -83,23 +83,25 @@ export default function Header() {
 }
 
 const SearchBar = styled.input`
-background-color: transparent;
-border: none;
+  background-color: transparent;
+  border: none;
 
- @media (max-width: ${screen.mobile}) {
-  width: 5rem;
- }
+  @media (max-width: ${screen.mobile}) {
+    width: 5rem;
+  }
 `;
 
 const SearchComponent = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  
+
   border-radius: 3rem;
   border: 2px solid #0005;
 
   padding: 0 0.5rem;
+
+  display: ${(props: { show: boolean }) => (props.show ? "flex" : "none")};
 `;
 
 const SearchAndMenu = styled.div`
