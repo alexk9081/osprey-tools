@@ -1,4 +1,4 @@
-import { colors, fonts } from "@/styles/styleConstants";
+import { colors, fonts, screen } from "@/styles/styleConstants";
 import Head from "next/head";
 import styled from "styled-components";
 
@@ -37,12 +37,24 @@ const Buttons = styled.div`
   align-items: center;
   gap: 3rem;
 
+  overflow: scroll;
+
   height: 3rem;
+
+  @media (max-width: ${screen.tablet}) {
+    justify-content: left;
+
+    margin: 0 1rem;
+
+    gap: 1rem;
+  }
 `;
 
 const Button = styled.button`
   background-color: ${colors.unfBlue};
   color: ${colors.nearWhite};
+
+  flex-shrink: 0;
 
   font-size: 1rem;
   font-weight: 600;
