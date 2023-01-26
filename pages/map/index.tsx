@@ -37,8 +37,6 @@ const Buttons = styled.div`
   align-items: center;
   gap: 3rem;
 
-  overflow: scroll;
-
   height: 3rem;
 
   @media (max-width: ${screen.tablet}) {
@@ -47,6 +45,10 @@ const Buttons = styled.div`
     margin: 0 1rem;
 
     gap: 1rem;
+  }
+
+  @media (max-width: ${screen.mobile}) {
+    overflow: scroll;
   }
 `;
 
