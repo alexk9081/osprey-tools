@@ -113,7 +113,7 @@ const TaskWrapper = styled.div`
   margin: 1rem;
   padding: 1rem;
 
-  /* border: 1px solid #666; */
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 1rem;
 
   box-shadow: 0.1rem 0.3rem 0.75rem #00000040;
