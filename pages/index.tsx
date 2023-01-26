@@ -1,4 +1,4 @@
-import { fonts } from "@/styles/styleConstants";
+import { fonts, screen } from "@/styles/styleConstants";
 import Head from "next/head";
 import { ReactComponentElement, ReactElement, ReactFragment } from "react";
 import styled from "styled-components";
@@ -17,22 +17,69 @@ export default function Home() {
           />
         </Hero>
 
-        <UpcomingTasks>
-          <UpcomingTasksTitle>Upcoming Tasks</UpcomingTasksTitle>
-          <Task date="March 10th">Commit Felony</Task>
-          <Task date="March 11th">Move To New Country</Task>
-          <Task date="December 12th">Get Extradited</Task>
-        </UpcomingTasks>
+        <MainContent>
+          <div>
+            <UpcomingTasks>
+              <UpcomingTasksTitle>Upcoming Tasks</UpcomingTasksTitle>
+              <Task date="March 10th">Commit Felony</Task>
+              <Task date="March 11th">Move To New Country</Task>
+              <Task date="December 12th">Get Extradited</Task>
+            </UpcomingTasks>
+            <Test>
+              Eu deserunt commodo ex ex laboris. Pariatur est amet deserunt
+              nulla aliquip laborum adipisicing qui. Cupidatat voluptate in
+              officia occaecat mollit et irure aliquip Lorem proident ullamco
+              ipsum pariatur duis.
+            </Test>
+          </div>
+
+          <StickyBox>Test</StickyBox>
+        </MainContent>
       </main>
     </>
   );
 }
 
+const Test = styled.div`
+  height: 15rem;
+
+  background-color: #aaa;
+
+  margin-right: -20rem;
+  padding: 1rem 20rem 1rem 1rem;
+`;
+
+const StickyBox = styled.div`
+  position: sticky;
+  top: 6rem;
+
+  height: 20rem;
+
+  margin: 1rem;
+  padding: 1rem;
+
+  border: 4px solid #000;
+  border-radius: 1rem;
+
+  background-color: white;
+
+  @media (max-width: ${screen.tablet}) {
+    display: none;
+  }
+`;
+
+const MainContent = styled.div`
+  display: grid;
+
+  grid-template-columns: 1fr 20rem;
+
+  @media (max-width: ${screen.tablet}) {
+    grid-template-columns: 100%;
+  }
+`;
+
 const Hero = styled.div`
   height: 30vh;
-
-  /* background-image: radial-gradient(#0a233f 0%, #ffffff 60%); */
-  /* backdrop-filter: blur(45px); */
 `;
 
 const Image = styled.img`
