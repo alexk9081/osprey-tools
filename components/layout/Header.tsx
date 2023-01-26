@@ -118,7 +118,7 @@ const MenuButton = styled(Menu2)`
 `;
 
 const Image = styled.img`
-  width: 100px;
+  width: 90px;
 `;
 
 const UpperHeader = styled.header<{ isTransparent: boolean }>`
