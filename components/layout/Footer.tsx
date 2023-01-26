@@ -37,7 +37,7 @@ const FooterWrapper = styled.footer`
 
   display: flex;
   justify-content: space-between;
-  gap: 10rem;
+  gap: 2rem;
 
   position: relative;
 
@@ -86,6 +86,8 @@ const GroupMembersTitle = styled.div`
   font-weight: 600;
   font-family: ${fonts.serifMain};
 
+  text-align: right;
+
   @media (max-width: ${screen.tablet}) {
     font-size: 1.25rem;
   }
@@ -94,6 +96,8 @@ const GroupMembersTitle = styled.div`
 const GroupMemberName = styled.div`
   font-size: 1.25rem;
   font-family: ${fonts.sansSerifMain};
+
+  text-align: right;
 
   @media (max-width: ${screen.tablet}) {
     font-size: 1rem;
