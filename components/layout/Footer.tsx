@@ -34,6 +34,7 @@ const FooterWrapper = styled.footer`
   padding: 2rem 4rem;
 
   background-color: ${colors.nearWhite};
+  color: ${colors.nearBlack};
 
   display: flex;
   justify-content: space-between;

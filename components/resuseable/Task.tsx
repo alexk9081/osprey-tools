@@ -1,3 +1,4 @@
+import { colors } from "@/styles/styleConstants";
 import { ReactFragment } from "react";
 import styled from "styled-components";
 
@@ -24,6 +25,8 @@ const TaskWrapper = styled.div`
   box-shadow: 0.1rem 0.3rem 0.75rem #00000040;
 
   transition: 0.1s ease all;
+
+  color: ${colors.nearBlack};
 
   &:hover {
     cursor: pointer;
