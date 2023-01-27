@@ -38,11 +38,16 @@ export default function Home() {
             </UpcomingTasks>
             <NoteCards>
               <NoteCard isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
-                <CardText isOpen={!isOpen}>
-                  How do you convert assembly to byte code in SIC/XE?
-                  <SmallText>Click to Open</SmallText>
-                </CardText>
-                <CardText isOpen={isOpen}>I DON&apos;T KNOW</CardText>
+                <BackgroundChanger
+                  isOpen={isOpen}
+                  onClick={() => setIsOpen(!isOpen)}
+                >
+                  <CardText2 isOpen={isOpen}>I DON&apos;T KNOW</CardText2>
+                  <CardText isOpen={!isOpen}>
+                    How do you convert assembly to byte code in SIC/XE?
+                    <SmallText>Click to Open</SmallText>
+                  </CardText>
+                </BackgroundChanger>
               </NoteCard>
             </NoteCards>
           </div>
@@ -54,23 +59,7 @@ export default function Home() {
   );
 }
 
-const SmallText = styled.div`
-  padding-top: 0.25rem;
-  font-size: 0.75rem;
-  font-weight: 500;
-`;
-
-const CardText = styled.span`
-  position: absolute;
-  text-align: center;
-
-  padding: 1rem;
-
-  transition: 4s cubic-bezier(1, -0.01, 0.97, 0.54) 1s opacity;
-  opacity: ${(props: { isOpen: boolean }) => (props.isOpen ? "1" : "0")};
-`;
-
-const NoteCard = styled.div`
+const BackgroundChanger = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -85,6 +74,55 @@ const NoteCard = styled.div`
   background-color: ${(props: { isOpen: boolean }) =>
     props.isOpen ? "red" : "white"};
 
+  transition: 4s cubic-bezier(1, -0.01, 0.97, 0.54) 1s background-color;
+
+  height: 10rem;
+  width: 20rem;
+
+  cursor: pointer;
+`;
+
+const SmallText = styled.div`
+  padding-top: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+`;
+
+const CardText2 = styled.span`
+  position: absolute;
+  text-align: center;
+
+  padding: 1rem;
+
+  color: white;
+
+  transition: 4s cubic-bezier(1, -0.01, 0.97, 0.54) 1s opacity;
+  opacity: ${(props: { isOpen: boolean }) => (props.isOpen ? "1" : "0")};
+`;
+
+const CardText = styled.span`
+  position: absolute;
+  text-align: center;
+
+  padding: 1rem;
+
+  color: black;
+
+  transition: 4s cubic-bezier(1, -0.01, 0.97, 0.54) 1s opacity;
+  opacity: ${(props: { isOpen: boolean }) => (props.isOpen ? "1" : "0")};
+`;
+
+const NoteCard = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 1.5rem;
+  font-weight: 700;
+
+  box-sizing: border-box;
+  background-color: white;
+
   box-shadow: 0.75rem 0.25rem 1rem #00000040;
 
   height: 10rem;
@@ -93,11 +131,7 @@ const NoteCard = styled.div`
   transform: ${(props: { isOpen: boolean }) =>
     props.isOpen ? "rotateY(6120deg)" : "rotateY(0deg)"};
 
-  color: ${(props: { isOpen: boolean }) => (props.isOpen ? "white" : "black")};
-
-  transition: 5s cubic-bezier(1, 0.03, 0.75, 0.61) transform,
-    5s cubic-bezier(1, 0.03, 0.75, 0.61) color,
-    4s cubic-bezier(1, -0.01, 0.97, 0.54) 1s background-color;
+  transition: 5s cubic-bezier(1, 0.03, 0.75, 0.61) transform;
 
   cursor: pointer;
 `;
