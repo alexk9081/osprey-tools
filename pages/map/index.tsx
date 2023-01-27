@@ -7,7 +7,7 @@ export default function Map() {
   const testButtonData = [
     {
       floor: "Big Map",
-      image: "http://fakeimg.pl/1000x400?text=Big%20Map&font=lobster",
+      image: "https://cdn.discordapp.com/attachments/1067491860286820394/1068584309922996334/20230126_115824.png",
     },
     {
       floor: "Floor 1",
@@ -53,6 +53,8 @@ export default function Map() {
 const Image = styled.img`
   width: 100%;
   height: calc(100vh - 5rem - 3rem);
+
+  object-fit: contain;
 `;
 
 const Buttons = styled.div`
