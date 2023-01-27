@@ -1,8 +1,30 @@
 import { colors, fonts, screen } from "@/styles/styleConstants";
+import { useState } from "react";
 import Head from "next/head";
 import styled from "styled-components";
 
 export default function Map() {
+  const testButtonData = [
+    {
+      floor: "Big Map",
+      image: "http://fakeimg.pl/1000x400?text=Big%20Map&font=lobster",
+    },
+    {
+      floor: "Floor 1",
+      image: "http://fakeimg.pl/1000x400?text=Floor%201&font=museo",
+    },
+    {
+      floor: "Floor 2",
+      image: "http://fakeimg.pl/1000x400?text=Floor%202&font=bebas",
+    },
+    {
+      floor: "Floor 3",
+      image: "http://fakeimg.pl/1000x400?text=Floor%203&font=lobster",
+    },
+  ];
+
+  const [activeImage, setActiveImage] = useState(testButtonData[0]["image"]);
+
   return (
     <>
       <Head>
@@ -11,16 +33,18 @@ export default function Map() {
       <main>
         <Hero></Hero>
         <Buttons>
-          <Button>Big Map</Button>
-          <Button>Floor 1</Button>
-          <Button>Floor 2</Button>
-          <Button>Floor 3</Button>
+          {testButtonData.map((map) => (
+            <Button
+              onClick={() => setActiveImage(map.image)}
+              key={map.floor}
+              isActive={map.image == activeImage}
+            >
+              {map.floor}
+            </Button>
+          ))}
         </Buttons>
 
-        <Image
-          src="http://fakeimg.pl/1500x600?text=Map Placeholder&font=bebas"
-          alt=""
-        />
+        <Image src={activeImage} alt="" />
       </main>
     </>
   );
@@ -32,10 +56,8 @@ const Image = styled.img`
 `;
 
 const Buttons = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 3rem;
+  display: grid;
+  grid-auto-flow: column;
 
   height: 3rem;
 
@@ -53,23 +75,24 @@ const Buttons = styled.div`
 `;
 
 const Button = styled.button`
-  background-color: ${colors.unfBlue};
-  color: ${colors.nearWhite};
+  background-color: transparent;
+  color: ${(props: { isActive: boolean }) =>
+    props.isActive ? colors.nearBlack : colors.lightGray};
 
-  flex-shrink: 0;
-
-  font-size: 1rem;
+  font-size: 1.25rem;
   font-weight: 600;
 
-  border-radius: 1rem;
+  border: none;
+  border-bottom: ${(props: { isActive: boolean }) =>
+    props.isActive ? "4px solid " + colors.unfBlue : "4px solid transparent"};
+  height: 100%;
 
-  padding: 0.5rem 1rem;
-
-  transition: 0.3s ease all;
+  transition: 0.3s ease all, 0.1s ease border-bottom;
 
   &:hover {
     cursor: pointer;
-    background-color: ${colors.unfBlueLight};
+    background-color: ${colors.translucentDarkWhite};
+    color: ${colors.lightBlack};
   }
 `;
 

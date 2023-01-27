@@ -11,6 +11,8 @@ export const colors = {
   translucentNearWhite: "rgba( 240, 240, 240, 0.95 )",
   translucentDarkWhite: "rgba( 224, 224, 224, 0.95 )",
 
+  lightGray: "#555",
+
   unfBlue: "#0a233f",
   unfBlueLight: "#1a334f",
 };
