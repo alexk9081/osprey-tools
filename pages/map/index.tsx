@@ -81,6 +81,7 @@ const Button = styled.button`
 
   font-size: 1.25rem;
   font-weight: 600;
+  white-space: nowrap;
 
   border: none;
   border-bottom: ${(props: { isActive: boolean }) =>
