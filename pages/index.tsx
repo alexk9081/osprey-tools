@@ -42,7 +42,7 @@ export default function Home() {
                   How do you convert assembly to byte code in SIC/XE?
                   <SmallText>Click to Open</SmallText>
                 </CardText>
-                <CardText isOpen={isOpen}>I DON'T KNOW</CardText>
+                <CardText isOpen={isOpen}>I DON&apos;T KNOW</CardText>
               </NoteCard>
             </NoteCards>
           </div>
