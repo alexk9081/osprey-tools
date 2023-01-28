@@ -2,12 +2,14 @@ import { colors, fonts, screen } from "@/styles/styleConstants";
 import { useState } from "react";
 import Head from "next/head";
 import styled from "styled-components";
+import SimpleMap from "@/components/resuseable/Map";
 
 export default function Map() {
   const testButtonData = [
     {
       floor: "Big Map",
-      image: "https://cdn.discordapp.com/attachments/1067491860286820394/1068584309922996334/20230126_115824.png",
+      image:
+        "https://cdn.discordapp.com/attachments/1067491860286820394/1068584309922996334/20230126_115824.png",
     },
     {
       floor: "Floor 1",
@@ -32,6 +34,9 @@ export default function Map() {
       </Head>
       <main>
         <Hero></Hero>
+
+        <SimpleMap height="35rem" width="100%" />
+
         <Buttons>
           {testButtonData.map((map) => (
             <Button

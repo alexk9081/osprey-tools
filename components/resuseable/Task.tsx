@@ -1,8 +1,7 @@
 import { colors } from "@/styles/styleConstants";
-import { ReactFragment } from "react";
 import styled from "styled-components";
 
-export default function Task({ children, date }: { children: ReactFragment; date: string }) {
+export default function Task({ children, date }: { children: string; date: string }) {
   return (
     <>
       <TaskWrapper>
