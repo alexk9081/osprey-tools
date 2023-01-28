@@ -25,7 +25,7 @@ export default function NoteCards() {
   return (
     <NoteCardsWrapper>
       {data.map((card) => (
-        <NoteCard question={card.question} answer={card.answer} />
+        <NoteCard question={card.question} answer={card.answer} key={card.question} />
       ))}
     </NoteCardsWrapper>
   );
