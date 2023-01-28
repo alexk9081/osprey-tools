@@ -56,6 +56,7 @@ export default function CampusMap({
                 lng: point.coordinates.lng,
               });
             }}
+            key={point.number}
           >
             {point.name}
           </PointOfIntrest>
@@ -82,6 +83,7 @@ export default function CampusMap({
                   lng: point.coordinates.lng,
                 });
               }}
+              key={point.number}
             >
               {point.number}
             </MapMarker>
@@ -135,7 +137,7 @@ const CampusMapWrapper = styled.div`
   grid-template-columns: 60% 40%;
 
   @media (max-width: ${screen.tablet}) {
-  grid-template-columns: 100%;
+    grid-template-columns: 100%;
   }
 `;
 
