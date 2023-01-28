@@ -40,7 +40,7 @@ export default function Header() {
     return () => {
       router.events.off("routeChangeStart", handleRouteChange);
     };
-  }, []);
+  }, [router.events, router.pathname]);
 
   return (
     <>
@@ -57,7 +57,7 @@ export default function Header() {
             setShowMenu(false);
           }}
         >
-          <Image src="https://upload.wikimedia.org/wikipedia/en/thumb/a/ac/North_Florida_Ospreys_logo.svg/800px-North_Florida_Ospreys_logo.svg.png" />
+          <Image src="https://upload.wikimedia.org/wikipedia/en/thumb/a/ac/North_Florida_Ospreys_logo.svg/800px-North_Florida_Ospreys_logo.svg.png" alt="" />
         </Link>
         <SearchAndMenu>
           <SearchComponent show={url.startsWith("/map")}>
