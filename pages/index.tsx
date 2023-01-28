@@ -118,7 +118,7 @@ const Image = styled.img`
   bottom: 1rem;
   right: 2rem;
 
-  width: 250px;
+  height: 175px;
 
   border: 4px solid ${colors.unfBlue};
   border-radius: 1rem;
