@@ -53,10 +53,6 @@ function MapMarker({
 }
 
 const Marker = styled.div`
-  /* opacity: 0.2; */
-  /* transition: 0.1s ease opacity, 0.1s ease visibility; */
-  /* visibility: hidden; */
-  /* width: 40px; */
   background-color: rgba(0, 0, 0, 0.8);
   color: #fff;
   text-align: center;

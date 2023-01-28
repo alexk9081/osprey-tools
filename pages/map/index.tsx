@@ -35,7 +35,15 @@ export default function Map() {
       <main>
         <Hero></Hero>
 
-        <SimpleMap height="35rem" width="100%" />
+        <CampusMap>
+          <KeyPointsOfIntrest>
+            <Title>Key Points of Intrest</Title>
+            <PointOfIntrest>Building 58 - Student Union</PointOfIntrest>
+            <PointOfIntrest>Building 12 - Tommy G</PointOfIntrest>
+            <PointOfIntrest>Building 41 - Police Building</PointOfIntrest>
+          </KeyPointsOfIntrest>
+          <SimpleMap height="35rem" width="100%" />
+        </CampusMap>
 
         <Buttons>
           {testButtonData.map((map) => (
@@ -54,6 +62,41 @@ export default function Map() {
     </>
   );
 }
+
+const Title = styled.div`
+  font-size: 2rem;
+  margin: 1rem;
+`;
+
+const PointOfIntrest = styled.div`
+  margin: 1rem;
+  padding: 1rem;
+
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+
+  box-shadow: 0.1rem 0.3rem 0.75rem #00000040;
+
+  transition: 0.1s ease all;
+
+  &:hover {
+    cursor: pointer;
+
+    background-color: #e2e2e2e8;
+    box-shadow: 0.1rem 0.3rem 0.75rem #00000060;
+  }
+`;
+
+const KeyPointsOfIntrest = styled.div`
+  color: ${colors.nearBlack};
+  font-size: 1.5rem;
+  font-weight: 700;
+`;
+
+const CampusMap = styled.div`
+  display: grid;
+  grid-template-columns: 60% 40%;
+`;
 
 const Image = styled.img`
   width: 100%;
