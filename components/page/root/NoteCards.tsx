@@ -34,8 +34,7 @@ export default function NoteCards() {
 const NoteCardsWrapper = styled.div`
   display: flex;
   gap: 2rem;
-
-  height: 15rem;
+  flex-wrap: wrap;
 
   background-color: #ddd;
 

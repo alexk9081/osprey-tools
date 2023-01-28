@@ -46,6 +46,8 @@ const NoteCardWrapper = styled.div`
   justify-content: center;
   align-items: center;
 
+  flex-shrink: 0;
+
   font-size: 1.5rem;
   font-weight: 700;
 
