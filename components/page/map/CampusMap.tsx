@@ -1,4 +1,4 @@
-import { colors } from "@/styles/styleConstants";
+import { colors, screen } from "@/styles/styleConstants";
 import GoogleMapReact from "google-map-react";
 import { useState } from "react";
 import styled from "styled-components";
@@ -133,6 +133,10 @@ const KeyPointsOfIntrest = styled.div`
 const CampusMapWrapper = styled.div`
   display: grid;
   grid-template-columns: 60% 40%;
+
+  @media (max-width: ${screen.tablet}) {
+  grid-template-columns: 100%;
+  }
 `;
 
 function MapMarker({
