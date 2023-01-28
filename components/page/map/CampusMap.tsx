@@ -13,7 +13,7 @@ export default function CampusMap({
   const data = [
     {
       number: "51",
-      name: "Building 58 - Social Sciences",
+      name: "Building 51 - Social Sciences",
       coordinates: { lat: 30.26957709945413, lng: -81.50628133740905 },
     },
     {
@@ -46,10 +46,10 @@ export default function CampusMap({
 
   return (
     <CampusMapWrapper>
-      <KeyPointsOfIntrest>
-        <Title>Key Points of Intrest</Title>
+      <KeyPointsOfInterest>
+        <Title>Key Points of Interest</Title>
         {data.map((point) => (
-          <PointOfIntrest
+          <PointOfInterest
             onClick={() => {
               setCenter({
                 lat: point.coordinates.lat,
@@ -59,9 +59,9 @@ export default function CampusMap({
             key={point.number}
           >
             {point.name}
-          </PointOfIntrest>
+          </PointOfInterest>
         ))}
-      </KeyPointsOfIntrest>
+      </KeyPointsOfInterest>
       <div style={{ height: "35rem", width: "100%" }}>
         <GoogleMapReact
           bootstrapURLKeys={{
@@ -107,7 +107,7 @@ const Title = styled.div`
   margin: 1rem;
 `;
 
-const PointOfIntrest = styled.div`
+const PointOfInterest = styled.div`
   margin: 1rem;
   padding: 1rem;
 
@@ -126,7 +126,7 @@ const PointOfIntrest = styled.div`
   }
 `;
 
-const KeyPointsOfIntrest = styled.div`
+const KeyPointsOfInterest = styled.div`
   color: ${colors.nearBlack};
   font-size: 1.5rem;
   font-weight: 700;
