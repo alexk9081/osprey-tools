@@ -4,11 +4,10 @@ import styled from "styled-components";
 export default function Tag({
   children,
   color,
-}: // size,
+}:
 {
   children: string;
   color: string;
-  // size: string;
 }) {
   return <StyledTag color={color}>{children}</StyledTag>;
 }

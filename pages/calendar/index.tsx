@@ -63,33 +63,3 @@ const ToDoTitle = styled.div`
 
   margin: 1rem;
 `;
-
-// function Task() {
-//   return (
-//     <TaskWrapper>
-//       <Title>Test Task</Title>
-//       Test
-//     </TaskWrapper>
-//   );
-// }
-
-// const TaskWrapper = styled.div`
-//   border: 1px solid #666;
-//   border-radius: 1rem;
-//   padding: 1rem;
-//   font-family: ${fonts.sansSerifMain};
-//   margin: 1rem;
-
-//   transition: 300ms ease all;
-
-//   &:hover {
-//     cursor: pointer;
-
-//     background-color: #ddd;
-//   }
-// `;
-
-// const Title = styled.div`
-//   font-weight: bold;
-//   font-size: 2rem;
-// `;

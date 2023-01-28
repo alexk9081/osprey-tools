@@ -6,8 +6,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 export default function Header() {
+  //Makes header background transparent or frosted glass when user scrolls down past 10px
   const [headerTransparent, setHeaderTransparent] = useState(true);
-
   useEffect(() => {
     const checkScrollHeight = () => {
       const scrollY = window.pageYOffset;
@@ -22,12 +22,12 @@ export default function Header() {
     };
   }, [headerTransparent]);
 
+  //Shows menu on click of top right button
   const [showMenu, setShowMenu] = useState(false);
 
-  //Chagne active route to be underlined
+  //Active route listener to show search bar on map page
   const router = useRouter();
   const [url, setURL] = useState("");
-
   useEffect(() => {
     setURL(router.pathname);
 

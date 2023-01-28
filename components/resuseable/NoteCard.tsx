@@ -35,7 +35,7 @@ const Text = styled.span`
   position: absolute;
   text-align: center;
 
-  padding: 1rem;
+  margin: 1rem;
 
   transition: 0s 0.2s linear opacity;
   opacity: ${(props: { isOpen: boolean }) => (props.isOpen ? "1" : "0")};
@@ -54,8 +54,6 @@ const NoteCardWrapper = styled.div`
 
   height: 10rem;
   width: 20rem;
-
-  padding: 1rem;
 
   transition: 0.4s linear transform, 0.4s linear box-shadow;
   box-shadow: ${(props: { isOpen: boolean }) =>
