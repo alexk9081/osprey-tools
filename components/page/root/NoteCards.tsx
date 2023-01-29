@@ -33,13 +33,12 @@ export default function NoteCards() {
 
 const NoteCardsWrapper = styled.div`
   display: flex;
-  gap: 2rem;
   flex-wrap: wrap;
+  gap: 2rem;
 
   background-color: #ddd;
 
-  margin-right: -20rem;
-  padding: 1rem 20rem 1rem 1rem;
+  padding: 5rem 1rem;
 
   @media (max-width: ${screen.tablet}) {
     margin: 0;
