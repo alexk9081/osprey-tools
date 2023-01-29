@@ -40,7 +40,7 @@ const MapText = styled.div`
 
   transform: translate(-50%, -50%);
 
-  font-family:${fonts.serifMain};
+  font-family: ${fonts.serifMain};
   color: ${colors.nearWhite};
   font-size: 2rem;
   font-weight: 800;
@@ -96,7 +96,7 @@ const Hero = styled.div`
 const Image = styled.img`
   height: 175px;
 
-  border: 4px solid ${colors.unfBlue};
+  box-shadow: 0rem 0rem 1rem ${colors.unfBlue};
   border-radius: 1rem;
 
   @media (max-width: ${screen.tablet}) {
