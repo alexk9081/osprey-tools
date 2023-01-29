@@ -17,13 +17,9 @@ export default function Home() {
         <MainHero />
 
         <MainContent>
-          <div>
-            <UpcomingTasks />
-            <NoteCards />
-            <Links />
-          </div>
-
-          <StickyBox>Test</StickyBox>
+          <UpcomingTasks />
+          <NoteCards />
+          <Links />
         </MainContent>
       </main>
     </>
@@ -50,11 +46,11 @@ const StickyBox = styled.div`
 `;
 
 const MainContent = styled.div`
-  display: grid;
+  /* display: grid;
 
   grid-template-columns: 1fr 20rem;
 
   @media (max-width: ${screen.tablet}) {
     grid-template-columns: 100%;
-  }
+  } */
 `;
