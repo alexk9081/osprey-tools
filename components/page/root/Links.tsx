@@ -43,10 +43,11 @@ export default function Links() {
 const LinksLayout = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-
   gap: 4rem;
-  margin: 10rem max(3rem, calc(50vw - 50rem));
 
+  padding: 10rem max(3rem, calc(50vw - 50rem));
+
+  background-color: #ddd;
 
   @media (max-width: ${screen.desktop}) {
     gap: 3rem;
@@ -93,10 +94,12 @@ const StyledLink = styled(Link)`
   padding: 2rem;
   border-radius: 1rem;
 
-  transition: 0.2s ease box-shadow;
+  transition: 0.2s ease box-shadow, 
+  0.2s ease background-color;
 
   &:hover {
     box-shadow: 0.1rem 0.3rem 1.5rem #00000040;
+    background-color: #eee;
   }
 
   @media (max-width: ${screen.desktop}) {
@@ -111,6 +114,8 @@ const StyledLink = styled(Link)`
 const Image = styled.img`
   width: 100%;
   height: 15rem;
+
+  border-radius: 1rem;
 
   @media (max-width: ${screen.desktop}) {
     height: 12rem;

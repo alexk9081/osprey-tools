@@ -18,7 +18,6 @@ export default function Home() {
 
         <MainContent>
           <UpcomingTasks />
-          <NoteCards />
           <Links />
         </MainContent>
       </main>
