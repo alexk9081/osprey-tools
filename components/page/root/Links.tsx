@@ -51,17 +51,17 @@ const LinksLayout = styled.div`
 
   @media (max-width: ${screen.desktop}) {
     gap: 3rem;
-    margin: 10rem 2rem;
+    padding: 10rem 2rem;
   }
 
   @media (max-width: ${screen.laptop}) {
     gap: 0.5rem;
-    margin: 10rem 1rem;
+    padding: 10rem 1rem;
   }
 
   @media (max-width: ${screen.tablet}) {
     grid-template-columns: 1fr;
-    margin: 10rem max(2rem, calc(50vw - 13rem));
+    padding: 10rem max(2rem, calc(50vw - 13rem));
   }
 `;
 
