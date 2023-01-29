@@ -13,7 +13,7 @@ export default function UpcomingTasks() {
       <Task date="March 11th">Move To New Country</Task>
       <Task date="December 12th">Get Extradited</Task>
       <FullCalendarLink href="/calendar">
-        View Full Calendar
+        <TextColoring>View Full Calendar</TextColoring>
         <ChevronsRight />
       </FullCalendarLink>
     </UpcomingTasksWrapper>
@@ -29,13 +29,15 @@ const UpcomingTasksTitle = styled.div`
   font-weight: 800;
 `;
 
+const TextColoring = styled.span`
+  color: ${colors.unfBlue};
+  font-weight: 600;
+`;
+
 const FullCalendarLink = styled(Link)`
   display: flex;
   align-items: center;
 
   text-decoration: none;
   margin: 1rem 2rem;
-
-  color: ${colors.unfBlue};
-  font-weight: 600;
 `;
