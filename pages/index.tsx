@@ -4,6 +4,7 @@ import styled from "styled-components";
 import NoteCards from "@/components/page/root/NoteCards";
 import UpcomingTasks from "@/components/page/root/UpcomingTasks";
 import MainHero from "@/components/page/root/Hero";
+import Links from "@/components/page/root/Links";
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
           <div>
             <UpcomingTasks />
             <NoteCards />
+            <Links />
           </div>
 
           <StickyBox>Test</StickyBox>

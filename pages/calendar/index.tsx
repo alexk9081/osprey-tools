@@ -39,7 +39,7 @@ export default function TodoPage() {
         <Scheduler
           timeZone="America/New_York"
           dataSource={data}
-          views={["week", "month"]}
+          views={["day", "week", "month"]}
           defaultCurrentView="month"
           defaultCurrentDate={currentDate}
           height={600}
