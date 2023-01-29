@@ -75,6 +75,7 @@ const Copyright = styled.div`
     font-size: 0.75rem;
     font-family: ${fonts.sansSerifMain};
     text-align: center;
+    white-space: nowrap;
 
     @media (max-width: ${screen.tablet}) {
       font-size: 0.6rem;
