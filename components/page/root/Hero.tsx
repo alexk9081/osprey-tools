@@ -24,7 +24,7 @@ export default function MainHero() {
 
 const MapHolder = styled.div`
   position: absolute;
-  bottom: 1rem;
+  bottom: 7rem;
   right: 2rem;
 
   @media (max-width: ${screen.tablet}) {
@@ -82,6 +82,8 @@ const HeroGradient = styled.div`
   width: 100%;
   background: linear-gradient(350deg, #030c15aa, #296271aa);
 
+  padding-bottom: 10rem;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -92,16 +94,41 @@ const Hero = styled.div`
   position: relative;
   background-image: url("https://www.flbog.edu/wp-content/uploads/unf-masthead.jpg");
   background-size: cover;
+  background-position: 50%;
 
   color: white;
-  text-shadow: 0 0 1rem #000c;
+  text-shadow: 0 0 1rem #0009;
 
   height: 30rem;
+
+  padding-bottom: 10rem;
 
   @media (max-width: ${screen.tablet}) {
     justify-content: flex-end;
 
     height: calc(30rem + 200px);
+  }
+
+  overflow:hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -12%;
+    left: -10%;
+
+    width: 120%;
+    height: 10rem;
+
+    background-color: white;
+
+    background-image: linear-gradient(to bottom, #00000090, white 4%);
+
+    transform: rotate(3deg);
+
+  @media (max-width: ${screen.tablet}) {
+    display: none;
+  }
   }
 `;
 
