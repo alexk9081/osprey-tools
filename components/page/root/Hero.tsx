@@ -5,17 +5,19 @@ import styled from "styled-components";
 export default function MainHero() {
   return (
     <Hero>
-      <HeroText>Elevate your Productivity</HeroText>
+      <HeroGradient>
+        <HeroText>Elevate your Productivity</HeroText>
 
-      <Link href="/map">
-        <MapHolder>
-          <Image
-            src="https://media.discordapp.net/attachments/1067491860286820394/1068360876056387614/CamScanner_01-26-2023_11.59_2.jpg?width=806&height=676"
-            alt=""
-          />
-          <MapText>Map</MapText>
-        </MapHolder>
-      </Link>
+        <Link href="/map">
+          <MapHolder>
+            <Image
+              src="https://media.discordapp.net/attachments/1067491860286820394/1068360876056387614/CamScanner_01-26-2023_11.59_2.jpg?width=806&height=676"
+              alt=""
+            />
+            <MapText>Map</MapText>
+          </MapHolder>
+        </Link>
+      </HeroGradient>
     </Hero>
   );
 }
@@ -75,14 +77,24 @@ const HeroText = styled.div`
   }
 `;
 
-const Hero = styled.div`
-  position: relative;
-  background-image: linear-gradient(350deg, ${colors.unfBlueWhite}, white);
+const HeroGradient = styled.div`
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(350deg, #030c15aa, #296271aa);
 
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+`;
+
+const Hero = styled.div`
+  position: relative;
+  background-image: url("https://www.flbog.edu/wp-content/uploads/unf-masthead.jpg");
+  background-size: cover;
+
+  color: white;
+  text-shadow: 0 0 1rem #000c;
 
   height: 30rem;
 
