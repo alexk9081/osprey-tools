@@ -80,45 +80,48 @@ function PageLink({
 }) {
   return (
     <>
-      <StyledLink href={route}>
+      <LinkWrapper>
         <Image src={imgSrc} alt="" />
         <Title>{title}</Title>
         <Description>{desc}</Description>
-        <LearnMore>
-          Learn more
-          <ChevronsRight size="0.75rem" />
-        </LearnMore>
-      </StyledLink>
+        <StyledLink href={route}>
+          <LearnMore>
+            Learn more
+            <ChevronsRight size="1rem" />
+          </LearnMore>
+        </StyledLink>
+      </LinkWrapper>
     </>
   );
 }
 
-const LearnMore = styled.div`
-  margin: 1rem;
+const StyledLink = styled(Link)`
+  display: inline-block;
 
-  display: flex;
+  text-decoration: none;
+
+  color: ${colors.unfBlue};
+
+  padding: 0.5rem;
+  margin: 1rem 0;
+`;
+
+const LearnMore = styled.span`
+  display: inline-flex;
   justify-content: center;
   align-items: center;
 
-  color: ${colors.nearBlack};
-  font-weight: 600;
-  font-size: 0.75rem;
-  line-height: 0.75rem;
+  font-weight: 700;
+  font-size: 1rem;
 `;
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
+const LinkWrapper = styled.div`
   color: ${colors.nearBlack};
 
   padding: 2rem;
   border-radius: 1rem;
 
   transition: 0.2s ease box-shadow, 0.2s ease background-color;
-
-  &:hover {
-    box-shadow: 0.1rem 0.3rem 1.5rem #00000040;
-    background-color: #eee;
-  }
 
   @media (max-width: ${screen.desktop}) {
     padding: 1.5rem;
@@ -133,8 +136,6 @@ const Image = styled.img`
   width: 100%;
   height: 15rem;
 
-  border-radius: 1rem;
-
   @media (max-width: ${screen.desktop}) {
     height: 12rem;
   }
@@ -145,7 +146,7 @@ const Title = styled.div`
   font-weight: 550;
   font-size: 1.25rem;
 
-  margin: 1rem;
+  margin: 1rem 0;
 
   color: ${colors.nearBlack};
 `;
