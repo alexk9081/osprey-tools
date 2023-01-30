@@ -30,3 +30,11 @@ Calendar dates with data {
   title: string;
   description: string;
 }
+
+
+Non-critical:
+User data {
+  name: string;
+  img: string;
+  password: string;
+}
