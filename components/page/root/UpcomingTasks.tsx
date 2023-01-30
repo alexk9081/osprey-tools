@@ -30,7 +30,7 @@ const ShadowWrapper = styled.div`
 const UpcomingTasksWrapper = styled.div`
   padding: 1rem;
 
-  box-shadow: 0 0 1rem #0006;
+  box-shadow: 0 0 1rem #0002;
   background-color: #fff;
 `;
 
