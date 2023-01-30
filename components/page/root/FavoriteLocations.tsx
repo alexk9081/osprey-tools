@@ -18,7 +18,7 @@ export default function FavoriteLocations() {
     <FavoriteLocationsWrapper>
       <Title>Favorite Locations</Title>
       {data.map((location) => (
-        <Location>{location.name}</Location>
+        <Location key={location.name}>{location.name}</Location>
       ))}
     </FavoriteLocationsWrapper>
   );
