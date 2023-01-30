@@ -57,7 +57,10 @@ export default function Header() {
             setShowMenu(false);
           }}
         >
-          <Image src="https://upload.wikimedia.org/wikipedia/en/thumb/a/ac/North_Florida_Ospreys_logo.svg/800px-North_Florida_Ospreys_logo.svg.png" alt="" />
+          <Image
+            src="https://upload.wikimedia.org/wikipedia/en/thumb/a/ac/North_Florida_Ospreys_logo.svg/800px-North_Florida_Ospreys_logo.svg.png"
+            alt=""
+          />
         </Link>
         <SearchAndMenu>
           <SearchComponent show={url.startsWith("/map")}>
@@ -71,13 +74,13 @@ export default function Header() {
             onClick={() => setShowMenu(!showMenu)}
           />
         </SearchAndMenu>
+        <Menu
+          show={showMenu}
+          closeMenu={() => {
+            setShowMenu(false);
+          }}
+        />
       </UpperHeader>
-      <Menu
-        show={showMenu}
-        closeMenu={() => {
-          setShowMenu(false);
-        }}
-      />
     </>
   );
 }
