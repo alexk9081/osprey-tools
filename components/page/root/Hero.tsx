@@ -1,24 +1,32 @@
 import { colors, fonts, screen } from "@/styles/styleConstants";
 import Link from "next/link";
 import styled from "styled-components";
+import { Parallax } from "react-parallax";
 
 export default function MainHero() {
   return (
-    <Hero>
-      <HeroGradient>
-        <HeroText>ELEVATE YOUR PRODUCTIVITY</HeroText>
-
-        <Link href="/map">
-          <MapHolder>
-            <Image
-              src="https://media.discordapp.net/attachments/1067491860286820394/1068360876056387614/CamScanner_01-26-2023_11.59_2.jpg?width=806&height=676"
-              alt=""
-            />
-            <MapText>Map</MapText>
-          </MapHolder>
-        </Link>
-      </HeroGradient>
-    </Hero>
+    <>
+      <Parallax
+        bgImage="https://www.flbog.edu/wp-content/uploads/unf-masthead.jpg"
+        bgImageAlt=""
+        strength={300}
+      >
+        <Hero>
+          <HeroGradient>
+            <HeroText>ELEVATE YOUR PRODUCTIVITY</HeroText>
+            <Link href="/map">
+              <MapHolder>
+                <Image
+                  src="https://media.discordapp.net/attachments/1067491860286820394/1068360876056387614/CamScanner_01-26-2023_11.59_2.jpg?width=806&height=676"
+                  alt=""
+                />
+                <MapText>Map</MapText>
+              </MapHolder>
+            </Link>
+          </HeroGradient>
+        </Hero>
+      </Parallax>
+    </>
   );
 }
 
@@ -92,14 +100,14 @@ const HeroGradient = styled.div`
 
 const Hero = styled.div`
   position: relative;
-  background-image: url("https://www.flbog.edu/wp-content/uploads/unf-masthead.jpg");
-  background-size: cover;
-  background-position: 50%;
+  /* background-image: url("https://www.flbog.edu/wp-content/uploads/unf-masthead.jpg"); */
+  /* background-size: cover;
+  background-position: 50%; */
 
   color: white;
   text-shadow: 0 0 1rem #0009;
 
-  height: 30rem;
+  height: 40rem;
 
   padding-bottom: 10rem;
 
@@ -109,7 +117,9 @@ const Hero = styled.div`
     height: calc(30rem + 200px);
   }
 
-  overflow:hidden;
+
+  //Diagonal cut below
+  overflow: hidden;
 
   &::after {
     content: "";
@@ -126,9 +136,9 @@ const Hero = styled.div`
 
     transform: rotate(3deg);
 
-  @media (max-width: ${screen.tablet}) {
-    display: none;
-  }
+    @media (max-width: ${screen.tablet}) {
+      display: none;
+    }
   }
 `;
 
