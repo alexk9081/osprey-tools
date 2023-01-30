@@ -46,24 +46,24 @@ const LinksLayout = styled.div`
   grid-template-columns: repeat(3, 1fr);
   gap: 4rem;
 
-  padding: 10rem max(3rem, calc(50vw - 50rem));
+  padding: 5rem max(3rem, calc(50vw - 50rem));
 
   background-color: #ddd;
 
   @media (max-width: ${screen.desktop}) {
     gap: 3rem;
-    padding: 10rem 2rem;
+    padding: 5rem 2rem;
   }
 
   @media (max-width: ${screen.laptop}) {
     gap: 0.5rem;
-    padding: 10rem 1rem;
+    padding: 5rem 1rem;
   }
 
   @media (max-width: ${screen.tablet}) {
     grid-template-columns: 1fr;
     gap: 4rem;
-    padding: 10rem max(2rem, calc(50vw - 13rem));
+    padding: 5rem max(2rem, calc(50vw - 13rem));
   }
 `;
 
