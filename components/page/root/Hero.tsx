@@ -6,7 +6,7 @@ export default function MainHero() {
   return (
     <Hero>
       <HeroGradient>
-        <HeroText>Elevate your Productivity</HeroText>
+        <HeroText>ELEVATE YOUR PRODUCTIVITY</HeroText>
 
         <Link href="/map">
           <MapHolder>
@@ -60,7 +60,7 @@ const HeroText = styled.div`
   font-size: 4rem;
   font-weight: 800;
 
-  font-family: ${fonts.serifMain};
+  font-family: ${fonts.sansSerifImpact};
 
   flex-grow: 1;
 
@@ -85,7 +85,7 @@ const HeroGradient = styled.div`
   padding-bottom: 10rem;
 
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
   flex-direction: column;
 `;

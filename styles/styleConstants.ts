@@ -22,6 +22,8 @@ export const colors = {
 export const fonts = {
   serifMain: "'Merriweather', serif",
   sansSerifMain: "'Barlow', sans-serif",
+
+  sansSerifImpact: "'Red Hat Display', sans-serif",
 };
 
 export const screen = {
