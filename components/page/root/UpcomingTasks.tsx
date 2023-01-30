@@ -3,8 +3,8 @@ import { colors } from "@/styles/styleConstants";
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
-
 import { ChevronsRight } from "tabler-icons-react";
+
 export default function UpcomingTasks() {
   return (
     <ShadowWrapper>

@@ -1,6 +1,7 @@
 import { colors, screen } from "@/styles/styleConstants";
 import { Route } from "devextreme-react/map";
 import Link from "next/link";
+import { ChevronsRight } from "tabler-icons-react";
 import styled from "styled-components";
 
 export default function Links() {
@@ -61,6 +62,7 @@ const LinksLayout = styled.div`
 
   @media (max-width: ${screen.tablet}) {
     grid-template-columns: 1fr;
+    gap: 4rem;
     padding: 10rem max(2rem, calc(50vw - 13rem));
   }
 `;
@@ -82,10 +84,27 @@ function PageLink({
         <Image src={imgSrc} alt="" />
         <Title>{title}</Title>
         <Description>{desc}</Description>
+        <LearnMore>
+          Learn more
+          <ChevronsRight size="0.75rem" />
+        </LearnMore>
       </StyledLink>
     </>
   );
 }
+
+const LearnMore = styled.div`
+  margin: 1rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: ${colors.nearBlack};
+  font-weight: 600;
+  font-size: 0.75rem;
+  line-height: 0.75rem;
+`;
 
 const StyledLink = styled(Link)`
   text-decoration: none;
@@ -94,8 +113,7 @@ const StyledLink = styled(Link)`
   padding: 2rem;
   border-radius: 1rem;
 
-  transition: 0.2s ease box-shadow, 
-  0.2s ease background-color;
+  transition: 0.2s ease box-shadow, 0.2s ease background-color;
 
   &:hover {
     box-shadow: 0.1rem 0.3rem 1.5rem #00000040;
