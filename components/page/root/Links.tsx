@@ -84,35 +84,29 @@ function PageLink({
         <Image src={imgSrc} alt="" />
         <Title>{title}</Title>
         <Description>{desc}</Description>
-        <StyledLink href={route}>
-          <LearnMore>
+        <LearnMore href={route}>
             Learn more
             <ChevronsRight size="1rem" />
-          </LearnMore>
-        </StyledLink>
+        </LearnMore>
       </LinkWrapper>
     </>
   );
 }
 
-const StyledLink = styled(Link)`
-  display: inline-block;
+const LearnMore = styled(Link)`
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
 
   text-decoration: none;
 
   color: ${colors.unfBlue};
+  font-weight: 700;
+  font-size: 1rem;
 
   padding: 0.5rem;
   margin: 1rem 0;
-`;
-
-const LearnMore = styled.span`
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-
-  font-weight: 700;
-  font-size: 1rem;
 `;
 
 const LinkWrapper = styled.div`
