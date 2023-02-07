@@ -48,7 +48,7 @@ export default function Header() {
         isTransparent={headerTransparent}
         onMouseEnter={() => setHeaderTransparent(false)}
         onMouseLeave={() => {
-          if (scrollY < 10) setHeaderTransparent(true);
+          if (scrollY < 10 && !showMenu) setHeaderTransparent(true);
         }}
       >
         <Link
@@ -74,13 +74,13 @@ export default function Header() {
             onClick={() => setShowMenu(!showMenu)}
           />
         </SearchAndMenu>
-        <Menu
-          show={showMenu}
-          closeMenu={() => {
-            setShowMenu(false);
-          }}
-        />
       </UpperHeader>
+      <Menu
+        show={showMenu}
+        closeMenu={() => {
+          setShowMenu(false);
+        }}
+      />
     </>
   );
 }
@@ -115,11 +115,28 @@ const SearchAndMenu = styled.div`
 function Menu({ show, closeMenu }: { show: boolean; closeMenu: () => void }) {
   return (
     <>
-      <MenuWrapper show={show}>
+      <div
+        style={{
+          position: "fixed",
+          left: 0,
+          zIndex: 99,
+          padding: "1rem",
+          width: "100vw",
+          height: "calc(100vh - 5rem)",
+          top: show ? "5rem" : "10rem",
+          backgroundColor: show ? "#fffc" : "#0000",
+          backdropFilter: show ? "blur(10px)" : "blur(0px)",
+          transition: show
+            ? "0.3s ease all, 0.8s ease backdrop-filter"
+            : "0.3s ease all, 0.2s ease backdrop-filter",
+          opacity: show ? "1" : "0",
+          visibility: show ? "visible" : "hidden",
+        }}
+      >
         <NavButton href="/calendar" onClick={closeMenu}>
           <NavText>Calendar</NavText>
         </NavButton>
-      </MenuWrapper>
+      </div>
     </>
   );
 }
@@ -137,32 +154,6 @@ const NavText = styled.div`
   font-size: 2rem;
   font-weight: 600;
   font-family: ${fonts.sansSerifMain};
-`;
-
-const MenuWrapper = styled.div`
-  position: fixed;
-  top: ${(props: { show: boolean }) => (props.show ? "5rem" : "10rem")};
-  left: 0;
-  z-index: 99;
-
-  padding: 1rem;
-
-  width: 100vw;
-  height: calc(100vh - 5rem);
-
-  background-color: ${(props: { show: boolean }) =>
-    props.show ? "#fffc" : "#0000"};
-  backdrop-filter: ${(props: { show: boolean }) =>
-    props.show ? "blur(10px)" : "blur(0px)"};
-
-  transition: ${(props: { show: boolean }) =>
-    props.show
-      ? "0.3s ease all, 0.8s ease backdrop-filter"
-      : "0.3s ease all, 0.2s ease backdrop-filter"};
-
-  opacity: ${(props: { show: boolean }) => (props.show ? "1" : "0")};
-  visibility: ${(props: { show: boolean }) =>
-    props.show ? "visible" : "hidden"};
 `;
 
 const MenuButton = styled(Menu2)`
