@@ -42,8 +42,6 @@ const MapHolder = styled.div`
 `;
 
 const MapText = styled.div`
-  display: none;
-
   position: absolute;
   top: 50%;
   left: 50%;
@@ -56,9 +54,6 @@ const MapText = styled.div`
   font-weight: 800;
   text-shadow: 0 0 1rem ${colors.nearBlack};
 
-  @media (max-width: ${screen.tablet}) {
-    display: block;
-  }
 `;
 
 const HeroText = styled.div`
@@ -100,9 +95,6 @@ const HeroGradient = styled.div`
 
 const Hero = styled.div`
   position: relative;
-  /* background-image: url("https://www.flbog.edu/wp-content/uploads/unf-masthead.jpg"); */
-  /* background-size: cover;
-  background-position: 50%; */
 
   color: white;
   text-shadow: 0 0 1rem #0009;
@@ -134,7 +126,7 @@ const Hero = styled.div`
 
     background-image: linear-gradient(to bottom, #00000090, white 4%);
 
-    transform: rotate(3deg);
+    transform: rotate(2.5deg);
 
     @media (max-width: ${screen.tablet}) {
       display: none;
@@ -144,6 +136,7 @@ const Hero = styled.div`
 
 const Image = styled.img`
   height: 175px;
+  filter: brightness(0.7);
 
   box-shadow: 0rem 0rem 1rem ${colors.unfBlue};
   border-radius: 1rem;
