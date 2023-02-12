@@ -8,9 +8,15 @@ export default function UpcomingTasks() {
   return (
     <UpcomingTasksWrapper>
       <UpcomingTasksTitle>Upcoming Tasks</UpcomingTasksTitle>
-      <Task date="March 10th">Commit Felony</Task>
-      <Task date="March 11th">Move To New Country</Task>
-      <Task date="December 12th">Get Extradited</Task>
+      <TaskLink href="/calendar">
+        <Task date="March 10th">Commit Felony</Task>
+      </TaskLink>
+      <TaskLink href="/calendar">
+        <Task date="March 11th">Move To New Country</Task>
+      </TaskLink>
+      <TaskLink href="/calendar">
+        <Task date="December 12th">Get Extradited</Task>
+      </TaskLink>
       <FullCalendarLink href="/calendar">
         <TextColoring>View Full Calendar</TextColoring>
         <ChevronsRight />
@@ -18,6 +24,10 @@ export default function UpcomingTasks() {
     </UpcomingTasksWrapper>
   );
 }
+
+const TaskLink = styled(Link)`
+  text-decoration: none;
+`;
 
 const UpcomingTasksWrapper = styled.div`
   padding: 1rem;
@@ -36,6 +46,8 @@ const TextColoring = styled.span`
 const FullCalendarLink = styled(Link)`
   display: flex;
   align-items: center;
+
+  color: ${colors.unfBlue};
 
   text-decoration: none;
   margin: 1rem 2rem;

@@ -48,33 +48,7 @@ const QuickAccessComponents = styled.div`
   }
 `;
 
-const StickyBox = styled.div`
-  position: sticky;
-  top: 6rem;
-
-  height: 20rem;
-
-  margin: 1rem;
-  padding: 1rem;
-
-  border: 4px solid #000;
-  border-radius: 1rem;
-
-  background-color: white;
-
-  @media (max-width: ${screen.tablet}) {
-    display: none;
-  }
-`;
-
 const MainContent = styled.div`
-  /* display: grid;
-
-  grid-template-columns: 1fr 20rem;
-
-  @media (max-width: ${screen.tablet}) {
-    grid-template-columns: 100%;
-  } */
 `;
 
 export async function getStaticProps() {

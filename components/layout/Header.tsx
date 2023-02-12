@@ -48,7 +48,7 @@ export default function Header() {
         isTransparent={headerTransparent && !showMenu}
         onMouseEnter={() => setHeaderTransparent(false)}
         onMouseLeave={() => {
-          if (scrollY < 10) setHeaderTransparent(true);
+          if (scrollY < 10 && !showMenu) setHeaderTransparent(true);
         }}
       >
         <Link
@@ -74,13 +74,13 @@ export default function Header() {
             onClick={() => setShowMenu(!showMenu)}
           />
         </SearchAndMenu>
-        <Menu
-          show={showMenu}
-          closeMenu={() => {
-            setShowMenu(false);
-          }}
-        />
       </UpperHeader>
+      <Menu
+        show={showMenu}
+        closeMenu={() => {
+          setShowMenu(false);
+        }}
+      />
     </>
   );
 }
