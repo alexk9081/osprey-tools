@@ -13,6 +13,7 @@ export default function MainHero() {
       >
         <Hero>
           <HeroGradient>
+            <ProjectTitle>O s p r e y    P r o d u c t i v i t y    T o o l s</ProjectTitle>
             <HeroText>ELEVATE YOUR PRODUCTIVITY</HeroText>
             <Link href="/map">
               <MapHolder>
@@ -29,6 +30,22 @@ export default function MainHero() {
     </>
   );
 }
+
+const ProjectTitle = styled.div`
+  color: ${colors.darkWhite};
+  white-space: pre-wrap;
+  font-size: 1rem;
+
+  text-shadow: 0 0 0.5rem #000;
+
+  @media (max-width: ${screen.tablet}) {
+  font-size: 0.9rem;
+  }
+
+  @media (max-width: ${screen.mobile}) {
+  font-size: 0.75rem;
+  }
+`;
 
 const MapHolder = styled.div`
   position: absolute;
@@ -48,12 +65,15 @@ const MapText = styled.div`
 
   transform: translate(-50%, -50%);
 
-  font-family: ${fonts.serifMain};
+  font-family: ${fonts.sansSerifMain};
   color: ${colors.nearWhite};
   font-size: 2rem;
-  font-weight: 800;
+  font-weight: 600;
   text-shadow: 0 0 1rem ${colors.nearBlack};
 
+  @media (max-width: ${screen.tablet}) {
+    display: none;
+  }
 `;
 
 const HeroText = styled.div`
@@ -62,21 +82,25 @@ const HeroText = styled.div`
 
   font-size: 4rem;
   font-weight: 800;
+  line-height: 4rem;
+
+  text-align: center;
 
   font-family: ${fonts.sansSerifImpact};
 
-  flex-grow: 1;
-
   @media (max-width: ${screen.desktop}) {
     font-size: 3rem;
+    line-height: 3rem;
   }
 
   @media (max-width: ${screen.tablet}) {
     font-size: 2rem;
+    line-height: 2rem;
   }
 
   @media (max-width: ${screen.mobile}) {
-    font-size: 1.5rem;
+    font-size: 2rem;
+    line-height: 2rem;
   }
 `;
 
@@ -88,7 +112,7 @@ const HeroGradient = styled.div`
   padding-bottom: 10rem;
 
   display: flex;
-  justify-content: left;
+  justify-content: center;
   align-items: center;
   flex-direction: column;
 `;
@@ -107,8 +131,8 @@ const Hero = styled.div`
     justify-content: flex-end;
 
     height: calc(30rem + 200px);
+    padding-bottom: 0;
   }
-
 
   //Diagonal cut below
   overflow: hidden;
@@ -142,19 +166,6 @@ const Image = styled.img`
   border-radius: 1rem;
 
   @media (max-width: ${screen.tablet}) {
-    position: relative;
-
-    display: block;
-
-    border: none;
-    border-radius: 0;
-
-    box-shadow: 0rem 0rem 1rem #00000080;
-
-    width: 100vw;
-    height: 200px;
-    object-fit: cover;
-
-    filter: brightness(0.5);
+    display: none;
   }
 `;
