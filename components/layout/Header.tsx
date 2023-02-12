@@ -45,7 +45,7 @@ export default function Header() {
   return (
     <>
       <UpperHeader
-        isTransparent={headerTransparent}
+        isTransparent={headerTransparent && !showMenu}
         onMouseEnter={() => setHeaderTransparent(false)}
         onMouseLeave={() => {
           if (scrollY < 10) setHeaderTransparent(true);
@@ -119,6 +119,12 @@ function Menu({ show, closeMenu }: { show: boolean; closeMenu: () => void }) {
         <NavButton href="/calendar" onClick={closeMenu}>
           <NavText>Calendar</NavText>
         </NavButton>
+        <NavButton href="/map" onClick={closeMenu}>
+          <NavText>Map</NavText>
+        </NavButton>
+        <NavButton href="/notecards" onClick={closeMenu}>
+          <NavText>Notecards</NavText>
+        </NavButton>
       </MenuWrapper>
     </>
   );
@@ -151,9 +157,7 @@ const MenuWrapper = styled.div`
   height: calc(100vh - 5rem);
 
   background-color: ${(props: { show: boolean }) =>
-    props.show ? "#fffc" : "#0000"};
-  backdrop-filter: ${(props: { show: boolean }) =>
-    props.show ? "blur(10px)" : "blur(0px)"};
+    props.show ? "#eee" : "#0000"};
 
   transition: ${(props: { show: boolean }) =>
     props.show
