@@ -8,6 +8,7 @@ export default function UpcomingTasks() {
   return (
     <UpcomingTasksWrapper>
       <UpcomingTasksTitle>Upcoming Tasks</UpcomingTasksTitle>
+
       <TaskLink href="/calendar">
         <Task date="March 10th">Commit Felony</Task>
       </TaskLink>
@@ -17,6 +18,7 @@ export default function UpcomingTasks() {
       <TaskLink href="/calendar">
         <Task date="December 12th">Get Extradited</Task>
       </TaskLink>
+
       <FullCalendarLink href="/calendar">
         <TextColoring>View Full Calendar</TextColoring>
         <ChevronsRight />
@@ -34,8 +36,12 @@ const UpcomingTasksWrapper = styled.div`
 `;
 
 const UpcomingTasksTitle = styled.div`
-  font-size: 2rem;
+  font-size: 1.75rem;
   font-weight: 800;
+
+  margin: 0rem 2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid black;
 `;
 
 const TextColoring = styled.span`
@@ -48,6 +54,8 @@ const FullCalendarLink = styled(Link)`
   align-items: center;
 
   color: ${colors.unfBlue};
+
+  /* border-bottom: 2px solid blue; */
 
   text-decoration: none;
   margin: 1rem 2rem;
