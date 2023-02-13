@@ -74,13 +74,13 @@ export default function Header() {
             onClick={() => setShowMenu(!showMenu)}
           />
         </SearchAndMenu>
+        <Menu
+          show={showMenu}
+          closeMenu={() => {
+            setShowMenu(false);
+          }}
+        />
       </UpperHeader>
-      <Menu
-        show={showMenu}
-        closeMenu={() => {
-          setShowMenu(false);
-        }}
-      />
     </>
   );
 }
