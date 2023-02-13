@@ -5,19 +5,37 @@ import styled from "styled-components";
 import { ChevronsRight } from "tabler-icons-react";
 
 export default function UpcomingTasks() {
+  const data = [
+    {
+      title: "Commit Felony",
+      date: "March 10th",
+      eventType: "Reoccuring Event",
+    },
+    {
+      title: "Move To New Country",
+      date: "March 11th",
+      eventType: "Personal Event",
+    },
+    {
+      title: "Get Extradited",
+      date: "December 12th",
+      eventType: "Annual Holiday",
+    },
+  ];
+
   return (
     <UpcomingTasksWrapper>
       <UpcomingTasksTitle>Upcoming Tasks</UpcomingTasksTitle>
 
-      <TaskLink href="/calendar">
-        <Task date="March 10th">Commit Felony</Task>
-      </TaskLink>
-      <TaskLink href="/calendar">
-        <Task date="March 11th">Move To New Country</Task>
-      </TaskLink>
-      <TaskLink href="/calendar">
-        <Task date="December 12th">Get Extradited</Task>
-      </TaskLink>
+      {data.map((task) => (
+        <TaskLink href="/calendar">
+          <Task
+            title={task.title}
+            date={task.date}
+            eventType={task.eventType}
+          />
+        </TaskLink>
+      ))}
 
       <FullCalendarLink href="/calendar">
         <TextColoring>View Full Calendar</TextColoring>

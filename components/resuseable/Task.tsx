@@ -2,18 +2,20 @@ import { colors, fonts } from "@/styles/styleConstants";
 import styled from "styled-components";
 
 export default function Task({
-  children,
+  title,
   date,
+  eventType,
 }: {
-  children: string;
+  title: string;
   date: string;
+  eventType: string;
 }) {
   return (
     <>
       <TaskWrapper>
         <TaskHeader>
-          <Tag>Calendar Event</Tag>
-          <TaskTitle>{children}</TaskTitle>
+          <Tag>{eventType}</Tag>
+          <TaskTitle>{title}</TaskTitle>
           <Date>{date}</Date>
         </TaskHeader>
       </TaskWrapper>
