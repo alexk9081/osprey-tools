@@ -6,7 +6,9 @@ import MainHero from "@/components/page/root/Hero";
 import Links from "@/components/page/root/Links";
 import FavoriteLocations from "@/components/page/root/FavoriteLocations";
 
-export default function Home() {
+export default function Home(props: any) {
+  const message = props.data;
+
   return (
     <>
       <Head>
@@ -15,7 +17,6 @@ export default function Home() {
 
       <main>
         <MainHero />
-
         <MainContent>
           <ShadowWrapper>
             <QuickAccessComponents>
@@ -49,3 +50,13 @@ const QuickAccessComponents = styled.div`
 
 const MainContent = styled.div`
 `;
+
+export async function getStaticProps() {
+  const res = await fetch("https://alex-keo-spring-test.herokuapp.com/hello");
+  
+  const hello = await res.json();
+
+  return {
+    props: { data: hello.response }, // will be passed to the page component as props
+  };
+}

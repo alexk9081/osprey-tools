@@ -45,7 +45,7 @@ export default function Header() {
   return (
     <>
       <UpperHeader
-        isTransparent={headerTransparent}
+        isTransparent={headerTransparent && !showMenu}
         onMouseEnter={() => setHeaderTransparent(false)}
         onMouseLeave={() => {
           if (scrollY < 10 && !showMenu) setHeaderTransparent(true);
@@ -115,28 +115,17 @@ const SearchAndMenu = styled.div`
 function Menu({ show, closeMenu }: { show: boolean; closeMenu: () => void }) {
   return (
     <>
-      <div
-        style={{
-          position: "fixed",
-          left: 0,
-          zIndex: 99,
-          padding: "1rem",
-          width: "100vw",
-          height: "calc(100vh - 5rem)",
-          top: show ? "5rem" : "10rem",
-          backgroundColor: show ? "#fffc" : "#0000",
-          backdropFilter: show ? "blur(10px)" : "blur(0px)",
-          transition: show
-            ? "0.3s ease all, 0.8s ease backdrop-filter"
-            : "0.3s ease all, 0.2s ease backdrop-filter",
-          opacity: show ? "1" : "0",
-          visibility: show ? "visible" : "hidden",
-        }}
-      >
+      <MenuWrapper show={show}>
         <NavButton href="/calendar" onClick={closeMenu}>
           <NavText>Calendar</NavText>
         </NavButton>
-      </div>
+        <NavButton href="/map" onClick={closeMenu}>
+          <NavText>Map</NavText>
+        </NavButton>
+        <NavButton href="/notecards" onClick={closeMenu}>
+          <NavText>Notecards</NavText>
+        </NavButton>
+      </MenuWrapper>
     </>
   );
 }
@@ -154,6 +143,30 @@ const NavText = styled.div`
   font-size: 2rem;
   font-weight: 600;
   font-family: ${fonts.sansSerifMain};
+`;
+
+const MenuWrapper = styled.div`
+  position: fixed;
+  top: ${(props: { show: boolean }) => (props.show ? "5rem" : "10rem")};
+  left: 0;
+  z-index: 99;
+
+  padding: 1rem;
+
+  width: 100vw;
+  height: calc(100vh - 5rem);
+
+  background-color: ${(props: { show: boolean }) =>
+    props.show ? "#eee" : "#0000"};
+
+  transition: ${(props: { show: boolean }) =>
+    props.show
+      ? "0.3s ease all, 0.8s ease backdrop-filter"
+      : "0.3s ease all, 0.2s ease backdrop-filter"};
+
+  opacity: ${(props: { show: boolean }) => (props.show ? "1" : "0")};
+  visibility: ${(props: { show: boolean }) =>
+    props.show ? "visible" : "hidden"};
 `;
 
 const MenuButton = styled(Menu2)`
