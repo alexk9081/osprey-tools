@@ -28,7 +28,7 @@ export default function UpcomingTasks() {
       <UpcomingTasksTitle>Upcoming Tasks</UpcomingTasksTitle>
 
       {data.map((task) => (
-        <TaskLink href="/calendar">
+        <TaskLink href="/calendar" key={task.title}>
           <Task
             title={task.title}
             date={task.date}

@@ -56,6 +56,7 @@ export default function TodoPage() {
             title={task.title}
             date={task.date}
             eventType={task.eventType}
+            key={task.title}
           />
       ))}
 
