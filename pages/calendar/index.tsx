@@ -21,6 +21,25 @@ export default function TodoPage() {
     },
   ];
 
+  const data2 = [
+    {
+      title: "Commit Felony",
+      date: "March 10th",
+      eventType: "Reoccuring Event",
+    },
+    {
+      title: "Move To New Country",
+      date: "March 11th",
+      eventType: "Personal Event",
+    },
+    {
+      title: "Get Extradited",
+      date: "December 12th",
+      eventType: "Annual Holiday",
+    },
+  ];
+
+
   const currentDate = new Date();
 
   return (
@@ -32,9 +51,13 @@ export default function TodoPage() {
         <Hero></Hero>
         <ToDoTitle>Todo</ToDoTitle>
 
-        <Task date="March 10th">Commit Felony</Task>
-        <Task date="March 11th">Move To New Country</Task>
-        <Task date="December 12th">Get Extradited</Task>
+        {data2.map((task) => (
+          <Task
+            title={task.title}
+            date={task.date}
+            eventType={task.eventType}
+          />
+      ))}
 
         <Scheduler
           timeZone="America/New_York"
