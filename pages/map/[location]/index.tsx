@@ -10,6 +10,10 @@ export default function Map({location}: {location: locationType}) {
     location.coordinates
   );
 
+  const [activeLocation, setActiveLocation] = useState(
+    location
+  )
+
   return (
     <>
       <Head>
@@ -18,9 +22,9 @@ export default function Map({location}: {location: locationType}) {
       <main>
         <Hero></Hero>
 
-        <CampusMap setCenter={setCenter} center={center} />
+        <CampusMap setCenter={setCenter} center={center} setActiveLocation={setActiveLocation} />
 
-        <FloorViewer />
+        <FloorViewer floors={activeLocation.images}/>
       </main>
     </>
   );

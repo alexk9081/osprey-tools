@@ -1,33 +1,25 @@
 import { colors, screen } from "@/styles/styleConstants";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 
-export default function FloorViewer() {
-  const testButtonData = [
-    {
-      floor: "Big Map",
-      image:
-        "https://cdn.discordapp.com/attachments/1067491860286820394/1068584309922996334/20230126_115824.png",
-    },
-    {
-      floor: "Floor 1",
-      image: "http://fakeimg.pl/1000x400?text=Floor%201&font=museo",
-    },
-    {
-      floor: "Floor 2",
-      image: "http://fakeimg.pl/1000x400?text=Floor%202&font=bebas",
-    },
-    {
-      floor: "Floor 3",
-      image: "http://fakeimg.pl/1000x400?text=Floor%203&font=lobster",
-    },
-  ];
+export default function FloorViewer({
+  floors,
+}: {
+  floors: {
+    floor: string;
+    image: string;
+  }[];
+}) {
+  const [activeImage, setActiveImage] = useState(floors[0]["image"]);
 
-  const [activeImage, setActiveImage] = useState(testButtonData[0]["image"]);
+  useEffect(() => {
+    setActiveImage(floors[0]["image"]);
+  }, [floors]);
+
   return (
     <>
       <Buttons>
-        {testButtonData.map((map) => (
+        {floors.map((map) => (
           <Button
             onClick={() => setActiveImage(map.image)}
             key={map.floor}

@@ -1,5 +1,5 @@
 import { colors, screen } from "@/styles/styleConstants";
-import data from "@/temp/locationData";
+import data, { locationType } from "@/temp/locationData";
 import GoogleMapReact from "google-map-react";
 import { useState } from "react";
 import styled from "styled-components";
@@ -7,9 +7,11 @@ import styled from "styled-components";
 export default function CampusMap({
   center,
   setCenter,
+  setActiveLocation,
 }: {
   center: { lat: number; lng: number };
   setCenter: React.Dispatch<React.SetStateAction<{ lat: number; lng: number }>>;
+  setActiveLocation: React.Dispatch<React.SetStateAction<locationType>>;
 }) {
   function _onChange({
     center,
@@ -32,6 +34,7 @@ export default function CampusMap({
                 lat: point.coordinates.lat,
                 lng: point.coordinates.lng,
               });
+              setActiveLocation(point);
             }}
             key={point.number}
           >

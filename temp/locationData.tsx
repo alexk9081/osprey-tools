@@ -1,4 +1,4 @@
-const data = [
+const data: locationType[] = [
   {
     number: "UNF",
     name: "University of North Florida",
@@ -222,10 +222,8 @@ export type locationType = {
   number: string;
   name: string;
   coordinates: { lat: number; lng: number };
-  images: [
-    {
-      floor: string;
-      image: string;
-    }
-  ];
+  images: {
+    floor: string;
+    image: string;
+  }[];
 };
