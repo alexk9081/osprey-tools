@@ -1,4 +1,5 @@
 import { colors, screen } from "@/styles/styleConstants";
+import data from "@/temp/locationData";
 import GoogleMapReact from "google-map-react";
 import { useState } from "react";
 import styled from "styled-components";
@@ -10,30 +11,6 @@ export default function CampusMap({
   center: { lat: number; lng: number };
   setCenter: React.Dispatch<React.SetStateAction<{ lat: number; lng: number }>>;
 }) {
-  const data = [
-    {
-      number: "51",
-      name: "Building 51 - Social Sciences",
-      coordinates: { lat: 30.26957709945413, lng: -81.50628133740905 },
-    },
-    {
-      number: "58",
-      name: "Building 58 - Student Union",
-
-      coordinates: { lat: 30.271890435799264, lng: -81.50923390523664 },
-    },
-    {
-      number: "12",
-      name: "Building 12 - Tommy G",
-      coordinates: { lat: 30.269504032957066, lng: -81.50865484296324 },
-    },
-    {
-      number: "41",
-      name: "Building 41 - Police Building",
-      coordinates: { lat: 30.26714525333742, lng: -81.51225882517198 },
-    },
-  ];
-
   function _onChange({
     center,
     zoom,

@@ -39,7 +39,7 @@ export default function UpcomingTasks() {
 
       <FullCalendarLink href="/calendar">
         <TextColoring>View Full Calendar</TextColoring>
-        <ChevronsRight />
+        <ChevronsRight size="1.25rem" />
       </FullCalendarLink>
     </UpcomingTasksWrapper>
   );
@@ -65,6 +65,9 @@ const UpcomingTasksTitle = styled.div`
 const TextColoring = styled.span`
   color: ${colors.unfBlue};
   font-weight: 600;
+
+  font-size: 1rem;
+  line-height: 1rem;
 `;
 
 const FullCalendarLink = styled(Link)`
@@ -73,7 +76,9 @@ const FullCalendarLink = styled(Link)`
 
   color: ${colors.unfBlue};
 
-  /* border-bottom: 2px solid blue; */
+  width: fit-content;
+
+  border-bottom: 2px solid ${colors.unfBlue};
 
   text-decoration: none;
   margin: 1rem 2rem;
