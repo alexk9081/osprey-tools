@@ -39,6 +39,23 @@ export default function TodoPage() {
     },
   ];
 
+  function showToast(event: any, value: any, type: any) {
+    console.log(`${event} "${value}" task`, type, 800);
+  }
+
+  function showAddedToast(e:any) {
+    console.log(e);
+    
+    showToast('Added', e.appointmentData.text, 'success');
+  }
+
+  function showUpdatedToast(e:any) {
+    showToast('Updated', e.appointmentData.text, 'info');
+  }
+
+  function showDeletedToast(e:any) {
+    showToast('Deleted', e.appointmentData.text, 'warning');
+  }
 
   const currentDate = new Date();
 
@@ -56,6 +73,7 @@ export default function TodoPage() {
             title={task.title}
             date={task.date}
             eventType={task.eventType}
+            key={task.title}
           />
       ))}
 
@@ -70,6 +88,9 @@ export default function TodoPage() {
           firstDayOfWeek={1}
           startDayHour={8}
           endDayHour={18}
+          onAppointmentAdded={showAddedToast}
+          onAppointmentUpdated={showUpdatedToast}
+          onAppointmentDeleted={showDeletedToast}
         ></Scheduler>
       </main>
     </>
