@@ -1,63 +1,29 @@
-import { fonts } from "@/styles/styleConstants";
 import Head from "next/head";
-import React from "react";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import "devextreme/dist/css/dx.light.css";
 import Scheduler from "devextreme-react/scheduler";
 import Task from "@/components/resuseable/Task";
+import { CalendarContext } from "@/components/layout/CalendarContext";
 
 export default function TodoPage() {
-  const data = [
-    {
-      text: "Create Plan To Steal UNF Goldfish Sculpture",
-      startDate: new Date("2023-01-25T16:30:00.000Z"),
-      endDate: new Date("2023-01-25T18:30:00.000Z"),
-    },
-    {
-      text: "Book Flights to New York for Sales Trip",
-      startDate: new Date("2023-01-25T19:00:00.000Z"),
-      endDate: new Date("2023-01-25T20:00:00.000Z"),
-      allDay: true,
-    },
-  ];
+  function addEvent(e: any) {
+    const f = { ...e.appointmentData, eventType: "Personal Event" };
 
-  const data2 = [
-    {
-      title: "Commit Felony",
-      date: "March 10th",
-      eventType: "Reoccuring Event",
-    },
-    {
-      title: "Move To New Country",
-      date: "March 11th",
-      eventType: "Personal Event",
-    },
-    {
-      title: "Get Extradited",
-      date: "December 12th",
-      eventType: "Annual Holiday",
-    },
-  ];
-
-  function showToast(event: any, value: any, type: any) {
-    console.log(`${event} "${value}" task`, type, 800);
+    setEvents([...events, f]);
   }
 
-  function showAddedToast(e:any) {
+  function updateEvent(e: any) {
     console.log(e);
-    
-    showToast('Added', e.appointmentData.text, 'success');
   }
 
-  function showUpdatedToast(e:any) {
-    showToast('Updated', e.appointmentData.text, 'info');
-  }
-
-  function showDeletedToast(e:any) {
-    showToast('Deleted', e.appointmentData.text, 'warning');
+  function deleteEvent(e: any) {
+    console.log(e);
   }
 
   const currentDate = new Date();
+
+  const { events, setEvents } = useContext(CalendarContext);
 
   return (
     <>
@@ -68,19 +34,20 @@ export default function TodoPage() {
         <Hero></Hero>
         <ToDoTitle>Todo</ToDoTitle>
 
-        {data2.map((task) => (
+        {events.map((event) => (
           <Task
-            title={task.title}
-            date={task.date}
-            eventType={task.eventType}
-            key={task.title}
+            title={event.text}
+            date={event.startDate}
+            eventType={
+              event.recurrenceRule ? "Reoccuring Event" : event.eventType
+            }
+            key={event.text}
           />
-      ))}
-
+        ))}
         <Scheduler
           timeZone="America/New_York"
-          dataSource={data}
-          views={["day", "week", "month"]}
+          dataSource={[...events]}
+          views={["day", "week", "month", "agenda"]}
           defaultCurrentView="month"
           defaultCurrentDate={currentDate}
           height={600}
@@ -88,9 +55,9 @@ export default function TodoPage() {
           firstDayOfWeek={1}
           startDayHour={8}
           endDayHour={18}
-          onAppointmentAdded={showAddedToast}
-          onAppointmentUpdated={showUpdatedToast}
-          onAppointmentDeleted={showDeletedToast}
+          onAppointmentAdded={addEvent}
+          onAppointmentUpdating={updateEvent}
+          onAppointmentDeleted={deleteEvent}
         ></Scheduler>
       </main>
     </>

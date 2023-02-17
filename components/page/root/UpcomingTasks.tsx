@@ -3,36 +3,22 @@ import { colors } from "@/styles/styleConstants";
 import Link from "next/link";
 import styled from "styled-components";
 import { ChevronsRight } from "tabler-icons-react";
+import { CalendarContext } from "@/components/layout/CalendarContext";
+import { useContext } from "react";
 
 export default function UpcomingTasks() {
-  const data = [
-    {
-      title: "Commit Felony",
-      date: "March 10th",
-      eventType: "Reoccuring Event",
-    },
-    {
-      title: "Move To New Country",
-      date: "March 11th",
-      eventType: "Personal Event",
-    },
-    {
-      title: "Get Extradited",
-      date: "December 12th",
-      eventType: "Annual Holiday",
-    },
-  ];
+  const {events} = useContext(CalendarContext);
 
   return (
     <UpcomingTasksWrapper>
       <UpcomingTasksTitle>Upcoming Tasks</UpcomingTasksTitle>
 
-      {data.map((task) => (
-        <TaskLink href="/calendar">
+      {events.slice(0,3).map((event) => (
+        <TaskLink href="/calendar" key={event.title}>
           <Task
-            title={task.title}
-            date={task.date}
-            eventType={task.eventType}
+            title={event.text}
+            date={event.startDate}
+            eventType={event.eventType}
           />
         </TaskLink>
       ))}
