@@ -52,11 +52,13 @@ const MainContent = styled.div`
 `;
 
 export async function getStaticProps() {
-  const res = await fetch("https://alex-keo-spring-test.herokuapp.com/hello");
+  // const res = await fetch("https://alex-keo-spring-test.herokuapp.com/hello");
   
-  const hello = await res.json();
+  // const hello = await res.json();
+  const hello = "Hello";
 
   return {
-    props: { data: hello.response }, // will be passed to the page component as props
+    // props: { data: hello.response }, 
+    props: { data: hello }, 
   };
 }

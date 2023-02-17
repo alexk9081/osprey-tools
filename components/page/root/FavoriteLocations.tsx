@@ -17,12 +17,22 @@ export default function FavoriteLocations() {
   return (
     <FavoriteLocationsWrapper>
       <Title>Favorite Locations</Title>
-      {data.map((location) => (
-        <Location key={location.name}>{location.name}</Location>
-      ))}
+
+      <Locations>
+        {data.map((location) => (
+          <Location key={location.name}>
+            <LocationText>{location.name}</LocationText>
+          </Location>
+        ))}
+      </Locations>
     </FavoriteLocationsWrapper>
   );
 }
+
+const Locations = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+`;
 
 const FavoriteLocationsWrapper = styled.div`
   padding: 1rem;
@@ -33,15 +43,33 @@ const Title = styled.div`
   font-weight: 800;
 `;
 
-const Location = styled.div`
-  margin: 1rem;
-  padding: 1rem;
+const LocationText = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
 
   font-size: 1.5rem;
   font-weight: 700;
 
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 1rem;
+  padding: 1rem;
+  height: 100%;
+
+  box-sizing: border-box;
+
+  backdrop-filter: brightness(0.65);
+  color: white;
+
+  transition: 0.2s ease all;
+`;
+
+const Location = styled.div`
+  margin: 1rem;
+  height: 10rem;
+
+  background-image: url("https://images.unsplash.com/photo-1574417837609-53a862369529?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80");
+  background-size: cover;
 
   box-shadow: 0.1rem 0.3rem 0.75rem #00000040;
 
@@ -50,7 +78,10 @@ const Location = styled.div`
   &:hover {
     cursor: pointer;
 
-    background-color: #e2e2e2e8;
     box-shadow: 0.1rem 0.3rem 0.75rem #00000060;
+
+    ${LocationText} {
+      backdrop-filter: brightness(0.45);
+    }
   }
 `;

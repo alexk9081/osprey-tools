@@ -1,22 +1,37 @@
 import { colors, fonts } from "@/styles/styleConstants";
 import styled from "styled-components";
+import { isStringLiteral } from "typescript";
 
 export default function Task({
   title,
   date,
   eventType,
 }: {
-  title: string;
-  date: string;
+  title: string | undefined;
+  date: Date | string | undefined;
   eventType: string;
 }) {
+
+  let dateString: string;
+
+  if(typeof date === "string") {
+    dateString = date;
+  }
+  else if (typeof date === "undefined"){
+    dateString = "Unknown";
+  }
+  else {
+    dateString = date.toLocaleDateString('en-us', { weekday:"short", year:"numeric", month:"long", day: '2-digit'})
+  }
+
+
   return (
     <>
       <TaskWrapper>
         <TaskHeader>
-          <Tag>{eventType}</Tag>
+          <Tag>{eventType ? eventType : "Personal Event"}</Tag>
           <TaskTitle>{title}</TaskTitle>
-          <Date>{date}</Date>
+          <Date>{dateString}</Date>
         </TaskHeader>
       </TaskWrapper>
     </>
