@@ -1,22 +1,40 @@
 import { colors } from "@/styles/styleConstants";
 import Head from "next/head";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import styled from "styled-components";
+import { useRouter } from 'next/router'
 
 type Inputs = {
-  firstName: string;
-  lastName: string;
-  age: number;
+  title: string;
+  desc: string;
 };
 
+
 export default function Create() {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+
+  /**
+   * Sends post requst to the database then reroutes user to the newly created pack
+   * 
+   * @param data Data from input fields in the form
+   */
+  function onSubmit(data: Inputs): void {
+    const userInfo = { name: "Wall-E", image: "www.image.com/image.jpg" };
+    console.log(data);
+    console.log(userInfo);
+
+    const isValid = true;
+    const fauxData = {packName: "softwareEngineering"}
+
+    if(isValid){
+      router.push(`/notecards/packs/${userInfo.name}/${fauxData.packName}`)
+    }
+  }
 
   return (
     <>
@@ -25,20 +43,26 @@ export default function Create() {
       </Head>
       <main>
         <Hero></Hero>
+
         <CustomForm onSubmit={handleSubmit(onSubmit)}>
           <input
-            {...register("firstName", { required: true, maxLength: 20 })}
+            placeholder="Title"
+            {...register("title", { required: true, pattern: /^[\w]{3,30}$/i })}
           />
-          <input {...register("lastName", { pattern: /^[A-Za-z]+$/i })} />
-          <input type="number" {...register("age", { min: 18, max: 99 })} />
+          {errors.title && <span>This field is required</span>}
+          <input
+            placeholder="Description"
+            {...register("desc", { pattern: /^[\w]{0,300}$/i })}
+          />
+          {errors.desc && <span>This field is required</span>}
+
+          {/* <select {...register("gender")}>
+            <option value="female">female</option>
+            <option value="male">male</option>
+            <option value="other">other</option>
+          </select> */}
+          
           <SubmitButton type="submit" />
-
-          {errors.firstName && <span>This field is required</span>}
-          {errors.lastName && <span>This field is required</span>}
-          {errors.age && <span>This field is required</span>}
-
-
-          {watch("firstName")}
         </CustomForm>
       </main>
     </>
@@ -46,10 +70,9 @@ export default function Create() {
 }
 
 const Hero = styled.div`
-  height: 40vh;
+  height: 5rem;
   background-color: ${colors.unfBlueWhite};
 `;
-
 
 const CustomForm = styled.form`
   display: flex;
