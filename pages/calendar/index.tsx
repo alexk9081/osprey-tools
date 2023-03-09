@@ -21,6 +21,15 @@ export default function TodoPage() {
     console.log(e);
   }
 
+  function editAppointmentForm(e: any) {
+    const form = e.form;
+    let mainGroupItems = form.itemOption('mainGroup').items;
+
+    mainGroupItems[0] = {...mainGroupItems[0], validationRules: [{type: "required"}]}
+
+    form.itemOption('mainGroup', 'items', mainGroupItems);
+  }
+
   const currentDate = new Date();
 
   const { events, setEvents } = useContext(CalendarContext);
@@ -55,6 +64,7 @@ export default function TodoPage() {
           firstDayOfWeek={1}
           startDayHour={8}
           endDayHour={18}
+          onAppointmentFormOpening={editAppointmentForm}
           onAppointmentAdded={addEvent}
           onAppointmentUpdating={updateEvent}
           onAppointmentDeleted={deleteEvent}
