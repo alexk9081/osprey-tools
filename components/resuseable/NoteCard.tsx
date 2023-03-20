@@ -1,3 +1,4 @@
+import { colors } from "@/styles/styleConstants";
 import { useState } from "react";
 import styled from "styled-components";
 
@@ -35,7 +36,7 @@ const Text = styled.span`
   position: absolute;
   text-align: center;
 
-  margin: 1rem;
+  margin: 3rem;
 
   transition: 0s 0.2s linear opacity;
   opacity: ${(props: { isOpen: boolean }) => (props.isOpen ? "1" : "0")};
@@ -52,16 +53,18 @@ const NoteCardWrapper = styled.div`
   font-weight: 700;
 
   box-sizing: border-box;
-  background-color: white;
+  background-color: #fafafa;
 
   height: 10rem;
   width: 20rem;
 
+  margin: 1rem;
+
   transition: 0.4s linear transform, 0.4s linear box-shadow;
   box-shadow: ${(props: { isOpen: boolean }) =>
     props.isOpen
-      ? "0.75rem -0.25rem 1rem #00000040"
-      : "0.75rem  0.25rem 1rem #00000040"};
+      ? "0.5rem -0.25rem 1.25rem #00000040"
+      : "0.5rem  0.25rem 1.25rem #00000040"};
 
   transform: ${(props: { isOpen: boolean }) =>
     props.isOpen ? "rotateX(180deg)" : "rotateX(0deg)"};
