@@ -23,11 +23,14 @@ export default function TodoPage() {
 
   function editAppointmentForm(e: any) {
     const form = e.form;
-    let mainGroupItems = form.itemOption('mainGroup').items;
+    let mainGroupItems = form.itemOption("mainGroup").items;
 
-    mainGroupItems[0] = {...mainGroupItems[0], validationRules: [{type: "required"}]}
+    mainGroupItems[0] = {
+      ...mainGroupItems[0],
+      validationRules: [{ type: "required" }],
+    };
 
-    form.itemOption('mainGroup', 'items', mainGroupItems);
+    form.itemOption("mainGroup", "items", mainGroupItems);
   }
 
   const currentDate = new Date();
@@ -43,16 +46,18 @@ export default function TodoPage() {
         <Hero></Hero>
         <ToDoTitle>Todo</ToDoTitle>
 
-        {events.map((event) => (
-          <Task
-            title={event.text}
-            date={event.startDate}
-            eventType={
-              event.recurrenceRule ? "Reoccuring Event" : event.eventType
-            }
-            key={event.text}
-          />
-        ))}
+        <EventsHolder>
+          {events.map((event) => (
+            <Task
+              title={event.text}
+              date={event.startDate}
+              eventType={
+                event.recurrenceRule ? "Reoccuring Event" : event.eventType
+              }
+              key={event.text}
+            />
+          ))}
+        </EventsHolder>
         <Scheduler
           timeZone="America/New_York"
           dataSource={[...events]}
@@ -76,6 +81,19 @@ export default function TodoPage() {
 
 const Hero = styled.div`
   height: 5rem;
+`;
+
+const EventsHolder = styled.div`
+  height: 24rem;
+
+  overflow-y: scroll;
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 `;
 
 const ToDoTitle = styled.div`

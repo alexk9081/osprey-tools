@@ -21,6 +21,13 @@ const data: Appointment[] = [
     allDay: true,
     eventType: "Annual Holiday",
   },
+  {
+    text: "Blame Rich for All Your Problems",
+    startDate: new Date("2024-01-11T16:30:00.000Z"),
+    endDate: new Date("2024-01-11T18:30:00.000Z"),
+    allDay: true,
+    eventType: "Annual Holiday",
+  },
 ];
 
 export default data;
