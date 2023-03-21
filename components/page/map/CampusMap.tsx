@@ -27,20 +27,22 @@ export default function CampusMap({
     <CampusMapWrapper>
       <KeyPointsOfInterest>
         <Title>Key Points of Interest</Title>
-        {data.map((point) => (
-          <PointOfInterest
-            onClick={() => {
-              setCenter({
-                lat: point.coordinates.lat,
-                lng: point.coordinates.lng,
-              });
-              setActiveLocation(point);
-            }}
-            key={point.number}
-          >
-            {point.name}
-          </PointOfInterest>
-        ))}
+        <POIList>
+          {data.map((point) => (
+            <PointOfInterest
+              onClick={() => {
+                setCenter({
+                  lat: point.coordinates.lat,
+                  lng: point.coordinates.lng,
+                });
+                setActiveLocation(point);
+              }}
+              key={point.number}
+            >
+              {point.name}
+            </PointOfInterest>
+          ))}
+        </POIList>
       </KeyPointsOfInterest>
       <div style={{ height: "35rem", width: "100%" }}>
         <GoogleMapReact
@@ -82,9 +84,25 @@ export default function CampusMap({
   );
 }
 
+const POIList = styled.div`
+  height: 31rem;
+  overflow-y: scroll;
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+
+  box-shadow: 0 -13px 10px -4px #9d9d9d inset;
+
+  padding-right: 3rem;
+`;
+
 const Title = styled.div`
   font-size: 2rem;
-  margin: 1rem;
+  padding: 1rem;
 `;
 
 const PointOfInterest = styled.div`
