@@ -1,16 +1,24 @@
 import { colors } from "@/styles/styleConstants";
+import Link from "next/link";
 import styled from "styled-components";
 
 export default function FavoriteLocations() {
   const data = [
     {
       name: "Building 58 - Student Union",
+      url: "58",
     },
     {
       name: "Building 51 - Social Sciences",
+      url: "51",
     },
     {
       name: "Building 12 - Tommy G",
+      url: "12",
+    },
+    {
+      name: "Building 41 - Poilce Building",
+      url: "41",
     },
   ];
 
@@ -20,14 +28,20 @@ export default function FavoriteLocations() {
 
       <Locations>
         {data.map((location) => (
-          <Location key={location.name}>
-            <LocationText>{location.name}</LocationText>
-          </Location>
+          <StyledLink key={location.name} href={"map/" + location.url}>
+            <Location>
+              <LocationText>{location.name}</LocationText>
+            </Location>
+          </StyledLink>
         ))}
       </Locations>
     </FavoriteLocationsWrapper>
   );
 }
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+`;
 
 const Locations = styled.div`
   display: grid;
@@ -44,6 +58,7 @@ const Title = styled.div`
 `;
 
 const LocationText = styled.div`
+
   display: flex;
   justify-content: center;
   align-items: center;
