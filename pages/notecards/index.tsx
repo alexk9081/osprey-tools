@@ -61,7 +61,6 @@ export default function NoteCardsPage() {
           />
         </CardSection>
 
-        <SectionBreak />
 
         <CardSection title="Public Packs">
           {data.map((cardCollection: any) => (
@@ -88,29 +87,14 @@ const Hero = styled.div`
   align-items: center;
 `;
 
-const SectionBreak = styled.hr`
-  margin: 0 4rem;
-`;
-
 function CardSection({ title, children }: { title: string; children: any }) {
   return (
-    <CardSectionWrapper>
-      <SectionTitle>{title}</SectionTitle>
-      <NoteCardCollections>{children}</NoteCardCollections>
-    </CardSectionWrapper>
+    <fieldset>
+      <legend>{title}</legend>
+    <NoteCardCollections>{children}</NoteCardCollections>
+    </fieldset>
   );
 }
-
-const CardSectionWrapper = styled.div`
-  margin: 4rem 2rem;
-`;
-
-const SectionTitle = styled.div`
-  font-size: 1.5rem;
-  font-weight: 700;
-
-  margin-bottom: 1rem;
-`;
 
 const NoteCardCollections = styled.div`
   display: flex;
