@@ -48,14 +48,15 @@ export default function TodoPage() {
 
         <EventsHolder>
           {events.map((event) => (
-            <Task
-              title={event.text}
-              date={event.startDate}
-              eventType={
-                event.recurrenceRule ? "Reoccuring Event" : event.eventType
-              }
-              key={event.text}
-            />
+            <TaskWrapper key={event.text}>
+              <Task
+                title={event.text}
+                date={event.startDate}
+                eventType={
+                  event.recurrenceRule ? "Reoccuring Event" : event.eventType
+                }
+              />
+            </TaskWrapper>
           ))}
         </EventsHolder>
         <Scheduler
@@ -79,12 +80,18 @@ export default function TodoPage() {
   );
 }
 
+const TaskWrapper = styled.div``;
+
 const Hero = styled.div`
   height: 5rem;
 `;
 
 const EventsHolder = styled.div`
   height: 24rem;
+
+  ${TaskWrapper}:nth-child(odd) {
+    background-color: #f8f8f8;
+  }
 
   overflow-y: scroll;
 
@@ -109,5 +116,5 @@ const ToDoTitle = styled.div`
   font-weight: bold;
   font-size: 3rem;
 
-  margin: 1rem;
+  margin: 1rem 2rem;
 `;
