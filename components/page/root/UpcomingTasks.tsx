@@ -14,7 +14,7 @@ export default function UpcomingTasks() {
       <UpcomingTasksTitle>Upcoming Tasks</UpcomingTasksTitle>
 
       {events.slice(0,3).map((event) => (
-        <TaskLink href="/calendar" key={event.title}>
+        <TaskLink href="/calendar" key={event.text}>
           <Task
             title={event.text}
             date={event.startDate}
