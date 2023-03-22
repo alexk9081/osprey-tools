@@ -88,12 +88,21 @@ const EventsHolder = styled.div`
 
   overflow-y: scroll;
 
-  /* Hide scrollbar for Chrome, Safari and Opera */
-  &::-webkit-scrollbar {
-    display: none;
+  ::-webkit-scrollbar {
+    width: 20px;
   }
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #d6dee1;
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+    &:hover {
+      background-color: #a8bbbf;
+    }
+  }
 `;
 
 const ToDoTitle = styled.div`

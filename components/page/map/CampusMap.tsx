@@ -88,12 +88,21 @@ const POIList = styled.div`
   height: 31rem;
   overflow-y: scroll;
 
-  /* Hide scrollbar for Chrome, Safari and Opera */
-  &::-webkit-scrollbar {
-    display: none;
+  ::-webkit-scrollbar {
+    width: 20px;
   }
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #9ba5a9;
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+    &:hover {
+      background-color: #5c6568;
+    }
+  }
 
   box-shadow: 0 -13px 10px -4px #9d9d9d inset;
 
