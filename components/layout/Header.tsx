@@ -125,6 +125,9 @@ function Menu({ show, closeMenu }: { show: boolean; closeMenu: () => void }) {
         <NavButton href="/notecards" onClick={closeMenu}>
           <NavText>Notecards</NavText>
         </NavButton>
+        <NavButton href="/users" onClick={closeMenu}>
+          <NavText>Users</NavText>
+        </NavButton>
       </MenuWrapper>
     </>
   );
