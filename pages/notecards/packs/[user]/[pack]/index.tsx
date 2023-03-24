@@ -17,7 +17,7 @@ export default function Pack({
   return (
     <>
       <Head>
-        <title>Alex Keo</title>
+        <title>Notecard Pack | UNF App</title>
       </Head>
       <main>
         <Hero>
@@ -26,7 +26,11 @@ export default function Pack({
             <div>
               <div>
                 {cards.map((card) => (
-                  <EditCard question={card.question} answer={card.answer} />
+                  <EditCard
+                    key={card.question}
+                    question={card.question}
+                    answer={card.answer}
+                  />
                 ))}
                 <EditCard question="" answer="" />
               </div>
@@ -59,7 +63,7 @@ export default function Pack({
 
         <GridViewCards>
           {cards.map((card) => (
-            <SlideWrapper>
+            <SlideWrapper key={card.question}>
               <NoteCard
                 height="15rem"
                 width="calc(100% - 2rem)"

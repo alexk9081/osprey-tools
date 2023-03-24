@@ -7,7 +7,7 @@ export default function Users() {
   return (
     <>
       <Head>
-        <title>OPT</title>
+        <title>Users | UNF App</title>
       </Head>
       <main>
         <Hero></Hero>

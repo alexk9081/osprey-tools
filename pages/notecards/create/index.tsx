@@ -39,7 +39,7 @@ export default function Create() {
   return (
     <>
       <Head>
-        <title>Alex Keo</title>
+        <title>Create Notecard Pack | UNF App</title>
       </Head>
       <main>
         <Hero></Hero>

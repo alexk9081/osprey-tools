@@ -17,7 +17,7 @@ export default function Map({location}: {location: locationType}) {
   return (
     <>
       <Head>
-        <title>Home | UNF App</title>
+        <title>Map | UNF App</title>
       </Head>
       <main>
         <Hero></Hero>
