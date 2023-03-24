@@ -1,4 +1,4 @@
-import { colors } from "@/styles/styleConstants";
+import { colors, screen } from "@/styles/styleConstants";
 import Link from "next/link";
 import styled from "styled-components";
 
@@ -7,18 +7,22 @@ export default function FavoriteLocations() {
     {
       name: "Building 58 - Student Union",
       url: "58",
+      img: "https://www.unf.edu/studentunion/images/studentunion.jpg",
     },
     {
       name: "Building 51 - Social Sciences",
       url: "51",
+      img: "https://thermomass.com/website/wp-content/uploads/2017/02/unf-bldg51-02.jpg",
     },
     {
       name: "Building 12 - Tommy G",
       url: "12",
+      img: "https://digitalcommons.unf.edu/assets/md5images/7d02d9983a170b7e6d8625c847806819.jpg",
     },
     {
       name: "Building 41 - Poilce Building",
       url: "41",
+      img: "https://www.unf.edu/upd/images/upd-home-banner.jpg",
     },
   ];
 
@@ -29,7 +33,7 @@ export default function FavoriteLocations() {
       <Locations>
         {data.map((location) => (
           <StyledLink key={location.name} href={"map/" + location.url}>
-            <Location>
+            <Location imgUrl={location.img}>
               <LocationText>{location.name}</LocationText>
             </Location>
           </StyledLink>
@@ -58,7 +62,6 @@ const Title = styled.div`
 `;
 
 const LocationText = styled.div`
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -73,7 +76,7 @@ const LocationText = styled.div`
 
   box-sizing: border-box;
 
-  backdrop-filter: brightness(0.65);
+  backdrop-filter: brightness(0.45);
   color: white;
 
   transition: 0.2s ease all;
@@ -81,10 +84,12 @@ const LocationText = styled.div`
 
 const Location = styled.div`
   margin: 1rem;
-  height: 10rem;
+  height: 12rem;
 
-  background-image: url("https://images.unsplash.com/photo-1574417837609-53a862369529?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80");
+  background-image: ${(props: { imgUrl: string }) =>
+    "url('" + props.imgUrl + "')"};
   background-size: cover;
+  background-position: 0;
 
   box-shadow: 0.1rem 0.3rem 0.75rem #00000040;
 
@@ -96,7 +101,11 @@ const Location = styled.div`
     box-shadow: 0.1rem 0.3rem 0.75rem #00000060;
 
     ${LocationText} {
-      backdrop-filter: brightness(0.45);
+      backdrop-filter: brightness(0.9);
     }
+  }
+
+  @media (max-width: ${screen.tablet}) {
+    margin: 0.25rem;
   }
 `;
