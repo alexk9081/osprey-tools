@@ -2,7 +2,7 @@ import { colors, screen } from "@/styles/styleConstants";
 import Link from "next/link";
 import styled from "styled-components";
 
-export default function FavoriteLocations() {
+export default function PopularLocations() {
   const data = [
     {
       name: "Building 58 - Student Union",
@@ -28,7 +28,7 @@ export default function FavoriteLocations() {
 
   return (
     <FavoriteLocationsWrapper>
-      <Title>Favorite Locations</Title>
+      <Title>Popular Locations</Title>
 
       <Locations>
         {data.map((location) => (
@@ -48,17 +48,23 @@ const StyledLink = styled(Link)`
 `;
 
 const Locations = styled.div`
+  margin: 2rem 0.5rem;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
 `;
 
 const FavoriteLocationsWrapper = styled.div`
   padding: 1rem;
+  margin: 0rem 2rem;
 `;
 
 const Title = styled.div`
-  font-size: 2rem;
+  font-size: 1.75rem;
   font-weight: 800;
+
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid black;
 `;
 
 const LocationText = styled.div`
@@ -83,7 +89,6 @@ const LocationText = styled.div`
 `;
 
 const Location = styled.div`
-  margin: 1rem;
   height: 12rem;
 
   background-image: ${(props: { imgUrl: string }) =>

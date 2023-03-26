@@ -4,7 +4,7 @@ import styled from "styled-components";
 import UpcomingTasks from "@/components/page/root/UpcomingTasks";
 import MainHero from "@/components/page/root/Hero";
 import Links from "@/components/page/root/Links";
-import FavoriteLocations from "@/components/page/root/FavoriteLocations";
+import PopularLocations from "@/components/page/root/PopularLocations";
 
 export default function Home(props: any) {
   const message = props.data;
@@ -21,7 +21,7 @@ export default function Home(props: any) {
           <ShadowWrapper>
             <QuickAccessComponents>
               <UpcomingTasks />
-              <FavoriteLocations />
+              <PopularLocations />
             </QuickAccessComponents>
           </ShadowWrapper>
           <Links />
