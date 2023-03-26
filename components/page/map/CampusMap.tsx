@@ -111,7 +111,10 @@ const POIList = styled.div`
 
 const Title = styled.div`
   font-size: 2rem;
-  padding: 1rem;
+  line-height: 2rem;
+  margin: 0.5rem 1.5rem;
+  padding: calc(0.5rem - 1px) 1rem;
+  border-bottom: 2px solid black;
 `;
 
 const PointOfInterest = styled.div`
