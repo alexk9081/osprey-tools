@@ -117,4 +117,7 @@ const ToDoTitle = styled.div`
   font-size: 3rem;
 
   margin: 1rem 2rem;
+  padding: 0 1rem;
+
+  border-bottom: 2px solid black;
 `;
