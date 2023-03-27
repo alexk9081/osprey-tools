@@ -1,7 +1,11 @@
 import { colors, screen } from "@/styles/styleConstants";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import LightBox from "./Lightbox";
+import Lightbox from "yet-another-react-lightbox";
+import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
+import Zoom from "yet-another-react-lightbox/plugins/zoom";
+import "yet-another-react-lightbox/styles.css";
+import "yet-another-react-lightbox/plugins/thumbnails.css";
 
 export default function FloorViewer({
   floors,
@@ -14,6 +18,7 @@ export default function FloorViewer({
   const [activeImage, setActiveImage] = useState(floors[0]["image"]);
   const [open, setOpen] = useState(false);
   const [imageIndex, setImageIndex] = useState(0);
+  const images = floors.map((floor: any) => ({ src: floor.image }));
 
   useEffect(() => {
     setActiveImage(floors[0]["image"]);
@@ -37,11 +42,12 @@ export default function FloorViewer({
       </FloorSelectors>
 
       <Image src={activeImage} onClick={() => setOpen(true)} alt="" />
-      <LightBox
-        floors={floors}
+      <Lightbox
         open={open}
-        setOpen={setOpen}
-        imageIndex={imageIndex}
+        close={() => setOpen(false)}
+        index={imageIndex}
+        slides={images}
+        plugins={[Thumbnails, Zoom]}
       />
     </>
   );
