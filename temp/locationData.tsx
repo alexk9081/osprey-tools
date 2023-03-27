@@ -140,12 +140,12 @@ const data: locationType[] = [
       {
         floor: "Floor 1",
         image:
-          "https://cdn.discordapp.com/attachments/1068603528051966022/1069669952853909694/20230130_121607.jpg",
+          "https://cdn.discordapp.com/attachments/1068603528051966022/1069669976216178828/20230130_121809.jpg",
       },
       {
         floor: "Floor 2",
         image:
-          "https://cdn.discordapp.com/attachments/1068603528051966022/1069669976216178828/20230130_121809.jpg",
+          "https://cdn.discordapp.com/attachments/1068603528051966022/1069669952853909694/20230130_121607.jpg",
       },
       {
         floor: "Floor 3",
