@@ -3,6 +3,7 @@ import data, { locationType } from "@/temp/locationData";
 import GoogleMapReact from "google-map-react";
 import { Search } from "tabler-icons-react";
 import styled from "styled-components";
+import { useState } from "react";
 
 export default function CampusMap({
   center,
@@ -23,16 +24,29 @@ export default function CampusMap({
     setCenter(center);
   }
 
+  const [filteredList, setFilteredList] = useState(data);
+
+  function updateFilteredList(query: string) {
+    setFilteredList(
+      data.filter((location) =>
+      location
+      .name
+      .toLowerCase()
+      .includes(query.toLowerCase())
+      )
+    )
+  }
+
   return (
     <CampusMapWrapper>
       <KeyPointsOfInterest>
         <Title>Key Points of Interest</Title>
         <SearchComponent>
-          <SearchBar />
+          <SearchBar onChange={(e) => {updateFilteredList(e.target.value)}} />
           <Search />
         </SearchComponent>
         <POIList>
-          {data.map((point) => (
+          {filteredList.map((point) => (
             <PointOfInterest
               onClick={() => {
                 setCenter({
