@@ -1,7 +1,7 @@
 import { colors, screen } from "@/styles/styleConstants";
 import data, { locationType } from "@/temp/locationData";
 import GoogleMapReact from "google-map-react";
-import { useState } from "react";
+import { Search } from "tabler-icons-react";
 import styled from "styled-components";
 
 export default function CampusMap({
@@ -27,6 +27,10 @@ export default function CampusMap({
     <CampusMapWrapper>
       <KeyPointsOfInterest>
         <Title>Key Points of Interest</Title>
+        <SearchComponent>
+          <SearchBar />
+          <Search />
+        </SearchComponent>
         <POIList>
           {data.map((point) => (
             <PointOfInterest
@@ -83,6 +87,26 @@ export default function CampusMap({
     </CampusMapWrapper>
   );
 }
+
+const SearchBar = styled.input`
+  background-color: transparent;
+  border: none;
+
+  width: 100%;
+`;
+
+const SearchComponent = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  border-radius: 3rem;
+  border: 2px solid #0005;
+
+  padding: 0 0.5rem;
+
+  margin: 0.5rem 1rem;
+`;
 
 const POIList = styled.div`
   height: 31rem;

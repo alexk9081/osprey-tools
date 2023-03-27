@@ -102,7 +102,7 @@ const data: locationType[] = [
   },
   {
     number: "59",
-    name: "Building 15 - Biological Sciences Building",
+    name: "Building 59 - Biological Sciences Building",
     coordinates: { lat: 30.270307112540355, lng: -81.50624548917119 },
     images: [
       {
