@@ -1,6 +1,7 @@
 import { colors, screen } from "@/styles/styleConstants";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
+import LightBox from "./Lightbox";
 
 export default function FloorViewer({
   floors,
@@ -11,6 +12,8 @@ export default function FloorViewer({
   }[];
 }) {
   const [activeImage, setActiveImage] = useState(floors[0]["image"]);
+  const [open, setOpen] = useState(false);
+  const [imageIndex, setImageIndex] = useState(0);
 
   useEffect(() => {
     setActiveImage(floors[0]["image"]);
@@ -18,19 +21,28 @@ export default function FloorViewer({
 
   return (
     <>
-      <Buttons>
-        {floors.map((map) => (
+      <FloorSelectors>
+        {floors.map((map, index) => (
           <Button
-            onClick={() => setActiveImage(map.image)}
+            onClick={() => {
+              setActiveImage(map.image);
+              setImageIndex(index);
+            }}
             key={map.floor}
             isActive={map.image == activeImage}
           >
             {map.floor}
           </Button>
         ))}
-      </Buttons>
+      </FloorSelectors>
 
-      <Image src={activeImage} alt="" />
+      <Image src={activeImage} onClick={() => setOpen(true)} alt="" />
+      <LightBox
+        floors={floors}
+        open={open}
+        setOpen={setOpen}
+        imageIndex={imageIndex}
+      />
     </>
   );
 }
@@ -40,9 +52,11 @@ const Image = styled.img`
   height: calc(100vh - 5rem - 3rem);
 
   object-fit: contain;
+
+  cursor: pointer;
 `;
 
-const Buttons = styled.div`
+const FloorSelectors = styled.div`
   display: grid;
   grid-auto-flow: column;
 
