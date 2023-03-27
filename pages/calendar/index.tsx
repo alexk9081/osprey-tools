@@ -68,8 +68,8 @@ export default function TodoPage() {
           height={600}
           showAllDayPanel={true}
           firstDayOfWeek={1}
-          startDayHour={8}
-          endDayHour={18}
+          startDayHour={0}
+          endDayHour={24}
           onAppointmentFormOpening={editAppointmentForm}
           onAppointmentAdded={addEvent}
           onAppointmentUpdating={updateEvent}
