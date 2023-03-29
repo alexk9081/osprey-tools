@@ -18,29 +18,29 @@ public class ExampleAPI {
   /**
    * Main method starts the server on port 8080
    * 
-   * On a local dev enviornment it would be at 'http://localhost:8080'
+   * On a local dev enviornment its going to be at 'http://localhost:8080'
    * On heroku its going to be at 'https://alex-keo-example-url.herokuapp.com'
    */
-	public static void main(String[] args) { 
-		SpringApplication.run(ExampleAPI.class, args);
-	}
+  public static void main(String[] args) { 
+    SpringApplication.run(ExampleAPI.class, args);
+  }
 
   /**
    * Example method creates new route for getting users
    * 
-   * On a local dev enviornment it would be at 'http://localhost:8080/users'
+   * On a local dev enviornment its going to be at 'http://localhost:8080/users'
    * On heroku its going to be at 'https://alex-keo-example-url.herokuapp.com/users'
    * 
    */
-	@GetMapping("/users")
-	public String users() {
+  @GetMapping("/users")
+  public String users() {
     //This would be a call to your code which would then query the database
     String[] userData = exampleDatabaseCall();
 
     //Json objects are used to ensure the data is formatted correctly so that the frontend can parse it
     JSONObject usersJson = new JSONObject();
 
-    //Creates a new json object for every user entry, generally it would have multiple parameters like nNumber, name, DoB, etc.
+    //Creates a new json object for every user, generally it would have multiple parameters like nNumber, name, DoB, etc.
     //This results in usersJson being a list of objects which would look as follows:
     // [{name: "user1"},{name: "user2"},{name: "user3"}]
     for(String user: userData) {
@@ -51,7 +51,7 @@ public class ExampleAPI {
     }
 
     return usersJson.toString();
-	}
+  }
 
 
   private static String[] exampleDatabaseCall() {
