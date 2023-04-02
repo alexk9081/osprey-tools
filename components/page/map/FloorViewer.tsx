@@ -3,10 +3,12 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Lightbox from "yet-another-react-lightbox";
 import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
+import Captions from "yet-another-react-lightbox/plugins/captions";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import "yet-another-react-lightbox/styles.css";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 
+import "yet-another-react-lightbox/plugins/captions.css";
 export default function FloorViewer({
   floors,
 }: {
@@ -18,7 +20,7 @@ export default function FloorViewer({
   const [activeImage, setActiveImage] = useState(floors[0]["image"]);
   const [open, setOpen] = useState(false);
   const [imageIndex, setImageIndex] = useState(0);
-  const images = floors.map((floor: any) => ({ src: floor.image }));
+  const images = floors.map((floor: any) => ({ src: floor.image, title: floor.floor }));
 
   useEffect(() => {
     setActiveImage(floors[0]["image"]);
@@ -47,7 +49,7 @@ export default function FloorViewer({
         close={() => setOpen(false)}
         index={imageIndex}
         slides={images}
-        plugins={[Thumbnails, Zoom]}
+        plugins={[Thumbnails, Zoom, Captions]}
       />
     </>
   );

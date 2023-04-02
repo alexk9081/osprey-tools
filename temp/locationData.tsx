@@ -126,7 +126,7 @@ const data: locationType[] = [
           "https://cdn.discordapp.com/attachments/1068603528051966022/1069665490076717117/20230130_120505.jpg",
       },
       {
-        floor: "Not Virus Storage",
+        floor: "DO NOT OPEN - OPHIOCORDYCEPS UNILATERALIS INSIDE",
         image:
           "https://cdn.discordapp.com/attachments/1068603528051966022/1069666148246896740/20230130_120044.jpg",
       },
