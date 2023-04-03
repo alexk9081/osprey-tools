@@ -7,21 +7,33 @@ import { CalendarContext } from "@/components/layout/CalendarContext";
 import { useContext } from "react";
 
 export default function UpcomingTasks() {
-  const {events} = useContext(CalendarContext);
+  const { events } = useContext(CalendarContext);
 
   return (
     <UpcomingTasksWrapper>
       <UpcomingTasksTitle>Upcoming Tasks</UpcomingTasksTitle>
 
-      {events.slice(0,3).map((event) => (
-        <TaskLink href="/calendar" key={event.text}>
-          <Task
-            title={event.text}
-            date={event.startDate}
-            eventType={event.eventType}
-          />
-        </TaskLink>
-      ))}
+      {events
+        .filter((event) => {
+          if (
+            typeof event.endDate != "string" &&
+            typeof event.endDate != "undefined"
+          ) {
+            return event.endDate?.getTime() > new Date().getTime();
+          }
+        })
+        .slice(0, 3)
+        .map((event) => (
+          <TaskLink href="/calendar" key={event.text}>
+            <Task
+              title={event.text}
+              startDate={event.startDate}
+              endDate={event.endDate}
+              allDay={event.allDay ? event.allDay : false}
+              eventType={event.eventType}
+            />
+          </TaskLink>
+        ))}
 
       <FullCalendarLink href="/calendar">
         <TextColoring>View Full Calendar</TextColoring>

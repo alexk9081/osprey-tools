@@ -5,6 +5,7 @@ import "devextreme/dist/css/dx.light.css";
 import Scheduler from "devextreme-react/scheduler";
 import Task from "@/components/resuseable/Task";
 import { CalendarContext } from "@/components/layout/CalendarContext";
+import { Appointment } from "devextreme/ui/scheduler";
 
 export default function TodoPage() {
   function addEvent(e: any) {
@@ -47,17 +48,28 @@ export default function TodoPage() {
         <ToDoTitle>Todo</ToDoTitle>
 
         <EventsHolder>
-          {events.map((event) => (
-            <TaskWrapper key={event.text}>
-              <Task
-                title={event.text}
-                date={event.startDate}
-                eventType={
-                  event.recurrenceRule ? "Reoccuring Event" : event.eventType
-                }
-              />
-            </TaskWrapper>
-          ))}
+          {events
+            .filter((event: Appointment) => {
+              if (
+                typeof event.endDate != "string" &&
+                typeof event.endDate != "undefined"
+              ) {
+                return event.endDate?.getTime() > new Date().getTime();
+              }
+            })
+            .map((event: Appointment) => (
+              <TaskWrapper key={event.text}>
+                <Task
+                  title={event.text}
+                  startDate={event.startDate}
+                  endDate={event.endDate}
+                  allDay={event.allDay ? event.allDay : false}
+                  eventType={
+                    event.recurrenceRule ? "Reoccuring Event" : event.eventType
+                  }
+                />
+              </TaskWrapper>
+            ))}
         </EventsHolder>
         <Scheduler
           timeZone="America/New_York"

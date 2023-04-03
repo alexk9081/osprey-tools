@@ -4,26 +4,31 @@ import { isStringLiteral } from "typescript";
 
 export default function Task({
   title,
-  date,
+  startDate,
+  endDate,
+  allDay,
   eventType,
 }: {
   title: string | undefined;
-  date: Date | string | undefined;
+  startDate: Date | string | undefined;
+  endDate: Date | string | undefined;
+  allDay: boolean;
   eventType: string;
 }) {
-
-  let dateString: string;
-
-  if(typeof date === "string") {
-    dateString = date;
+  function getDateString(date: Date | string | undefined) {
+    if (typeof date === "string") {
+      return date;
+    } else if (typeof date === "undefined") {
+      return "Unknown";
+    } else {
+      return date.toLocaleDateString("en-us", {
+        weekday: "short",
+        year: "numeric",
+        month: "long",
+        day: "2-digit",
+      });
+    }
   }
-  else if (typeof date === "undefined"){
-    dateString = "Unknown";
-  }
-  else {
-    dateString = date.toLocaleDateString('en-us', { weekday:"short", year:"numeric", month:"long", day: '2-digit'})
-  }
-
 
   return (
     <>
@@ -31,7 +36,11 @@ export default function Task({
         <TaskHeader>
           <Tag>{eventType ? eventType : "Personal Event"}</Tag>
           <TaskTitle>{title}</TaskTitle>
-          <Date>{dateString}</Date>
+          <Date>
+            {allDay || getDateString(startDate) == getDateString(endDate)
+              ? getDateString(startDate)
+              : getDateString(startDate) + " - " + getDateString(endDate)}
+          </Date>
         </TaskHeader>
       </TaskWrapper>
     </>
