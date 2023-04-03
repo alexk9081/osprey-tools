@@ -42,6 +42,7 @@ const Image = styled.img`
   width: 100%;
   height: 200px;
   border-radius: 1rem;
+  object-fit: contain;
 `;
 
 const Title = styled.div`

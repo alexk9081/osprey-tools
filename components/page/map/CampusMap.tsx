@@ -1,8 +1,9 @@
 import { colors, screen } from "@/styles/styleConstants";
 import data, { locationType } from "@/temp/locationData";
 import GoogleMapReact from "google-map-react";
-import { useState } from "react";
+import { Search } from "tabler-icons-react";
 import styled from "styled-components";
+import { useState } from "react";
 
 export default function CampusMap({
   center,
@@ -23,24 +24,43 @@ export default function CampusMap({
     setCenter(center);
   }
 
+  const [filteredList, setFilteredList] = useState(data);
+
+  function updateFilteredList(query: string) {
+    setFilteredList(
+      data.filter((location) =>
+      location
+      .name
+      .toLowerCase()
+      .includes(query.toLowerCase())
+      )
+    )
+  }
+
   return (
     <CampusMapWrapper>
       <KeyPointsOfInterest>
         <Title>Key Points of Interest</Title>
-        {data.map((point) => (
-          <PointOfInterest
-            onClick={() => {
-              setCenter({
-                lat: point.coordinates.lat,
-                lng: point.coordinates.lng,
-              });
-              setActiveLocation(point);
-            }}
-            key={point.number}
-          >
-            {point.name}
-          </PointOfInterest>
-        ))}
+        <SearchComponent>
+          <SearchBar onChange={(e) => {updateFilteredList(e.target.value)}} />
+          <Search />
+        </SearchComponent>
+        <POIList>
+          {filteredList.map((point) => (
+            <PointOfInterest
+              onClick={() => {
+                setCenter({
+                  lat: point.coordinates.lat,
+                  lng: point.coordinates.lng,
+                });
+                setActiveLocation(point);
+              }}
+              key={point.number}
+            >
+              {point.name}
+            </PointOfInterest>
+          ))}
+        </POIList>
       </KeyPointsOfInterest>
       <div style={{ height: "35rem", width: "100%" }}>
         <GoogleMapReact
@@ -82,9 +102,57 @@ export default function CampusMap({
   );
 }
 
+const SearchBar = styled.input`
+  background-color: transparent;
+  border: none;
+
+  width: 100%;
+`;
+
+const SearchComponent = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  border-radius: 3rem;
+  border: 2px solid #0005;
+
+  padding: 0 0.5rem;
+
+  margin: 0.5rem 1rem;
+`;
+
+const POIList = styled.div`
+  height: 31rem;
+  overflow-y: scroll;
+
+  ::-webkit-scrollbar {
+    width: 20px;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #9ba5a9;
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+    &:hover {
+      background-color: #5c6568;
+    }
+  }
+
+  box-shadow: 0 -13px 10px -4px #9d9d9d inset;
+
+  padding-right: 3rem;
+`;
+
 const Title = styled.div`
   font-size: 2rem;
-  margin: 1rem;
+  line-height: 2rem;
+  margin: 0.5rem 1.5rem;
+  padding: calc(0.5rem - 1px) 1rem;
+  border-bottom: 2px solid black;
 `;
 
 const PointOfInterest = styled.div`

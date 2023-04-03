@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { colors, fonts, screen } from "@/styles/styleConstants";
-import { Menu2, Search } from "tabler-icons-react";
+import { Menu2 } from "tabler-icons-react";
 import Link from "next/link";
-import { useRouter } from "next/router";
 
 export default function Header() {
   //Makes header background transparent or frosted glass when user scrolls down past 10px
@@ -25,23 +24,6 @@ export default function Header() {
   //Shows menu on click of top right button
   const [showMenu, setShowMenu] = useState(false);
 
-  //Active route listener to show search bar on map page
-  const router = useRouter();
-  const [url, setURL] = useState("");
-  useEffect(() => {
-    setURL(router.pathname);
-
-    const handleRouteChange = (url: string, { shallow }: any) => {
-      setURL(url);
-    };
-
-    router.events.on("routeChangeStart", handleRouteChange);
-
-    return () => {
-      router.events.off("routeChangeStart", handleRouteChange);
-    };
-  }, [router.events, router.pathname]);
-
   return (
     <>
       <UpperHeader
@@ -62,18 +44,12 @@ export default function Header() {
             alt=""
           />
         </Link>
-        <SearchAndMenu>
-          <SearchComponent show={url.startsWith("/map")}>
-            <SearchBar />
-            <Search />
-          </SearchComponent>
           <MenuButton
             size="3rem"
             strokeWidth={3}
             color={colors.unfBlue}
             onClick={() => setShowMenu(!showMenu)}
           />
-        </SearchAndMenu>
         <Menu
           show={showMenu}
           closeMenu={() => {
@@ -84,33 +60,6 @@ export default function Header() {
     </>
   );
 }
-
-const SearchBar = styled.input`
-  background-color: transparent;
-  border: none;
-
-  @media (max-width: ${screen.mobile}) {
-    width: 5rem;
-  }
-`;
-
-const SearchComponent = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-
-  border-radius: 3rem;
-  border: 2px solid #0005;
-
-  padding: 0 0.5rem;
-
-  display: ${(props: { show: boolean }) => (props.show ? "flex" : "none")};
-`;
-
-const SearchAndMenu = styled.div`
-  display: flex;
-  align-items: center;
-`;
 
 function Menu({ show, closeMenu }: { show: boolean; closeMenu: () => void }) {
   return (
@@ -124,6 +73,9 @@ function Menu({ show, closeMenu }: { show: boolean; closeMenu: () => void }) {
         </NavButton>
         <NavButton href="/notecards" onClick={closeMenu}>
           <NavText>Notecards</NavText>
+        </NavButton>
+        <NavButton href="/users" onClick={closeMenu}>
+          <NavText>Users</NavText>
         </NavButton>
       </MenuWrapper>
     </>

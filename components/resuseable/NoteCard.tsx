@@ -1,18 +1,28 @@
+import { colors } from "@/styles/styleConstants";
 import { useState } from "react";
 import styled from "styled-components";
 
 export default function NoteCard({
   question,
   answer,
+  height,
+  width,
 }: {
   question: string;
   answer: string;
+  height: string;
+  width: string;
 }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
-      <NoteCardWrapper isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
+      <NoteCardWrapper
+        height={height}
+        width={width}
+        isOpen={isOpen}
+        onClick={() => setIsOpen(!isOpen)}
+      >
         <Text isOpen={!isOpen}>
           {question}
           <SmallText>Click to Open</SmallText>
@@ -35,11 +45,13 @@ const Text = styled.span`
   position: absolute;
   text-align: center;
 
-  margin: 1rem;
+  margin: 3rem;
 
   transition: 0s 0.2s linear opacity;
   opacity: ${(props: { isOpen: boolean }) => (props.isOpen ? "1" : "0")};
 `;
+
+type wrapperProps = { width: string; height: string; isOpen: boolean };
 
 const NoteCardWrapper = styled.div`
   display: flex;
@@ -52,18 +64,20 @@ const NoteCardWrapper = styled.div`
   font-weight: 700;
 
   box-sizing: border-box;
-  background-color: white;
+  background-color: #fafafa;
 
-  height: 10rem;
-  width: 20rem;
+  height: ${(props: wrapperProps) => props.height};
+  width: ${(props: wrapperProps) => props.width};
+
+  margin: 1rem;
 
   transition: 0.4s linear transform, 0.4s linear box-shadow;
-  box-shadow: ${(props: { isOpen: boolean }) =>
+  box-shadow: ${(props: wrapperProps) =>
     props.isOpen
-      ? "0.75rem -0.25rem 1rem #00000040"
-      : "0.75rem  0.25rem 1rem #00000040"};
+      ? "0.5rem -0.25rem 1.25rem #00000040"
+      : "0.5rem  0.25rem 1.25rem #00000040"};
 
-  transform: ${(props: { isOpen: boolean }) =>
+  transform: ${(props: wrapperProps) =>
     props.isOpen ? "rotateX(180deg)" : "rotateX(0deg)"};
   cursor: pointer;
 `;

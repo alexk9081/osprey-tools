@@ -5,6 +5,7 @@ import "devextreme/dist/css/dx.light.css";
 import Scheduler from "devextreme-react/scheduler";
 import Task from "@/components/resuseable/Task";
 import { CalendarContext } from "@/components/layout/CalendarContext";
+import { Appointment } from "devextreme/ui/scheduler";
 
 export default function TodoPage() {
   function addEvent(e: any) {
@@ -21,6 +22,18 @@ export default function TodoPage() {
     console.log(e);
   }
 
+  function editAppointmentForm(e: any) {
+    const form = e.form;
+    let mainGroupItems = form.itemOption("mainGroup").items;
+
+    mainGroupItems[0] = {
+      ...mainGroupItems[0],
+      validationRules: [{ type: "required" }],
+    };
+
+    form.itemOption("mainGroup", "items", mainGroupItems);
+  }
+
   const currentDate = new Date();
 
   const { events, setEvents } = useContext(CalendarContext);
@@ -34,16 +47,30 @@ export default function TodoPage() {
         <Hero></Hero>
         <ToDoTitle>Todo</ToDoTitle>
 
-        {events.map((event) => (
-          <Task
-            title={event.text}
-            date={event.startDate}
-            eventType={
-              event.recurrenceRule ? "Reoccuring Event" : event.eventType
-            }
-            key={event.text}
-          />
-        ))}
+        <EventsHolder>
+          {events
+            .filter((event: Appointment) => {
+              if (
+                typeof event.endDate != "string" &&
+                typeof event.endDate != "undefined"
+              ) {
+                return event.endDate?.getTime() > new Date().getTime();
+              }
+            })
+            .map((event: Appointment) => (
+              <TaskWrapper key={event.text}>
+                <Task
+                  title={event.text}
+                  startDate={event.startDate}
+                  endDate={event.endDate}
+                  allDay={event.allDay ? event.allDay : false}
+                  eventType={
+                    event.recurrenceRule ? "Reoccuring Event" : event.eventType
+                  }
+                />
+              </TaskWrapper>
+            ))}
+        </EventsHolder>
         <Scheduler
           timeZone="America/New_York"
           dataSource={[...events]}
@@ -53,8 +80,9 @@ export default function TodoPage() {
           height={600}
           showAllDayPanel={true}
           firstDayOfWeek={1}
-          startDayHour={8}
-          endDayHour={18}
+          startDayHour={0}
+          endDayHour={24}
+          onAppointmentFormOpening={editAppointmentForm}
           onAppointmentAdded={addEvent}
           onAppointmentUpdating={updateEvent}
           onAppointmentDeleted={deleteEvent}
@@ -64,13 +92,44 @@ export default function TodoPage() {
   );
 }
 
+const TaskWrapper = styled.div``;
+
 const Hero = styled.div`
   height: 5rem;
+`;
+
+const EventsHolder = styled.div`
+  height: 24rem;
+
+  ${TaskWrapper}:nth-child(odd) {
+    background-color: #f8f8f8;
+  }
+
+  overflow-y: scroll;
+
+  ::-webkit-scrollbar {
+    width: 20px;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #d6dee1;
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+    &:hover {
+      background-color: #a8bbbf;
+    }
+  }
 `;
 
 const ToDoTitle = styled.div`
   font-weight: bold;
   font-size: 3rem;
 
-  margin: 1rem;
+  margin: 1rem 2rem;
+  padding: 0 1rem;
+
+  border-bottom: 2px solid black;
 `;

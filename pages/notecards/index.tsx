@@ -37,9 +37,9 @@ export default function NoteCardsPage() {
           Put highlighted note card packs here or a call to action to make a new
           notecard pack
         </Hero>
-
-        <NoteCardCollections>
-          {data.map((cardCollection) => (
+        
+        <CardSection title="Personal Packs">
+          {data.slice(1, 2).map((cardCollection: any) => (
             <Pack
               title={cardCollection.title}
               desc={cardCollection.desc}
@@ -59,7 +59,21 @@ export default function NoteCardsPage() {
               name: "Current User",
             }}
           />
-        </NoteCardCollections>
+        </CardSection>
+
+
+        <CardSection title="Public Packs">
+          {data.map((cardCollection: any) => (
+            <Pack
+              title={cardCollection.title}
+              desc={cardCollection.desc}
+              img={cardCollection.img}
+              link={cardCollection.link}
+              creator={cardCollection.creator}
+              key={cardCollection.creator.name + cardCollection.title}
+            />
+          ))}
+        </CardSection>
       </main>
     </>
   );
@@ -73,11 +87,20 @@ const Hero = styled.div`
   align-items: center;
 `;
 
+function CardSection({ title, children }: { title: string; children: any }) {
+  return (
+    <fieldset>
+      <legend>{title}</legend>
+    <NoteCardCollections>{children}</NoteCardCollections>
+    </fieldset>
+  );
+}
+
 const NoteCardCollections = styled.div`
   display: flex;
   gap: 0.75rem;
   flex-direction: row;
   flex-wrap: wrap;
 
-  margin: 4rem 2rem;
+  margin-bottom: 2rem;
 `;

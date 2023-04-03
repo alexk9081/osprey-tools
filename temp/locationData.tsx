@@ -7,11 +7,10 @@ const data: locationType[] = [
       {
         floor: "Campus Map",
         image:
-          "https://scontent-mia3-1.xx.fbcdn.net/v/t39.30808-6/276990513_5230151163675630_7452306586498567711_n.png?_nc_cat=108&ccb=1-7&_nc_sid=730e14&_nc_ohc=i0u9CGhBD5gAX8WLiet&_nc_ht=scontent-mia3-1.xx&oh=00_AfD60bWw0uoAmvG6WtQEwTfCIPmMSMuAjw5HNqBwUERcKA&oe=63F09A00",
+          "https://scontent-mia3-1.xx.fbcdn.net/v/t39.30808-6/276990513_5230151163675630_7452306586498567711_n.png?_nc_cat=108&ccb=1-7&_nc_sid=730e14&_nc_ohc=Hb74aUHQ3zwAX98sEQ9&_nc_ht=scontent-mia3-1.xx&oh=00_AfAYcdZgFf5lQQ6kI34n09mTwRaP_iUgLCCVlI9EPA1MlQ&oe=6425FEC0",
       },
     ],
   },
-
   {
     number: "51",
     name: "Building 51 - Social Sciences",
@@ -103,7 +102,7 @@ const data: locationType[] = [
   },
   {
     number: "59",
-    name: "Building 15 - Biological Sciences Building",
+    name: "Building 59 - Biological Sciences Building",
     coordinates: { lat: 30.270307112540355, lng: -81.50624548917119 },
     images: [
       {
@@ -127,7 +126,7 @@ const data: locationType[] = [
           "https://cdn.discordapp.com/attachments/1068603528051966022/1069665490076717117/20230130_120505.jpg",
       },
       {
-        floor: "Not Virus Storage",
+        floor: "DO NOT OPEN - OPHIOCORDYCEPS UNILATERALIS INSIDE",
         image:
           "https://cdn.discordapp.com/attachments/1068603528051966022/1069666148246896740/20230130_120044.jpg",
       },
@@ -141,12 +140,12 @@ const data: locationType[] = [
       {
         floor: "Floor 1",
         image:
-          "https://cdn.discordapp.com/attachments/1068603528051966022/1069669952853909694/20230130_121607.jpg",
+          "https://cdn.discordapp.com/attachments/1068603528051966022/1069669976216178828/20230130_121809.jpg",
       },
       {
         floor: "Floor 2",
         image:
-          "https://cdn.discordapp.com/attachments/1068603528051966022/1069669976216178828/20230130_121809.jpg",
+          "https://cdn.discordapp.com/attachments/1068603528051966022/1069669952853909694/20230130_121607.jpg",
       },
       {
         floor: "Floor 3",

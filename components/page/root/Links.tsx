@@ -3,29 +3,9 @@ import { Route } from "devextreme-react/map";
 import Link from "next/link";
 import { ChevronsRight } from "tabler-icons-react";
 import styled from "styled-components";
+import data from "@/temp/homePageLinksData";
 
 export default function Links() {
-  const data = [
-    {
-      img: "https://images.unsplash.com/photo-1435527173128-983b87201f4d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1467&q=80",
-      title: "Calendar",
-      desc: "Commodo enim nostrud enim consequat elit sunt laboris aliquip mollit. Fugiat sint duis incididunt duis. Laborum deserunt enim incididunt nulla do pariatur laborum velit excepteur. Esse sint laboris est ad velit in.",
-      route: "/calendar",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1619468129361-605ebea04b44?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80",
-      title: "Map",
-      desc: "Cillum exercitation do et andidunt exercitation incididunt fugiat anim ex velit non ad nostrud labore Lorem.im. Amet occaecat inci Non non consequat amet ipsum deserunt est esse elit consectetur cupidatat nisi.",
-      route: "/map",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80",
-      title: "Notecards",
-      desc: "Deserunt sit fugiat elit ullamco cillum ea anim. Nostrud pariatur nostrud culpa nulla consectetur anim minim id exercitation cillum exercitation. Voluptate cupidatat do cupidatat elit nisi non id elit dolor in ad amet aliquip eiusmod.",
-      route: "/notecards",
-    },
-  ];
-
   return (
     <LinksLayout>
       {data.map((link) => (
