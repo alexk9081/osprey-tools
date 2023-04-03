@@ -43,7 +43,7 @@ export default function CampusMap({
         <Title>Key Points of Interest</Title>
         <SearchComponent>
           <SearchBar onChange={(e) => {updateFilteredList(e.target.value)}} />
-          <Search />
+          <Search style={{paddingRight: "0.5rem"}} />
         </SearchComponent>
         <POIList>
           {filteredList.map((point) => (
@@ -107,6 +107,9 @@ const SearchBar = styled.input`
   border: none;
 
   width: 100%;
+
+  border-radius: 3rem;
+  padding: 0.5rem 1.25rem;
 `;
 
 const SearchComponent = styled.div`
@@ -116,8 +119,6 @@ const SearchComponent = styled.div`
 
   border-radius: 3rem;
   border: 2px solid #0005;
-
-  padding: 0 0.5rem;
 
   margin: 0.5rem 1rem;
 `;
