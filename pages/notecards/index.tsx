@@ -1,3 +1,4 @@
+import Hero from "@/components/page/notecards/Hero";
 import Pack from "@/components/page/notecards/Pack";
 import { colors } from "@/styles/styleConstants";
 import Head from "next/head";
@@ -33,12 +34,9 @@ export default function NoteCardsPage() {
         <title>Notecards | UNF App</title>
       </Head>
       <main>
-        <Hero>
-          Put highlighted note card packs here or a call to action to make a new
-          notecard pack
-        </Hero>
+        <Hero />
         
-        <CardSection title="Personal Packs">
+        <CardSection title="Your Notecards">
           {data.slice(1, 2).map((cardCollection: any) => (
             <Pack
               title={cardCollection.title}
@@ -62,7 +60,7 @@ export default function NoteCardsPage() {
         </CardSection>
 
 
-        <CardSection title="Public Packs">
+        <CardSection title="Public Notecards">
           {data.map((cardCollection: any) => (
             <Pack
               title={cardCollection.title}
@@ -79,22 +77,31 @@ export default function NoteCardsPage() {
   );
 }
 
-const Hero = styled.div`
-  height: 40vh;
-  background-color: ${colors.unfBlueWhite};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
 function CardSection({ title, children }: { title: string; children: any }) {
   return (
-    <fieldset>
-      <legend>{title}</legend>
+    <SectionSet>
+      <SectionName>
+        {title}
+        </SectionName>
     <NoteCardCollections>{children}</NoteCardCollections>
-    </fieldset>
+    </SectionSet>
   );
 }
+
+const SectionSet = styled.fieldset`
+  margin: 3rem 2rem;
+  padding: 1rem;
+
+  border-radius: 2rem;
+`;
+
+const SectionName = styled.legend`
+  font-weight: 600;
+  font-size: 1.5rem;
+
+  margin-left: 1rem;
+  padding: 0 0.5rem;
+`;
 
 const NoteCardCollections = styled.div`
   display: flex;
