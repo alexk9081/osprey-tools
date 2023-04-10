@@ -20,7 +20,6 @@ export default function Footer() {
       </FooterSection>
 
       <Copyright>
-        <span>Currently Felony Free ☺</span>
         <span>Copyright © 2023 Group 10. All rights reserved.</span>
       </Copyright>
     </FooterWrapper>
