@@ -41,6 +41,7 @@ export default function Header() {
         >
           <Image
             src="https://upload.wikimedia.org/wikipedia/en/thumb/a/ac/North_Florida_Ospreys_logo.svg/800px-North_Florida_Ospreys_logo.svg.png"
+            // src="logo.png" BACKUP
             alt=""
           />
         </Link>
