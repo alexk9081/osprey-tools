@@ -1,11 +1,9 @@
 import Head from "next/head";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
 import "devextreme/dist/css/dx.light.css";
-import Scheduler from "devextreme-react/scheduler";
-import Task from "@/components/resuseable/Task";
+import { Scheduler } from "devextreme-react/scheduler";
 import { CalendarContext } from "@/components/layout/CalendarContext";
-import { Appointment } from "devextreme/ui/scheduler";
 
 export default function TodoPage() {
   function addEvent(e: any) {
@@ -45,36 +43,15 @@ export default function TodoPage() {
       </Head>
       <main>
         <Hero></Hero>
-        <ToDoTitle>Todo</ToDoTitle>
-
-        <EventsHolder>
-          {events
-            .filter((event: Appointment) => {
-              if (
-                typeof event.endDate != "string" &&
-                typeof event.endDate != "undefined"
-              ) {
-                return event.endDate?.getTime() > new Date().getTime();
-              }
-            })
-            .map((event: Appointment) => (
-              <TaskWrapper key={event.text}>
-                <Task
-                  title={event.text}
-                  startDate={event.startDate}
-                  endDate={event.endDate}
-                  allDay={event.allDay ? event.allDay : false}
-                  eventType={
-                    event.recurrenceRule ? "Reoccuring Event" : event.eventType
-                  }
-                />
-              </TaskWrapper>
-            ))}
-        </EventsHolder>
         <Scheduler
           timeZone="America/New_York"
           dataSource={[...events]}
-          views={["day", "week", "month", "agenda"]}
+          views={[
+            "day",
+            "week",
+            "month",
+            { type: "agenda", agendaDuration: 365 },
+          ]}
           defaultCurrentView="month"
           defaultCurrentDate={currentDate}
           height={600}
@@ -86,50 +63,13 @@ export default function TodoPage() {
           onAppointmentAdded={addEvent}
           onAppointmentUpdating={updateEvent}
           onAppointmentDeleted={deleteEvent}
-        ></Scheduler>
+        >
+        </Scheduler>
       </main>
     </>
   );
 }
 
-const TaskWrapper = styled.div``;
-
 const Hero = styled.div`
   height: 5rem;
-`;
-
-const EventsHolder = styled.div`
-  height: 24rem;
-
-  ${TaskWrapper}:nth-child(odd) {
-    background-color: #f8f8f8;
-  }
-
-  overflow-y: scroll;
-
-  ::-webkit-scrollbar {
-    width: 20px;
-  }
-  ::-webkit-scrollbar-track {
-    background-color: transparent;
-  }
-  ::-webkit-scrollbar-thumb {
-    background-color: #d6dee1;
-    border-radius: 20px;
-    border: 6px solid transparent;
-    background-clip: content-box;
-    &:hover {
-      background-color: #a8bbbf;
-    }
-  }
-`;
-
-const ToDoTitle = styled.div`
-  font-weight: bold;
-  font-size: 3rem;
-
-  margin: 1rem 2rem;
-  padding: 0 1rem;
-
-  border-bottom: 2px solid black;
 `;
