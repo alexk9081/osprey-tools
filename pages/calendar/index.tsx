@@ -4,6 +4,7 @@ import styled from "styled-components";
 import "devextreme/dist/css/dx.light.css";
 import { Scheduler } from "devextreme-react/scheduler";
 import { CalendarContext } from "@/components/layout/CalendarContext";
+import NotecardLayout from "@/components/layout/notecards/layout";
 
 export default function TodoPage() {
   function addEvent(e: any) {
@@ -69,6 +70,12 @@ export default function TodoPage() {
     </>
   );
 }
+
+TodoPage.getLayout = function getLayout(page:any) {
+  console.log("Hello?");
+
+  return <NotecardLayout>{page}</NotecardLayout>;
+};
 
 const Hero = styled.div`
   height: 5rem;
