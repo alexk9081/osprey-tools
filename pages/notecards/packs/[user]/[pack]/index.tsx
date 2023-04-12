@@ -1,3 +1,5 @@
+import type { ReactElement } from "react";
+import NotecardLayout from "@/components/layout/notecards/layout";
 import Head from "next/head";
 import styled from "styled-components";
 import NoteCard from "@/components/resuseable/NoteCard";
@@ -16,84 +18,38 @@ export default function Pack({
 }) {
   return (
     <>
-      <Head>
-        <title>Notecard Pack | UNF App</title>
-      </Head>
-      <main>
-        <Hero>
-          <div>
-            <div>Edit notecards</div>
-            <div>
-              <div>
-                {cards.map((card) => (
-                  <EditCard
-                    key={card.question}
+        <Head>
+          <title>Notecard Pack | UNF App</title>
+        </Head>
+        <main>
+          <Hero></Hero>
+
+          <h2>Notecard pack by {name}</h2>
+
+          <Swiper
+            modules={[Navigation, Pagination]}
+            spaceBetween={50}
+            slidesPerView={1}
+            navigation
+            pagination={{ clickable: true }}
+          >
+            {cards.map((card) => (
+              <SwiperSlide key={card.question + card.answer}>
+                <SlideWrapper>
+                  <NoteCard
+                    height="15rem"
+                    width="30rem"
                     question={card.question}
                     answer={card.answer}
                   />
-                ))}
-                <EditCard question="" answer="" />
-              </div>
-            </div>
-          </div>
-        </Hero>
-
-        <h2>Notecard pack by {name}</h2>
-
-        <Swiper
-          modules={[Navigation, Pagination]}
-          spaceBetween={50}
-          slidesPerView={1}
-          navigation
-          pagination={{ clickable: true }}
-        >
-          {cards.map((card) => (
-            <SwiperSlide key={card.question}>
-              <SlideWrapper>
-                <NoteCard
-                  height="15rem"
-                  width="30rem"
-                  question={card.question}
-                  answer={card.answer}
-                />
-              </SlideWrapper>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-
-        <GridViewCards>
-          {cards.map((card) => (
-            <SlideWrapper key={card.question}>
-              <NoteCard
-                height="15rem"
-                width="calc(100% - 2rem)"
-                question={card.question}
-                answer={card.answer}
-              />
-            </SlideWrapper>
-          ))}
-        </GridViewCards>
-      </main>
+                </SlideWrapper>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </main>
     </>
   );
 }
-
-function EditCard({ question, answer }: { question: string; answer: string }) {
-  return (
-    <div>
-      <input value={question} placeholder="Question" />
-      <input value={answer} placeholder="Answer" />
-      <input type="submit" />
-      <button>Delete</button>
-    </div>
-  );
-}
-
-const GridViewCards = styled.div`
-  display: grid;
-
-  grid-template-columns: repeat(3, 1fr);
-`;
 
 const SlideWrapper = styled.div`
   display: flex;
@@ -137,35 +93,35 @@ const data = [
         cards: [
           {
             question: "Test Two",
-            answer: "Hello Two!",
+            answer: "Hello Two0!",
           },
           {
             question: "Test TwoTwo",
-            answer: "Hello Two!",
+            answer: "Hello Two00!",
           },
           {
             question: "Test Twwo",
-            answer: "Hello Two!",
+            answer: "Hello Twoo!",
           },
           {
             question: "Test Two0",
-            answer: "Hello Two!",
+            answer: "Hello Twooo!",
           },
           {
             question: "Test Ttwwoo",
-            answer: "Hello Two!",
+            answer: "Hello Twoo0!",
           },
           {
             question: "Test Ttwwoo",
-            answer: "Hello Two!",
+            answer: "Hello Two0o!",
           },
           {
             question: "Test Ttwwoo",
-            answer: "Hello Two!",
+            answer: "Hello Twooo00!",
           },
           {
             question: "Test Ttwwoo",
-            answer: "Hello Two!",
+            answer: "Hello Two0o00!",
           },
         ],
       },
