@@ -1,4 +1,3 @@
-import { colors } from "@/styles/styleConstants";
 import { useState } from "react";
 import styled from "styled-components";
 
@@ -37,11 +36,13 @@ export default function NoteCard({
 
 const SmallText = styled.div`
   padding-top: 0.25rem;
-  font-size: 0.75rem;
+  font-size: 1.25rem;
   font-weight: 500;
 `;
 
 const Text = styled.span`
+  font-size: 2.5rem;
+  
   position: absolute;
   text-align: center;
 

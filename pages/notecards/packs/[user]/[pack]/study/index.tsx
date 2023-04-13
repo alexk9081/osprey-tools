@@ -2,14 +2,15 @@ import type { ReactElement } from "react";
 import NotecardLayout from "@/components/layout/notecards/layout";
 import Head from "next/head";
 import styled from "styled-components";
-import NoteCard from "@/components/resuseable/NoteCard";
+import NoteCard from "@/components/page/notecards/NoteCard";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import data from "@/temp/notecardData";
 
-export default function Pack({
+export default function StudyPage({
   name,
   cards,
 }: {
@@ -22,8 +23,6 @@ export default function Pack({
           <title>Notecard Pack | UNF App</title>
         </Head>
         <main>
-          <Hero></Hero>
-
           <h2>Notecard pack by {name}</h2>
 
           <Swiper
@@ -37,8 +36,8 @@ export default function Pack({
               <SwiperSlide key={card.question + card.answer}>
                 <SlideWrapper>
                   <NoteCard
-                    height="15rem"
-                    width="30rem"
+                    height="50vh"
+                    width="100vh"
                     question={card.question}
                     answer={card.answer}
                   />
@@ -51,6 +50,10 @@ export default function Pack({
   );
 }
 
+StudyPage.getLayout = function getLayout(page:any) {
+  return <NotecardLayout>{page}</NotecardLayout>;
+};
+
 const SlideWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -58,76 +61,6 @@ const SlideWrapper = styled.div`
 
   margin: 2rem;
 `;
-
-const Hero = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  height: 40vh;
-  background-color: wheat;
-`;
-
-const data = [
-  {
-    name: "Wall-E",
-    packs: [
-      {
-        name: "Software Engineering",
-        id: "softwareEngineering",
-        cards: [
-          {
-            question: "Test",
-            answer: "Hello!",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    name: "Gradma",
-    packs: [
-      {
-        name: "Construction of Language Transistors",
-        id: "languageTransistors",
-        cards: [
-          {
-            question: "Test Two",
-            answer: "Hello Two0!",
-          },
-          {
-            question: "Test TwoTwo",
-            answer: "Hello Two00!",
-          },
-          {
-            question: "Test Twwo",
-            answer: "Hello Twoo!",
-          },
-          {
-            question: "Test Two0",
-            answer: "Hello Twooo!",
-          },
-          {
-            question: "Test Ttwwoo",
-            answer: "Hello Twoo0!",
-          },
-          {
-            question: "Test Ttwwoo",
-            answer: "Hello Two0o!",
-          },
-          {
-            question: "Test Ttwwoo",
-            answer: "Hello Twooo00!",
-          },
-          {
-            question: "Test Ttwwoo",
-            answer: "Hello Two0o00!",
-          },
-        ],
-      },
-    ],
-  },
-];
 
 export async function getStaticPaths() {
   const paths = data
