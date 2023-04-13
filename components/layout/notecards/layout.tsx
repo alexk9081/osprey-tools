@@ -53,8 +53,6 @@ const PageLayout = styled.div`
 `;
 
 const MainContent = styled.div`
-  padding: 1rem;
-
   box-sizing: border-box;
   height: calc(100vh - 5rem); 
 `;
