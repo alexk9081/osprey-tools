@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { colors, fonts, screen } from "@/styles/styleConstants";
-import { Menu2 } from "tabler-icons-react";
+import { colors, fonts } from "@/styles/styleConstants";
+import { Menu2, X } from "tabler-icons-react";
 import Link from "next/link";
 
 export default function Header() {
@@ -45,12 +45,22 @@ export default function Header() {
             alt=""
           />
         </Link>
+        {showMenu ? (
+          <CloseButton
+            size="3rem"
+            strokeWidth={3}
+            color={colors.unfBlue}
+            onClick={() => setShowMenu(!showMenu)}
+          />
+        ) : (
           <MenuButton
             size="3rem"
             strokeWidth={3}
             color={colors.unfBlue}
             onClick={() => setShowMenu(!showMenu)}
           />
+        )}
+
         <Menu
           show={showMenu}
           closeMenu={() => {
@@ -123,6 +133,13 @@ const MenuWrapper = styled.div`
 `;
 
 const MenuButton = styled(Menu2)`
+  padding: 0.5rem;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const CloseButton = styled(X)`
   padding: 0.5rem;
   &:hover {
     cursor: pointer;
