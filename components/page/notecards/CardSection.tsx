@@ -24,7 +24,7 @@ const SectionSet = styled.div`
 `;
 
 const SectionName = styled.div`
-  font-weight: 800;
+  font-weight: 600;
   font-size: 2.5rem;
 `;
 
