@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import data, { locationType } from "@/temp/locationData";
 import { useState } from "react";
-import { Search } from "tabler-icons-react";
+import { Search, X } from "tabler-icons-react";
 import { colors } from "@/styles/styleConstants";
 
 export default function SearchElement({
   setCenter,
   setActiveLocation,
-  closeMenu
+  closeMenu,
 }: {
   setCenter: React.Dispatch<React.SetStateAction<{ lat: number; lng: number }>>;
   setActiveLocation: React.Dispatch<React.SetStateAction<locationType>>;
@@ -18,24 +18,26 @@ export default function SearchElement({
   function updateFilteredList(query: string) {
     setFilteredList(
       data.filter((location) =>
-      location
-      .name
-      .toLowerCase()
-      .includes(query.toLowerCase())
+        location.name.toLowerCase().includes(query.toLowerCase())
       )
-    )
+    );
   }
 
   return (
     <KeyPointsOfInterest>
-      <Title>Key Points of Interest</Title>
+      <Header>
+        <Title>Key Points of Interest</Title>
+        <CloseButton onClick={() => closeMenu()}>
+          <X size="2.5rem" color="white" strokeWidth={3} />
+        </CloseButton>
+      </Header>
       <SearchComponent>
         <SearchBar
           onChange={(e) => {
             updateFilteredList(e.target.value);
           }}
         />
-        <Search style={{ paddingRight: "0.5rem" }} />
+        <StyledSearchIcon size="2rem" />
       </SearchComponent>
       <POIList>
         {filteredList.map((point) => (
@@ -58,6 +60,31 @@ export default function SearchElement({
   );
 }
 
+const CloseButton = styled.div`
+  padding: 0.5rem;
+
+  margin-left: 1rem;
+  background-color: #a82020;
+  border-radius: 25%;
+
+  width: 2.5rem;
+  height: 2.5rem;
+
+  cursor: pointer;
+`;
+
+const Header = styled.div`
+  height: 5rem;
+
+  display: flex;
+  justify-content: space-between;
+`;
+
+const StyledSearchIcon = styled(Search)`
+  padding-right: 0.5rem;
+  cursor: pointer;
+`;
+
 const SearchBar = styled.input`
   background-color: transparent;
   border: none;
@@ -66,6 +93,11 @@ const SearchBar = styled.input`
 
   border-radius: 3rem;
   padding: 0.5rem 1.25rem;
+
+  font-size: 1.25rem;
+  line-height: 1.25rem;
+  font-weight: 800;
+  font-family: inherit;
 `;
 
 const SearchComponent = styled.div`
@@ -73,15 +105,19 @@ const SearchComponent = styled.div`
   align-items: center;
   gap: 0.5rem;
 
+  margin-left: 1rem;
+  margin-right: calc(1rem - 10px);
+
   border-radius: 3rem;
   border: 2px solid #0005;
-
-  margin: 0.5rem 1rem;
 `;
 
 const POIList = styled.div`
-  height: 31rem;
+  height: calc(100vh - 5rem - 5rem - 2rem - 2.25rem - 2rem);
   overflow-y: scroll;
+
+  padding: 0 1rem;
+  margin-top: 1rem;
 
   ::-webkit-scrollbar {
     width: 20px;
@@ -98,22 +134,20 @@ const POIList = styled.div`
       background-color: #5c6568;
     }
   }
-
-  /* box-shadow: 0 -13px 10px -4px #9d9d9d inset; */
-
-  padding-right: 3rem;
 `;
 
 const Title = styled.div`
   font-size: 2rem;
   line-height: 2rem;
-  margin: 0.5rem 1.5rem;
-  padding: calc(0.5rem - 1px) 1rem;
+  margin-bottom: 2rem;
+  padding: 0.5rem 1rem;
   border-bottom: 2px solid black;
+
+  flex-grow: 1;
 `;
 
 const PointOfInterest = styled.div`
-  margin: 1rem;
+  margin: 1rem 0;
   padding: 1rem;
 
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -135,4 +169,8 @@ const KeyPointsOfInterest = styled.div`
   color: ${colors.nearBlack};
   font-size: 1.5rem;
   font-weight: 700;
+
+  padding: 1rem;
+
+  height: calc(100vh - 5rem);
 `;

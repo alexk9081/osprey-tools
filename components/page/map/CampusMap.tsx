@@ -6,11 +6,9 @@ import styled from "styled-components";
 export default function CampusMap({
   center,
   setCenter,
-  setActiveLocation,
 }: {
   center: { lat: number; lng: number };
   setCenter: React.Dispatch<React.SetStateAction<{ lat: number; lng: number }>>;
-  setActiveLocation: React.Dispatch<React.SetStateAction<locationType>>;
 }) {
   function _onChange({
     center,
