@@ -63,8 +63,7 @@ export default function TodoPage() {
           onAppointmentAdded={addEvent}
           onAppointmentUpdating={updateEvent}
           onAppointmentDeleted={deleteEvent}
-        >
-        </Scheduler>
+        ></Scheduler>
       </main>
     </>
   );

@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import { colors, fonts } from "@/styles/styleConstants";
 import { Menu2, X } from "tabler-icons-react";
 import Link from "next/link";
+import { UserContext } from "./LoginContext";
+import { CalendarContext } from "./CalendarContext";
 
 export default function Header() {
   //Makes header background transparent or frosted glass when user scrolls down past 10px
@@ -73,28 +75,121 @@ export default function Header() {
 }
 
 function Menu({ show, closeMenu }: { show: boolean; closeMenu: () => void }) {
+  const { user, setUser } = useContext(UserContext);
   return (
     <>
       <MenuWrapper show={show}>
-        <NavButton href="/calendar" onClick={closeMenu}>
-          <NavText>Calendar</NavText>
-        </NavButton>
-        <NavButton href="/map" onClick={closeMenu}>
-          <NavText>Map</NavText>
-        </NavButton>
-        <NavButton href="/notecards" onClick={closeMenu}>
-          <NavText>Notecards</NavText>
-        </NavButton>
-        <NavButton href="/users" onClick={closeMenu}>
-          <NavText>Users</NavText>
-        </NavButton>
+        <MenuFlex>
+          <NavButtons>
+            <NavButton href="/calendar" onClick={closeMenu}>
+              <NavText>Calendar</NavText>
+            </NavButton>
+            <NavButton href="/map" onClick={closeMenu}>
+              <NavText>Map</NavText>
+            </NavButton>
+            <NavButton href="/notecards" onClick={closeMenu}>
+              <NavText>Notecards</NavText>
+            </NavButton>
+          </NavButtons>
+
+          {user ? (
+            <LogoutButton
+              onClick={() => {
+                setUser(null);
+              }}
+            >
+              Logout
+            </LogoutButton>
+          ) : (
+            <LoginButton href="/users/create" onClick={closeMenu}>
+              Login / Register
+            </LoginButton>
+          )}
+        </MenuFlex>
       </MenuWrapper>
     </>
   );
 }
 
-const NavButton = styled(Link)`
+const LogoutButton = styled.button`
+  all: unset;
+  background-color: #0a0927;
+  color: white;
+
+  width: max-content;
+  padding: 1.5rem;
+  margin: 2rem;
+
   text-decoration: none;
+  font-size: 1.75rem;
+  font-weight: 800;
+
+  display: flex;
+  align-items: center;
+
+  transition: 100ms ease background-color;
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: #2d2a4b;
+  }
+
+  &:focus {
+    outline: 1px solid blue;
+  }
+`;
+
+const LoginButton = styled(Link)`
+  background-color: #0a0927;
+  color: white;
+
+  width: max-content;
+  padding: 1.5rem;
+  margin: 2rem;
+
+  text-decoration: none;
+  font-size: 1.75rem;
+  font-weight: 800;
+
+  display: flex;
+  align-items: center;
+
+  transition: 100ms ease background-color;
+
+  &:hover {
+    background-color: #2d2a4b;
+  }
+`;
+
+const MenuFlex = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 100%;
+`;
+
+const NavButtons = styled.div`
+  flex-direction: column;
+  gap: 1rem;
+`;
+
+const NavButton = styled(Link)`
+  color: ${colors.nearBlack};
+  text-decoration: none;
+
+  transition: 100ms ease background-color;
+
+  text-decoration: none;
+  font-size: 2.25rem;
+  font-weight: 600;
+
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    background-color: #ddd;
+  }
 `;
 
 const NavText = styled.div`
@@ -113,8 +208,6 @@ const MenuWrapper = styled.div`
   top: ${(props: { show: boolean }) => (props.show ? "5rem" : "10rem")};
   left: 0;
   z-index: 99;
-
-  padding: 1rem;
 
   width: 100vw;
   height: calc(100vh - 5rem);
@@ -180,14 +273,4 @@ const UpperHeader = styled.header<{ isTransparent: boolean }>`
     props.isTransparent
       ? "1px solid transparent"
       : "1px solid rgba(255, 255, 255, 0.3)"};
-
-  a {
-    color: ${colors.nearBlack};
-    text-decoration: none;
-    font-size: 2.25rem;
-    font-weight: 600;
-
-    display: flex;
-    align-items: center;
-  }
 `;

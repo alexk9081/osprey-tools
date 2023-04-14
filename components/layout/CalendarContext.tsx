@@ -17,10 +17,7 @@ export default function EventsProvider({
 }) {
   const [events, setEvents] = useState(data);
 
-  const eventsProviderValue = useMemo(
-    () => ({ events, setEvents }),
-    [events, setEvents]
-  );
+  const eventsProviderValue = useMemo(() => ({ events, setEvents }), [events, setEvents]);
 
   return (
     <>

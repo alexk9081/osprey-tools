@@ -1,8 +1,8 @@
 import Head from "next/head";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
-import Link from "next/link";
 import { useContext } from "react";
+import Link from "next/link";
 import { UserContext } from "@/components/layout/LoginContext";
 
 type Inputs = {
@@ -31,16 +31,14 @@ export default function Users() {
   return (
     <>
       <Head>
-        <title>Create User | UNF App</title>
+        <title>Login User | UNF App</title>
       </Head>
       <ContentLayout>
         <Hero></Hero>
 
         <RegisterElement onSubmit={handleSubmit(onSubmit)}>
-          <FormTitle>Register</FormTitle>
-          <InputName>
-            Username<RequiredStar>*</RequiredStar>
-          </InputName>
+          <FormTitle>Login</FormTitle>
+          <InputName>Username</InputName>
           <StyledInput
             placeholder="John Doe"
             {...register("name", {
@@ -54,9 +52,7 @@ export default function Users() {
 
           <br />
 
-          <InputName>
-            N-Number<RequiredStar>*</RequiredStar>
-          </InputName>
+          <InputName>N-Number</InputName>
           <StyledInput
             placeholder="n01234567"
             {...register("nNumber", {
@@ -68,26 +64,9 @@ export default function Users() {
 
           <br />
 
-          <InputName>Profile Picture Url</InputName>
-          <StyledInput
-            placeholder="i.imgur.com/XtqOTWr"
-            {...register("imageUrl", {
-              required: false,
-              pattern:
-                /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/,
-            })}
-          />
-          {errors.imageUrl && (
-            <ErrorMessage>A valid url is required</ErrorMessage>
-          )}
-
-          <br />
-
-          <RequiredMessage>*These fields are required</RequiredMessage>
-
           <Buttons>
-            <SubmitButton type="submit" value="Register" />
-            <RegisterButton href="/users/login">Login</RegisterButton>
+            <SubmitButton type="submit" value="Login" />
+            <RegisterButton href="/users/create">Register</RegisterButton>
           </Buttons>
         </RegisterElement>
       </ContentLayout>
@@ -133,16 +112,6 @@ const FormTitle = styled.div`
 
 const StyledInput = styled.input`
   width: 15rem;
-`;
-
-const RequiredStar = styled.span`
-  color: #c30000;
-`;
-
-const RequiredMessage = styled.div`
-  color: #c30000;
-  font-size: 0.75rem;
-  margin-bottom: 0.5rem;
 `;
 
 const InputName = styled.label`
