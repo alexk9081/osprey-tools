@@ -9,6 +9,9 @@ import { useContext } from "react";
 export default function UpcomingTasks() {
   const { events } = useContext(CalendarContext);
 
+  console.log(events);
+  
+
   return (
     <UpcomingTasksWrapper>
       <UpcomingTasksTitle>Upcoming Tasks</UpcomingTasksTitle>
@@ -21,6 +24,10 @@ export default function UpcomingTasks() {
           ) {
             return event.endDate?.getTime() > new Date().getTime();
           }
+        })
+        .sort((a,b) => {
+          if(a.startDate instanceof Date && b.startDate instanceof Date) return ( new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
+          else return 0;
         })
         .slice(0, 3)
         .map((event) => (
