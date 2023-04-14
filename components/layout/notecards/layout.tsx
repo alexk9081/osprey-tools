@@ -21,20 +21,29 @@ export default function NotecardLayout({
       <PageLayout>
         <Navbar>
           <NavButtons>
-            <StyledLink href={currentRoute + "/overview"} isActive={relativeRoute === "/overview"}>
+            <StyledLink
+              href={currentRoute + "/overview"}
+              isActive={relativeRoute === "/overview"}
+            >
               <List size="3rem" />
             </StyledLink>
-            <StyledLink href={currentRoute + "/study"} isActive={relativeRoute === "/study"}>
+            <StyledLink
+              href={currentRoute + "/study"}
+              isActive={relativeRoute === "/study"}
+            >
               <Cards size="3rem" />
             </StyledLink>
-            <StyledLink href={currentRoute + "/edit"} isActive={relativeRoute === "/edit"}>
+            <StyledLink
+              href={currentRoute + "/edit"}
+              isActive={relativeRoute === "/edit"}
+            >
               <Pencil size="3rem" />
             </StyledLink>
           </NavButtons>
           <NavButtons>
-            <StyledLink href="/notecards" isActive>
+            <ExitLink href="/notecards">
               <ArrowBarLeft size="3rem" />
-            </StyledLink>
+            </ExitLink>
           </NavButtons>
         </Navbar>
         <MainContent>{children}</MainContent>
@@ -45,6 +54,7 @@ export default function NotecardLayout({
 
 const MainHeaderSafeArea = styled.div`
   height: 5rem;
+  border-bottom: 1px solid #bbb;
 `;
 
 const PageLayout = styled.div`
@@ -54,7 +64,7 @@ const PageLayout = styled.div`
 
 const MainContent = styled.div`
   box-sizing: border-box;
-  height: calc(100vh - 5rem); 
+  height: calc(100vh - 5rem);
 `;
 
 const Navbar = styled.nav`
@@ -64,24 +74,59 @@ const Navbar = styled.nav`
   align-items: center;
   padding: 1rem 0;
 
-  background-color: #c7d0ff;
+  background-color: #e0e0e0;
+  border-right: 1px solid #bbb;
 `;
 
 const NavButtons = styled.div`
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
   gap: 0.5rem;
+
+  width: 100%;
 `;
 
 const StyledLink = styled(Link)`
   color: ${(props: { isActive: boolean }) =>
-      props.isActive ? "#000000" : "#666666"};;
+    props.isActive ? "#000000" : "#777"};
 
-  transition: 0.15s ease color;
+  border-right: ${({ isActive }: { isActive: boolean }) =>
+    isActive ? "6px solid black" : "6px solid transparent"};
+
+  box-sizing: border-box;
+
+  transition: 0.15s ease color, 0.05s ease background-color;
+
+  width: 100%;
+
+  margin-left: 1px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
 
   &:hover {
+    background-color: #ccc;
+    color: #000066;
+  }
+`;
+
+const ExitLink = styled(Link)`
+  color: #000000;
+
+  box-sizing: border-box;
+
+  transition: 0.15s ease color, 0.05s ease background-color;
+
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+
+  &:hover {
+    background-color: #ccc;
     color: #000066;
   }
 `;
