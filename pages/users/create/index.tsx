@@ -61,7 +61,7 @@ export default function Users() {
             placeholder="n01234567"
             {...register("nNumber", {
               required: true,
-              pattern: /^n[0-9]{8}$/i,
+              pattern: /^[nN][0-9]{8}$/i,
             })}
           />
           {errors.nNumber && <ErrorMessage>Invalid n-number</ErrorMessage>}
