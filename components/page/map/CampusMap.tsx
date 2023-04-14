@@ -30,7 +30,7 @@ export default function CampusMap({
               ? process?.env?.NEXT_PUBLIC_GOOGLE_MAPS_APIKEYY
               : "",
           }}
-          defaultZoom={15}
+          defaultZoom={16}
           center={center}
           onChange={_onChange}
         >

@@ -7,9 +7,11 @@ import { colors } from "@/styles/styleConstants";
 export default function SearchElement({
   setCenter,
   setActiveLocation,
+  closeMenu
 }: {
   setCenter: React.Dispatch<React.SetStateAction<{ lat: number; lng: number }>>;
   setActiveLocation: React.Dispatch<React.SetStateAction<locationType>>;
+  closeMenu: React.Dispatch<void>;
 }) {
   const [filteredList, setFilteredList] = useState(data);
 
@@ -39,6 +41,7 @@ export default function SearchElement({
         {filteredList.map((point) => (
           <PointOfInterest
             onClick={() => {
+              closeMenu();
               setCenter({
                 lat: point.coordinates.lat,
                 lng: point.coordinates.lng,

@@ -7,10 +7,24 @@ import SearchElement from "./Search";
 export default function MapLayout({
   setCenter,
   setActiveLocation,
+  setViewMap,
+  setImageIndex,
+  setActiveImage,
+  floors,
+  imageIndex,
   children,
 }: {
   setActiveLocation: React.Dispatch<React.SetStateAction<locationType>>;
   setCenter: React.Dispatch<React.SetStateAction<{ lat: number; lng: number }>>;
+  setViewMap: React.Dispatch<React.SetStateAction<boolean>>;
+  setImageIndex: React.Dispatch<React.SetStateAction<number>>;
+  setActiveImage: React.Dispatch<React.SetStateAction<string>>;
+  floors: {
+    floor: string;
+    shorthand: string;
+    image: string;
+  }[];
+  imageIndex: number;
   children: React.ReactNode;
 }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -21,24 +35,61 @@ export default function MapLayout({
 
       <MenuHolder>
         <PageLayout>
-          <Navbar onClick={() => setMenuOpen(!menuOpen)}>
-            <Search size="3rem" />
+          <Navbar>
+            <NavButtonHolder isActive={false} onClick={() => setMenuOpen(!menuOpen)}>
+              <Search size="3rem" />
+            </NavButtonHolder>
+            {floors.map((floor, index) => (
+              <NavButtonHolder
+                onClick={() => {
+                  setViewMap(false);
+                  setActiveImage(floor.image);
+                  setImageIndex(index);
+                }}
+                isActive={imageIndex === index}
+              >
+                {floor.shorthand}
+              </NavButtonHolder>
+            ))}
           </Navbar>
           <MainContent>
             <ContentFilter menuOpen={menuOpen}>{children}</ContentFilter>
           </MainContent>
         </PageLayout>
 
-        <Menu menuOpen={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>
+        <Menu menuOpen={menuOpen}>
           <SearchElement
             setCenter={setCenter}
             setActiveLocation={setActiveLocation}
+            closeMenu={() => setMenuOpen(false)}
           />
         </Menu>
       </MenuHolder>
     </>
   );
 }
+
+const NavButtonHolder = styled.div`
+  width: 100%;
+  box-sizing: border-box;
+
+  display: flex;
+  justify-content: center;
+  padding: 0.75rem 0;
+
+  font-size: 1.75rem;
+  font-weight: 800;
+
+  border-right: ${({ isActive }: { isActive: boolean }) =>
+    isActive ? "4px solid black" : "4px solid transparent"};
+
+  transition: 0.1s ease background-color;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #ccc;
+  }
+`;
 
 const MenuHolder = styled.div`
   position: relative;
@@ -59,6 +110,7 @@ const Menu = styled.div`
 
 const MainHeaderSafeArea = styled.div`
   height: 5rem;
+  border-bottom: 1px solid #bbb;
 `;
 
 const PageLayout = styled.div`
@@ -68,7 +120,7 @@ const PageLayout = styled.div`
 
 const MainContent = styled.div`
   box-sizing: border-box;
-  height: calc(100vh - 5rem);
+  height: calc(100vh - 5rem - 1px);
   width: 100%;
 
   overflow: hidden;
@@ -91,7 +143,10 @@ const Navbar = styled.nav`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  gap: 1rem;
+
   padding: 1rem 0;
 
   background-color: #e0e0e0;
+  border-right: 1px solid #bbb;
 `;

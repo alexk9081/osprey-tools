@@ -6,6 +6,7 @@ const data: locationType[] = [
     images: [
       {
         floor: "Campus Map",
+        shorthand: "MAP",
         image:
           "https://scontent-mia3-1.xx.fbcdn.net/v/t39.30808-6/276990513_5230151163675630_7452306586498567711_n.png?_nc_cat=108&ccb=1-7&_nc_sid=730e14&_nc_ohc=Hb74aUHQ3zwAX98sEQ9&_nc_ht=scontent-mia3-1.xx&oh=00_AfAYcdZgFf5lQQ6kI34n09mTwRaP_iUgLCCVlI9EPA1MlQ&oe=6425FEC0",
       },
@@ -18,21 +19,25 @@ const data: locationType[] = [
     images: [
       {
         floor: "Floor 1",
+        shorthand: "F1",
         image:
           "https://cdn.discordapp.com/attachments/1068603528051966022/1069662101934710794/20230130_115142.jpg",
       },
       {
         floor: "Floor 2",
+        shorthand: "F2",
         image:
           "https://cdn.discordapp.com/attachments/1068603528051966022/1069662541824925796/20230130_115419.jpg",
       },
       {
         floor: "Floor 3",
+        shorthand: "F3",
         image:
           "https://cdn.discordapp.com/attachments/1068603528051966022/1069662831991066654/20230130_115636.jpg",
       },
       {
         floor: "Floor Directory",
+        shorthand: "DIR",
         image:
           "https://cdn.discordapp.com/attachments/1068603528051966022/1069662891130753154/20230130_115107.jpg",
       },
@@ -45,11 +50,13 @@ const data: locationType[] = [
     images: [
       {
         floor: "East Building",
+        shorthand: "EAST",
         image:
           "https://cdn.discordapp.com/attachments/1068603528051966022/1069677109351551006/20230130_125307.jpg",
       },
       {
         floor: "West Building",
+        shorthand: "WEST",
         image:
           "https://cdn.discordapp.com/attachments/1068603528051966022/1069677109582250084/20230130_125414.jpg",
       },
@@ -62,6 +69,7 @@ const data: locationType[] = [
     images: [
       {
         floor: "",
+        shorthand: "",
         image: "",
       },
     ],
@@ -73,6 +81,7 @@ const data: locationType[] = [
     images: [
       {
         floor: "",
+        shorthand: "",
         image: "",
       },
     ],
@@ -85,16 +94,19 @@ const data: locationType[] = [
     images: [
       {
         floor: "Floor 1",
+        shorthand: "F1",
         image:
           "https://cdn.discordapp.com/attachments/1068603528051966022/1069659282691325953/20230130_114048.jpg",
       },
       {
         floor: "Floor 2",
+        shorthand: "F2",
         image:
           "https://cdn.discordapp.com/attachments/1068603528051966022/1069659333362716803/20230130_114056.jpg",
       },
       {
         floor: "Floor 3",
+        shorthand: "F3",
         image:
           "https://cdn.discordapp.com/attachments/1068603528051966022/1069659374118785024/20230130_114104.jpg",
       },
@@ -107,26 +119,31 @@ const data: locationType[] = [
     images: [
       {
         floor: "Floor 1",
+        shorthand: "F1",
         image:
           "https://cdn.discordapp.com/attachments/1068603528051966022/1069664913942925342/20230130_120457.jpg",
       },
       {
         floor: "Floor 2",
+        shorthand: "F2",
         image:
           "https://cdn.discordapp.com/attachments/1068603528051966022/1069665083778666547/20230130_120457.jpg",
       },
       {
         floor: "Floor 3",
+        shorthand: "F3",
         image:
           "https://cdn.discordapp.com/attachments/1068603528051966022/1069665116158693557/20230130_120505.jpg",
       },
       {
         floor: "Floor 4",
+        shorthand: "F4",
         image:
           "https://cdn.discordapp.com/attachments/1068603528051966022/1069665490076717117/20230130_120505.jpg",
       },
       {
         floor: "DO NOT OPEN - OPHIOCORDYCEPS UNILATERALIS INSIDE",
+        shorthand: "DEAD",
         image:
           "https://cdn.discordapp.com/attachments/1068603528051966022/1069666148246896740/20230130_120044.jpg",
       },
@@ -139,21 +156,25 @@ const data: locationType[] = [
     images: [
       {
         floor: "Floor 1",
+        shorthand: "F1",
         image:
           "https://cdn.discordapp.com/attachments/1068603528051966022/1069669976216178828/20230130_121809.jpg",
       },
       {
         floor: "Floor 2",
+        shorthand: "F2",
         image:
           "https://cdn.discordapp.com/attachments/1068603528051966022/1069669952853909694/20230130_121607.jpg",
       },
       {
         floor: "Floor 3",
+        shorthand: "F3",
         image:
           "https://cdn.discordapp.com/attachments/1068603528051966022/1069670006335488141/20230130_122020.jpg",
       },
       {
         floor: "Floor 4",
+        shorthand: "F4",
         image:
           "https://cdn.discordapp.com/attachments/1068603528051966022/1069670039717937162/20230130_122151.jpg",
       },
@@ -166,21 +187,25 @@ const data: locationType[] = [
     images: [
       {
         floor: "Floor 1",
+        shorthand: "F1",
         image:
           "https://cdn.discordapp.com/attachments/1068603528051966022/1069673453134815374/20230130_123104.jpg",
       },
       {
         floor: "Floor 2",
+        shorthand: "F2",
         image:
           "https://cdn.discordapp.com/attachments/1068603528051966022/1069673504439537734/20230130_123959.jpg",
       },
       {
         floor: "Floor 3",
+        shorthand: "F3",
         image:
           "https://cdn.discordapp.com/attachments/1068603528051966022/1069673586786308266/20230130_123525.jpg",
       },
       {
         floor: "Floor 4",
+        shorthand: "F4",
         image:
           "https://cdn.discordapp.com/attachments/1068603528051966022/1069673682156400871/20230130_123743.jpg",
       },
@@ -193,21 +218,25 @@ const data: locationType[] = [
     images: [
       {
         floor: "Floor 1",
+        shorthand: "F1",
         image:
           "https://cdn.discordapp.com/attachments/1068603528051966022/1069675814091767818/20230130_124932.jpg",
       },
       {
         floor: "Floor 2",
+        shorthand: "F2",
         image:
           "https://cdn.discordapp.com/attachments/1068603528051966022/1069675885231341698/20230130_124347.jpg",
       },
       {
         floor: "Floor 3",
+        shorthand: "F3",
         image:
           "https://cdn.discordapp.com/attachments/1068603528051966022/1069675941170786384/20230130_124635.jpg",
       },
       {
         floor: "Floor 4",
+        shorthand: "F4",
         image:
           "https://cdn.discordapp.com/attachments/1068603528051966022/1069675986767052911/20230130_124757.jpg",
       },
@@ -223,6 +252,7 @@ export type locationType = {
   coordinates: { lat: number; lng: number };
   images: {
     floor: string;
+    shorthand: string;
     image: string;
   }[];
 };

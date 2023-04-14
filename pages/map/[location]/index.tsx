@@ -2,9 +2,9 @@ import Head from "next/head";
 import styled from "styled-components";
 import CampusMap from "@/components/page/map/CampusMap";
 import FloorViewer from "@/components/page/map/FloorViewer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import data, { locationType } from "@/temp/locationData";
-import MapLayout from "@/components/page/map/PageLayout";
+import MapLayout from "@/components/page/map/MapLayout";
 import { BoxMultiple, Map } from "tabler-icons-react";
 
 export default function MapPage({ location }: { location: locationType }) {
@@ -14,16 +14,38 @@ export default function MapPage({ location }: { location: locationType }) {
 
   const [viewMap, setViewMap] = useState(true);
 
+  const floors = activeLocation.images;
+  const [activeImage, setActiveImage] = useState(
+    activeLocation.images[0]["image"]
+  );
+  const [imageIndex, setImageIndex] = useState(0);
+  const images = floors.map((floor: any) => ({
+    src: floor.image,
+    title: floor.floor,
+  }));
+
+  useEffect(() => {
+    setActiveImage(floors[0]["image"]);
+  }, [floors]);
+
   return (
     <>
       <Head>
         <title>Map | UNF App</title>
       </Head>
-      <MapLayout setCenter={setCenter} setActiveLocation={setActiveLocation}>
+      <MapLayout
+        setCenter={setCenter}
+        setActiveLocation={setActiveLocation}
+        setViewMap={setViewMap}
+        floors={activeLocation.images}
+        setImageIndex={setImageIndex}
+        setActiveImage={setActiveImage}
+        imageIndex={imageIndex}
+      >
         <ChangeViewButton onClick={() => setViewMap(!viewMap)}>
           {viewMap ? (
             <BoxMultiple color="white" size="1.75rem" />
-            ) : (
+          ) : (
             <Map color="white" size="1.75rem" />
           )}
         </ChangeViewButton>
@@ -35,7 +57,11 @@ export default function MapPage({ location }: { location: locationType }) {
               setActiveLocation={setActiveLocation}
             />
           ) : (
-            <FloorViewer floors={activeLocation.images} />
+            <FloorViewer
+              activeImage={activeImage}
+              images={images}
+              imageIndex={imageIndex}
+            />
           )}
         </MainContentLayout>
       </MapLayout>
@@ -51,13 +77,13 @@ const ChangeViewButton = styled.button`
   background-color: black;
 
   position: absolute;
-  bottom: 2rem;
+  top: 4rem;
   right: 4rem;
 
   z-index: 2;
 
-  height: 3rem;
-  width: 3rem;
+  height: 3.5rem;
+  width: 3.5rem;
 
   border-radius: 50%;
 
