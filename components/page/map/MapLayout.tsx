@@ -53,7 +53,7 @@ export default function MapLayout({
             ))}
           </Navbar>
           <MainContent>
-            <ContentFilter menuOpen={menuOpen}>{children}</ContentFilter>
+            <ContentFilter menuOpen={menuOpen} onClick={() => setMenuOpen(false)}>{children}</ContentFilter>
           </MainContent>
         </PageLayout>
 

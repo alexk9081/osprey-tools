@@ -54,6 +54,7 @@ export default function MapPage({ location }: { location: locationType }) {
             <CampusMap
               setCenter={setCenter}
               center={center}
+              setActiveLocation={setActiveLocation}
             />
           ) : (
             <FloorViewer
