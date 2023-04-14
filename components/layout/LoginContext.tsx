@@ -10,7 +10,7 @@ export const UserContext = createContext<{
   user: User;
   setUser: React.Dispatch<SetStateAction<User>>;
 }>({
-  user: { imageUrl: "tes", name: "ts", nNumber: "ts" },
+  user: null,
   setUser: () => {},
 });
 
@@ -19,7 +19,7 @@ export default function UserProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [user, setUser] = useState<User>({ imageUrl: "tes", name: "ts", nNumber: "ts" });
+  const [user, setUser] = useState<User>(null);
 
   const userProviderValue = useMemo(() => ({ user, setUser }), [user, setUser]);
 
