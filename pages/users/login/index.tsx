@@ -140,6 +140,8 @@ const Hero = styled.div`
 `;
 
 const ContentLayout = styled.main`
+  padding-top: 5rem;
+
   display: flex;
   justify-content: center;
   align-items: center;
