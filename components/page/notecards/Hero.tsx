@@ -1,7 +1,7 @@
 import { colors } from "@/styles/styleConstants";
 import Link from "next/link";
 import styled from "styled-components";
-import Button from "@/components/resuseable/Button";
+import Button from "@/components/resuseable/button";
 import { ChevronRight, ChevronsRight } from "tabler-icons-react";
 
 export default function NotecardsHero() {
