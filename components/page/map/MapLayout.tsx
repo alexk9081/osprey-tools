@@ -3,6 +3,7 @@ import { Search } from "tabler-icons-react";
 import { useState } from "react";
 import { locationType } from "@/temp/locationData";
 import SearchElement from "./Search";
+import { screen } from "@/styles/styleConstants";
 
 export default function MapLayout({
   setCenter,
@@ -36,7 +37,10 @@ export default function MapLayout({
       <MenuHolder>
         <PageLayout>
           <Navbar>
-            <NavButtonHolder isActive={false} onClick={() => setMenuOpen(!menuOpen)}>
+            <NavButtonHolder
+              isActive={false}
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
               <Search size="3rem" />
             </NavButtonHolder>
             {floors.map((floor, index) => (
@@ -53,8 +57,14 @@ export default function MapLayout({
               </NavButtonHolder>
             ))}
           </Navbar>
+
           <MainContent>
-            <ContentFilter menuOpen={menuOpen} onClick={() => setMenuOpen(false)}>{children}</ContentFilter>
+            <ContentFilter
+              menuOpen={menuOpen}
+              onClick={() => setMenuOpen(false)}
+            >
+              {children}
+            </ContentFilter>
           </MainContent>
         </PageLayout>
 
@@ -76,6 +86,7 @@ const NavButtonHolder = styled.div`
 
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: 0.75rem 0;
 
   font-size: 1.75rem;
@@ -89,6 +100,24 @@ const NavButtonHolder = styled.div`
   &:hover {
     cursor: pointer;
     background-color: #ccc;
+  }
+
+  @media (max-width: ${screen.tablet}) {
+    border-right: none;
+    height: 100%;
+    padding: 0;
+
+    border-bottom: ${({ isActive }: { isActive: boolean }) =>
+      isActive ? "4px solid black" : "4px solid transparent"};
+
+    &:hover {
+      cursor: pointer;
+      background-color: transparent;
+    }
+
+    &:active {
+      background-color: #ccc;
+    }
   }
 `;
 
@@ -106,7 +135,20 @@ const Menu = styled.div`
 
   background-color: #f0f0f0;
 
-  transition: 0.2s ease left;
+  opacity: ${({ menuOpen }: { menuOpen: boolean }) => (menuOpen ? "1" : "0")};
+  visibility: ${({ menuOpen }: { menuOpen: boolean }) =>
+    menuOpen ? "visible" : "hidden"};
+
+  transition: 0.2s ease left, 0.2s ease opacity, 0.2s ease visibility;
+
+  @media (max-width: ${screen.tablet}) {
+    left: 0;
+    width: 100%;
+
+    transition: 0.2s ease top, 0.2s ease opacity, 0.2s ease visibility;
+
+    top: ${({ menuOpen }: { menuOpen: boolean }) => (menuOpen ? "0" : "30%")};
+  }
 `;
 
 const MainHeaderSafeArea = styled.div`
@@ -117,6 +159,11 @@ const MainHeaderSafeArea = styled.div`
 const PageLayout = styled.div`
   display: grid;
   grid-template-columns: 5rem calc(100% - 5rem);
+
+  @media (max-width: ${screen.tablet}) {
+    grid-template-columns: 100%;
+    grid-template-rows: 5rem calc(100vh - 5rem - 5rem);
+  }
 `;
 
 const MainContent = styled.div`
@@ -150,4 +197,9 @@ const Navbar = styled.nav`
 
   background-color: #e0e0e0;
   border-right: 1px solid #bbb;
+
+  @media (max-width: ${screen.tablet}) {
+    flex-direction: row;
+    padding: 0 1rem;
+  }
 `;

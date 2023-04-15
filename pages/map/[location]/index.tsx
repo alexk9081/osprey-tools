@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import data, { locationType } from "@/temp/locationData";
 import MapLayout from "@/components/page/map/MapLayout";
 import { BoxMultiple, Map } from "tabler-icons-react";
+import { screen } from "@/styles/styleConstants";
 
 export default function MapPage({ location }: { location: locationType }) {
   const [center, setCenter] = useState(location.coordinates);
@@ -91,6 +92,11 @@ const ChangeViewButton = styled.button`
   border-radius: 50%;
 
   cursor: pointer;
+
+  @media (max-width: ${screen.tablet}) {
+    top: 4rem;
+    right: 1rem;
+  }
 `;
 
 export async function getStaticPaths() {

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import data, { locationType } from "@/temp/locationData";
 import { useState } from "react";
 import { Search, X } from "tabler-icons-react";
-import { colors } from "@/styles/styleConstants";
+import { colors, screen } from "@/styles/styleConstants";
 
 export default function SearchElement({
   setCenter,
@@ -28,7 +28,8 @@ export default function SearchElement({
       <Header>
         <Title>Key Points of Interest</Title>
         <CloseButton onClick={() => closeMenu()}>
-          <X size="2.5rem" color="white" strokeWidth={3} />
+          <StyledDesktopX size="2.5rem" color="white" strokeWidth={3} />
+          <StyledMobileX size="1.5rem" color="white" strokeWidth={3} />
         </CloseButton>
       </Header>
       <SearchComponent>
@@ -60,6 +61,20 @@ export default function SearchElement({
   );
 }
 
+const StyledDesktopX = styled(X)`
+  display: inline;
+  @media (max-width: ${screen.tablet}) {
+    display: none;
+  }
+`;
+
+const StyledMobileX = styled(X)`
+  display: none;
+  @media (max-width: ${screen.tablet}) {
+    display: inline;
+  }
+`;
+
 const CloseButton = styled.div`
   padding: 0.5rem;
 
@@ -71,6 +86,11 @@ const CloseButton = styled.div`
   height: 2.5rem;
 
   cursor: pointer;
+
+  @media (max-width: ${screen.tablet}) {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
 `;
 
 const Header = styled.div`
@@ -78,6 +98,10 @@ const Header = styled.div`
 
   display: flex;
   justify-content: space-between;
+
+  @media (max-width: ${screen.tablet}) {
+    height: 4rem;
+  }
 `;
 
 const StyledSearchIcon = styled(Search)`
@@ -144,6 +168,20 @@ const Title = styled.div`
   border-bottom: 2px solid black;
 
   flex-grow: 1;
+
+  @media (max-width: ${screen.tablet}) {
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    
+    margin-bottom: 1.5rem; 
+  }
+
+  @media (max-width: ${screen.mobile}) {
+    font-size: 1.25rem;
+    line-height: 1rem;
+    
+    margin-bottom: 1.75rem; 
+  }
 `;
 
 const PointOfInterest = styled.div`

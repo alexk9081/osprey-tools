@@ -38,10 +38,14 @@ export default function FloorViewer({
 }
 
 const Image = styled.img`
-  width: max-content;
+  width: 100%;
   height: calc(100vh - 5rem);
 
   object-fit: contain;
 
   cursor: pointer;
+
+  @media (max-width: ${screen.tablet}) {
+    height: calc(100vh - 5rem - 5rem);
+  }
 `;

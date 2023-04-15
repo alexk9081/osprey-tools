@@ -23,7 +23,7 @@ export default function CampusMap({
   }
 
   return (
-      <div style={{ height: "calc(100vh - 5rem)", width: "100%" }}>
+      <MapHolder >
         <GoogleMapReact
           bootstrapURLKeys={{
             key: process?.env?.NEXT_PUBLIC_GOOGLE_MAPS_APIKEYY
@@ -51,9 +51,18 @@ export default function CampusMap({
             </MapMarker>
           ))}
         </GoogleMapReact>
-      </div>
+      </MapHolder>
   );
 }
+
+const MapHolder = styled.div`
+  height: calc(100vh - 5rem);
+  width: 100%;
+
+  @media (max-width: ${screen.tablet}) {
+  height: calc(100vh - 5rem - 5rem);
+  }
+`;
 
 function MapMarker({
   lat,
