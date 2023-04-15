@@ -55,6 +55,7 @@ export default function MapPage({ location }: { location: locationType }) {
             <CampusMap
               setCenter={setCenter}
               center={center}
+              activeLocation= {activeLocation}
               setActiveLocation={setActiveLocation}
             />
           ) : (
