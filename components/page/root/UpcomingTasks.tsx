@@ -9,9 +9,6 @@ import { useContext } from "react";
 export default function UpcomingTasks() {
   const { events } = useContext(CalendarContext);
 
-  console.log(events);
-  
-
   return (
     <UpcomingTasksWrapper>
       <UpcomingTasksTitle>Upcoming Tasks</UpcomingTasksTitle>
