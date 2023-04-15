@@ -1,106 +1,185 @@
+import CardSection from "@/components/page/notecards/CardSection";
+import Hero from "@/components/page/notecards/Hero";
 import Pack from "@/components/page/notecards/Pack";
-import { colors } from "@/styles/styleConstants";
+import data from "@/temp/notecardPacksData";
 import Head from "next/head";
 import styled from "styled-components";
+import { Navigation, Pagination } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import { screen } from "@/styles/styleConstants";
 
 export default function NoteCardsPage() {
-  const data = [
-    {
-      title: "Software Engineering",
-      desc: "Study scrum concepts, unit testing, and how to break production",
-      img: "https://images.unsplash.com/photo-1580894908361-967195033215?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-      link: "/notecards/packs/Wall-E/softwareEngineering",
-      creator: {
-        img: "https://images.unsplash.com/photo-1589254065878-42c9da997008?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-        name: "Wall-E",
-      },
-    },
-    {
-      title: "Construction of Language Transistors",
-      desc: "Figure out how to make a compiler on your own",
-      img: "https://images.unsplash.com/photo-1629706167922-f7d29bb50450?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-      link: "/notecards/packs/Gradma/languageTransistors",
-      creator: {
-        img: "https://images.unsplash.com/photo-1442458370899-ae20e367c5d8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
-        name: "Gradma",
-      },
-    },
-  ];
-
   return (
     <>
       <Head>
         <title>Notecards | UNF App</title>
       </Head>
       <main>
-        <Hero>
-          Put highlighted note card packs here or a call to action to make a new
-          notecard pack
-        </Hero>
-        
-        <CardSection title="Personal Packs">
-          {data.slice(1, 2).map((cardCollection: any) => (
-            <Pack
-              title={cardCollection.title}
-              desc={cardCollection.desc}
-              img={cardCollection.img}
-              link={cardCollection.link}
-              creator={cardCollection.creator}
-              key={cardCollection.creator.name + cardCollection.title}
-            />
-          ))}
-          <Pack
-            title="Add new collection"
-            desc="Create your own note card collection"
-            img="https://cdn-icons-png.flaticon.com/512/32/32339.png"
-            link="/notecards/create"
-            creator={{
-              img: "https://genslerzudansdentistry.com/wp-content/uploads/2015/11/anonymous-user.png",
-              name: "Current User",
+        <Hero />
+
+        <CardSection
+          title="Your Notecards"
+          description="Your own personally made notecards"
+        >
+          <StyledSwiper
+            modules={[Navigation, Pagination]}
+            navigation
+            pagination={{ clickable: true }}
+            breakpoints={{
+              480: {
+                slidesPerView: 1,
+                spaceBetween: 0,
+              },
+              768: {
+                slidesPerView: 2,
+                spaceBetween: 0,
+              },
+              1024: {
+                slidesPerView: 3,
+                spaceBetween: 40,
+              },
+              1500: {
+                slidesPerView: 4,
+                spaceBetween: 50,
+              },
             }}
-          />
+          >
+            {data.slice(1, 2).map((cardCollection: any) => (
+              <SwiperSlide
+                key={cardCollection.creator.name + cardCollection.title}
+              >
+                <Pack
+                  title={cardCollection.title}
+                  desc={cardCollection.desc}
+                  img={cardCollection.img}
+                  link={cardCollection.link + "/overview"}
+                  creator={cardCollection.creator}
+                  key={cardCollection.creator.name + cardCollection.title}
+                />
+              </SwiperSlide>
+            ))}
+            <SwiperSlide>
+              <Pack
+                title="Add new collection"
+                desc="Create your own note card collection"
+                img="https://cdn-icons-png.flaticon.com/512/32/32339.png"
+                link="/notecards/create"
+                creator={{
+                  img: "https://genslerzudansdentistry.com/wp-content/uploads/2015/11/anonymous-user.png",
+                  name: "Current User",
+                }}
+              />
+            </SwiperSlide>
+          </StyledSwiper>
         </CardSection>
 
+        <HorizontalRule />
 
-        <CardSection title="Public Packs">
-          {data.map((cardCollection: any) => (
-            <Pack
-              title={cardCollection.title}
-              desc={cardCollection.desc}
-              img={cardCollection.img}
-              link={cardCollection.link}
-              creator={cardCollection.creator}
-              key={cardCollection.creator.name + cardCollection.title}
-            />
-          ))}
+        <CardSection
+          title="Public Notecards"
+          description="Community shared notecards"
+        >
+          <StyledSwiper
+            modules={[Navigation, Pagination]}
+            navigation
+            pagination={{ clickable: true }}
+            breakpoints={{
+              480: {
+                slidesPerView: 1,
+                spaceBetween: 0,
+              },
+              768: {
+                slidesPerView: 2,
+                spaceBetween: 0,
+              },
+              1024: {
+                slidesPerView: 3,
+                spaceBetween: 40,
+              },
+              1500: {
+                slidesPerView: 4,
+                spaceBetween: 50,
+              },
+            }}
+          >
+            {data.map((cardCollection: any) => (
+              <SwiperSlide
+                key={cardCollection.creator.name + cardCollection.title}
+              >
+                <Pack
+                  title={cardCollection.title}
+                  desc={cardCollection.desc}
+                  img={cardCollection.img}
+                  link={cardCollection.link + "/overview"}
+                  creator={cardCollection.creator}
+                  key={cardCollection.creator.name + cardCollection.title}
+                />
+              </SwiperSlide>
+            ))}
+            {data.map((cardCollection: any) => (
+              <SwiperSlide
+                key={cardCollection.creator.name + cardCollection.title}
+              >
+                <Pack
+                  title={cardCollection.title}
+                  desc={cardCollection.desc}
+                  img={cardCollection.img}
+                  link={cardCollection.link + "/overview"}
+                  creator={cardCollection.creator}
+                  key={cardCollection.creator.name + cardCollection.title}
+                />
+              </SwiperSlide>
+            ))}
+            {data.map((cardCollection: any) => (
+              <SwiperSlide
+                key={cardCollection.creator.name + cardCollection.title}
+              >
+                <Pack
+                  title={cardCollection.title}
+                  desc={cardCollection.desc}
+                  img={cardCollection.img}
+                  link={cardCollection.link + "/overview"}
+                  creator={cardCollection.creator}
+                  key={cardCollection.creator.name + cardCollection.title}
+                />
+              </SwiperSlide>
+            ))}
+            {data.map((cardCollection: any) => (
+              <SwiperSlide
+                key={cardCollection.creator.name + cardCollection.title}
+              >
+                <Pack
+                  title={cardCollection.title}
+                  desc={cardCollection.desc}
+                  img={cardCollection.img}
+                  link={cardCollection.link + "/overview"}
+                  creator={cardCollection.creator}
+                  key={cardCollection.creator.name + cardCollection.title}
+                />
+              </SwiperSlide>
+            ))}
+          </StyledSwiper>
         </CardSection>
       </main>
     </>
   );
 }
 
-const Hero = styled.div`
-  height: 40vh;
-  background-color: ${colors.unfBlueWhite};
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const StyledSwiper = styled(Swiper)`
+  @media (max-width: ${screen.tablet}) {
+    .swiper-button-prev {
+      display: none;
+    }
+
+    .swiper-button-next {
+      display: none;
+    }
+  }
 `;
 
-function CardSection({ title, children }: { title: string; children: any }) {
-  return (
-    <fieldset>
-      <legend>{title}</legend>
-    <NoteCardCollections>{children}</NoteCardCollections>
-    </fieldset>
-  );
-}
-
-const NoteCardCollections = styled.div`
-  display: flex;
-  gap: 0.75rem;
-  flex-direction: row;
-  flex-wrap: wrap;
-
-  margin-bottom: 2rem;
+const HorizontalRule = styled.hr`
+  margin: 0 2rem;
 `;

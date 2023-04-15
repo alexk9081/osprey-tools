@@ -22,6 +22,10 @@ export default function UpcomingTasks() {
             return event.endDate?.getTime() > new Date().getTime();
           }
         })
+        .sort((a,b) => {
+          if(a.startDate instanceof Date && b.startDate instanceof Date) return ( new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
+          else return 0;
+        })
         .slice(0, 3)
         .map((event) => (
           <TaskLink href="/calendar" key={event.text}>

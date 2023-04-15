@@ -17,42 +17,84 @@ export default function Pack({
 }) {
   return (
     <>
-      <PackWrapper href={link}>
-        <Image src={img} alt="" />
-        <Title>{title}</Title>
-        <Description>{desc}</Description>
-        <Creator>
-          <CreatorImg src={creator.img} alt="" />
-          <CreatorName>{creator.name}</CreatorName>
-        </Creator>
-      </PackWrapper>
+      <PackHolder>
+        <PackWrapper href={link}>
+          <Image src={img} alt="" />
+          <TextHolder>
+            <Title>{title}</Title>
+            <Description>{desc}</Description>
+            <Creator>
+              <CreatorImg src={creator.img} alt="" />
+              <CreatorName>{creator.name}</CreatorName>
+            </Creator>
+          </TextHolder>
+        </PackWrapper>
+      </PackHolder>
     </>
   );
 }
-
-
-const PackWrapper = styled(Link)`
+const PackHolder = styled.div`
   width: 300px;
+  height: 400px;
+  
+  margin: 0rem auto 3rem auto;
 
-  text-decoration: none;
-  color: ${colors.nearBlack};
+  display: flex;
 `;
 
 const Image = styled.img`
-  width: 100%;
-  height: 200px;
+  width: 300px;
+  height: 400px;
   border-radius: 1rem;
-  object-fit: contain;
+  object-fit: cover;
+
+  filter: brightness(0.65);
+
+  background-color: #aaa;
+
+  position: absolute;
+  top: 0;
+
+  transition: 0.1s ease filter;
+`;
+
+const PackWrapper = styled(Link)`
+  width: 300px;
+  height: 400px;
+
+  text-decoration: none;
+  color: ${colors.nearBlack};
+
+  position: relative;
+
+  &:hover {
+    ${Image} {
+      filter: brightness(1);
+    }
+  }
+`;
+
+const TextHolder = styled.div`
+  position: absolute;
+  bottom: 0;
+
+  color: white;
+
+  text-shadow: 0 0 1rem black;
+
+  padding: 1rem;
+  z-index: 2;
 `;
 
 const Title = styled.div`
-  font-size: 1.25rem;
+  font-size: 1.6rem;
   font-weight: 600;
   margin: 0.25rem 0;
 `;
 
 const Description = styled.div`
-  line-height: 1rem;
+  line-height: 0.8rem;
+  font-size: 0.8rem;
 `;
 
 const Creator = styled.div`
@@ -65,11 +107,11 @@ const Creator = styled.div`
 
 const CreatorImg = styled.img`
   border-radius: 50%;
-  height: 35px;
-  width: 35px;
+  height: 20px;
+  width: 20px;
   object-fit: cover;
 `;
 
 const CreatorName = styled.span`
-  font-size: 1.1rem;
+  font-size: 0.9rem;
 `;

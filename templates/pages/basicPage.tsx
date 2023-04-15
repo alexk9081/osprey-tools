@@ -1,12 +1,7 @@
 import Head from "next/head";
 import styled from "styled-components";
 
-const Hero = styled.div`
-  height: 90vh;
-  background-color: white;
-`;
-
-export default function Home() {
+export default function Page() {
   return (
     <>
       <Head>
@@ -18,3 +13,8 @@ export default function Home() {
     </>
   );
 }
+
+const Hero = styled.div`
+  height: 90vh;
+  background-color: white;
+`;

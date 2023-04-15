@@ -5,7 +5,7 @@ export default function Document() {
     <Html lang="en">
       <Head />
 
-      <meta content="Unofficial App for University of North Florida, located in Jacksonville. Nationally ranked academics. Matching incompetencies to needs, students to debt. Affodableish tuition. Division I athletics. " name="description"></meta>
+      <meta content="Unofficial App for University of North Florida, located in Jacksonville. Nationally ranked academics. Matching students to debt. Afforadable tuition. Division I athletics. " name="description"></meta>
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" />
       <link
