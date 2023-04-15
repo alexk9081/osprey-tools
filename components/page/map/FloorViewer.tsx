@@ -38,7 +38,7 @@ export default function FloorViewer({
 }
 
 const Image = styled.img`
-  width: 100%;
+  width: max-content;
   height: calc(100vh - 5rem);
 
   object-fit: contain;

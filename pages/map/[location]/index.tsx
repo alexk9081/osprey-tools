@@ -71,6 +71,9 @@ export default function MapPage({ location }: { location: locationType }) {
 
 const MainContentLayout = styled.main`
   position: relative;
+
+  display: flex;
+  justify-content: center;
 `;
 
 const ChangeViewButton = styled.button`
