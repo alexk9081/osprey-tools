@@ -83,7 +83,7 @@ export default function Users() {
 
           <br />
 
-          <RequiredMessage>*These fields are required</RequiredMessage>
+          <RequiredMessage>*Required</RequiredMessage>
 
           <Buttons>
             <SubmitButton type="submit" value="Register" />
@@ -171,6 +171,8 @@ const Hero = styled.div`
 `;
 
 const ContentLayout = styled.main`
+  padding-top: 5rem;
+
   display: flex;
   justify-content: center;
   align-items: center;
