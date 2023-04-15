@@ -47,6 +47,7 @@ export default function MapLayout({
                   setImageIndex(index);
                 }}
                 isActive={imageIndex === index}
+                key={floor.floor}
               >
                 {floor.shorthand}
               </NavButtonHolder>
