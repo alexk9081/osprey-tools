@@ -8,7 +8,7 @@ const data: locationType[] = [
         floor: "Campus Map",
         shorthand: "MAP",
         image:
-          "https://scontent-mia3-1.xx.fbcdn.net/v/t39.30808-6/276990513_5230151163675630_7452306586498567711_n.png?_nc_cat=108&ccb=1-7&_nc_sid=730e14&_nc_ohc=Hb74aUHQ3zwAX98sEQ9&_nc_ht=scontent-mia3-1.xx&oh=00_AfAYcdZgFf5lQQ6kI34n09mTwRaP_iUgLCCVlI9EPA1MlQ&oe=6425FEC0",
+          "https://www.unf.edu/ehs/images/vehicle-safety-cart-map.jpeg",
       },
     ],
   },
@@ -62,31 +62,30 @@ const data: locationType[] = [
       },
     ],
   },
-  {
-    number: "12",
-    name: "Building 12 - Tommy G",
-    coordinates: { lat: 30.269504032957066, lng: -81.50865484296324 },
-    images: [
-      {
-        floor: "",
-        shorthand: "",
-        image: "",
-      },
-    ],
-  },
-  {
-    number: "41",
-    name: "Building 41 - Police Building",
-    coordinates: { lat: 30.26714525333742, lng: -81.51225882517198 },
-    images: [
-      {
-        floor: "",
-        shorthand: "",
-        image: "",
-      },
-    ],
-  },
-
+  // {
+  //   number: "12",
+  //   name: "Building 12 - Tommy G",
+  //   coordinates: { lat: 30.269504032957066, lng: -81.50865484296324 },
+  //   images: [
+  //     {
+  //       floor: "",
+  //       shorthand: "",
+  //       image: "",
+  //     },
+  //   ],
+  // },
+  // {
+  //   number: "41",
+  //   name: "Building 41 - Police Building",
+  //   coordinates: { lat: 30.26714525333742, lng: -81.51225882517198 },
+  //   images: [
+  //     {
+  //       floor: "",
+  //       shorthand: "",
+  //       image: "",
+  //     },
+  //   ],
+  // },
   {
     number: "15",
     name: "Building 15 - John E. Mathews Jr. Computer Science Building",
