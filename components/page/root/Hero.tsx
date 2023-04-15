@@ -15,15 +15,6 @@ export default function MainHero() {
           <HeroGradient>
             <ProjectTitle>O s p r e y    P r o d u c t i v i t y    T o o l s</ProjectTitle>
             <HeroText>ELEVATE YOUR PRODUCTIVITY</HeroText>
-            <Link href="/map">
-              <MapHolder>
-                <Image
-                  src="https://media.discordapp.net/attachments/1067491860286820394/1068360876056387614/CamScanner_01-26-2023_11.59_2.jpg?width=806&height=676"
-                  alt=""
-                />
-                <MapText>Map</MapText>
-              </MapHolder>
-            </Link>
           </HeroGradient>
         </Hero>
       </Parallax>
@@ -44,35 +35,6 @@ const ProjectTitle = styled.div`
 
   @media (max-width: ${screen.mobile}) {
   font-size: 0.75rem;
-  }
-`;
-
-const MapHolder = styled.div`
-  position: absolute;
-  bottom: 7rem;
-  right: 2rem;
-
-  @media (max-width: ${screen.tablet}) {
-    bottom: 0;
-    right: 0;
-  }
-`;
-
-const MapText = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-
-  transform: translate(-50%, -50%);
-
-  font-family: ${fonts.sansSerifMain};
-  color: ${colors.nearWhite};
-  font-size: 2rem;
-  font-weight: 600;
-  text-shadow: 0 0 1rem ${colors.nearBlack};
-
-  @media (max-width: ${screen.tablet}) {
-    display: none;
   }
 `;
 
@@ -158,14 +120,3 @@ const Hero = styled.div`
   }
 `;
 
-const Image = styled.img`
-  height: 175px;
-  filter: brightness(0.7);
-
-  box-shadow: 0rem 0rem 1rem ${colors.unfBlue};
-  border-radius: 1rem;
-
-  @media (max-width: ${screen.tablet}) {
-    display: none;
-  }
-`;
