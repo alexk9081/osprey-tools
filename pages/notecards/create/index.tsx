@@ -2,13 +2,16 @@ import { colors } from "@/styles/styleConstants";
 import Head from "next/head";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
-import { useRouter } from 'next/router'
+import { useContext, useEffect } from "react";
+import { useRouter } from "next/router";
+import { UserContext } from "@/components/layout/LoginContext";
+
+import { Store } from 'react-notifications-component';
 
 type Inputs = {
   title: string;
   desc: string;
 };
-
 
 export default function Create() {
   const router = useRouter();
@@ -18,55 +21,85 @@ export default function Create() {
     formState: { errors },
   } = useForm<Inputs>();
 
-  /**
-   * Sends post requst to the database then reroutes user to the newly created pack
-   * 
-   * @param data Data from input fields in the form
-   */
   function onSubmit(data: Inputs): void {
     const userInfo = { name: "Wall-E", image: "www.image.com/image.jpg" };
     console.log(data);
     console.log(userInfo);
 
     const isValid = true;
-    const fauxData = {packName: "softwareEngineering"}
+    const fauxData = { packName: "softwareEngineering" };
 
-    if(isValid){
-      router.push(`/notecards/packs/${userInfo.name}/${fauxData.packName}`)
+    if (isValid) {
+      router.push(`/notecards/packs/${userInfo.name}/${fauxData.packName}`);
     }
   }
 
-  return (
-    <>
-      <Head>
-        <title>Create Notecard Pack | UNF App</title>
-      </Head>
-      <main>
-        <Hero></Hero>
+  const { user, setUser } = useContext(UserContext);
 
-        <CustomForm onSubmit={handleSubmit(onSubmit)}>
-          <input
-            placeholder="Title"
-            {...register("title", { required: true, pattern: /^[\w]{3,30}$/i })}
-          />
-          {errors.title && <span>This field is required</span>}
-          <input
-            placeholder="Description"
-            {...register("desc", { pattern: /^[\w]{0,300}$/i })}
-          />
-          {errors.desc && <span>This field is required</span>}
+  useEffect(() => {
+    if (!user) {
+      Store.addNotification({
+        title: "User Not Logged In",
+        message: "Log in to create notecards packs",
+        type: "danger",
+        insert: "top",
+        container: "top-center",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 5000,
+          onScreen: true,
+          pauseOnHover: true,
+          showIcon: true,
+        }
+      });
 
-          {/* <select {...register("gender")}>
+      router.push("/users/create");
+    }
+  }, [user]);
+
+  if (user) {
+    return (
+      <>
+        <Head>
+          <title>Create Notecard Pack | UNF App</title>
+        </Head>
+        <main>
+          <Hero></Hero>
+
+          <CustomForm onSubmit={handleSubmit(onSubmit)}>
+            <input
+              placeholder="Title"
+              {...register("title", {
+                required: true,
+                pattern: /^[\w]{3,30}$/i,
+              })}
+            />
+            {errors.title && <span>This field is required</span>}
+            <input
+              placeholder="Description"
+              {...register("desc", { pattern: /^[\w]{0,300}$/i })}
+            />
+            {errors.desc && <span>This field is required</span>}
+
+            {/* <select {...register("gender")}>
             <option value="female">female</option>
             <option value="male">male</option>
             <option value="other">other</option>
           </select> */}
-          
-          <SubmitButton type="submit" />
-        </CustomForm>
-      </main>
-    </>
-  );
+
+            <SubmitButton type="submit" />
+          </CustomForm>
+        </main>
+      </>
+    );
+  } else {
+    return (
+      <Head>
+        <title>Create Notecard Pack | UNF App</title>
+      </Head>
+    );
+  }
 }
 
 const Hero = styled.div`

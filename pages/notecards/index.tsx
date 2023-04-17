@@ -68,7 +68,7 @@ export default function NoteCardsPage() {
                 img="https://cdn-icons-png.flaticon.com/512/32/32339.png"
                 link="/notecards/create"
                 creator={{
-                  img: "https://genslerzudansdentistry.com/wp-content/uploads/2015/11/anonymous-user.png",
+                  img: "anon-user.png",
                   name: "Current User",
                 }}
               />

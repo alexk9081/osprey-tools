@@ -5,6 +5,8 @@ import "@/styles/globals.css";
 import { NextPage } from "next";
 import type { AppProps } from "next/app";
 import { ReactElement, ReactNode } from "react";
+import { ReactNotifications } from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -21,6 +23,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     <>
       <EventsProvider>
         <UserProvider>
+          <ReactNotifications />
           <Layout>{getLayout(<Component {...pageProps} />)}</Layout>
         </UserProvider>
       </EventsProvider>

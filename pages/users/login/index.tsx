@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import Link from "next/link";
 import { UserContext } from "@/components/layout/LoginContext";
+import { useRouter } from "next/router";
 
 type Inputs = {
   nNumber: string;
@@ -12,6 +13,7 @@ type Inputs = {
 };
 
 export default function Users() {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -23,9 +25,12 @@ export default function Users() {
   function onSubmit(data: Inputs): void {
     console.log(data);
 
+    setUser({imageUrl: "", name: "Alex Keo", nNumber: "n01450313"});
+
     // if (isValid) {
     //   router.push(`/notecards/packs/${userInfo.name}/${fauxData.packName}`);
     // }
+    router.push("/");
   }
 
   return (
