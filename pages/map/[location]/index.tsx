@@ -43,19 +43,19 @@ export default function MapPage({ location }: { location: locationType }) {
         setActiveImage={setActiveImage}
         imageIndex={imageIndex}
       >
-        <ChangeViewButton onClick={() => setViewMap(!viewMap)}>
-          {viewMap ? (
-            <BoxMultiple color="white" size="1.75rem" />
-          ) : (
-            <Map color="white" size="1.75rem" />
-          )}
-        </ChangeViewButton>
         <MainContentLayout>
+          <ChangeViewButton onClick={() => setViewMap(!viewMap)}>
+            {viewMap ? (
+              <BoxMultiple color="white" size="1.75rem" />
+            ) : (
+              <Map color="white" size="1.75rem" />
+            )}
+          </ChangeViewButton>
           {viewMap ? (
             <CampusMap
               setCenter={setCenter}
               center={center}
-              activeLocation= {activeLocation}
+              activeLocation={activeLocation}
               setActiveLocation={setActiveLocation}
             />
           ) : (
@@ -95,8 +95,8 @@ const ChangeViewButton = styled.button`
   cursor: pointer;
 
   @media (max-width: ${screen.tablet}) {
-    top: 4rem;
-    right: 1rem;
+    top: 1rem;
+    left: 1rem;
   }
 `;
 
