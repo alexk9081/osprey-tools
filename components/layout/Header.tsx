@@ -93,13 +93,21 @@ function Menu({ show, closeMenu }: { show: boolean; closeMenu: () => void }) {
           </NavButtons>
 
           {user ? (
-            <LogoutButton
-              onClick={() => {
-                setUser(null);
-              }}
-            >
-              Logout
-            </LogoutButton>
+            <div>
+              <UserInfoHolder>
+                <UserImg
+                  src={user.imageUrl ? user.imageUrl : "anon-user.png"}
+                />
+                <UserName>{user.name}</UserName>
+              </UserInfoHolder>
+              <LogoutButton
+                onClick={() => {
+                  setUser(null);
+                }}
+              >
+                Logout
+              </LogoutButton>
+            </div>
           ) : (
             <LoginButton href="/users/create" onClick={closeMenu}>
               Login / Register
@@ -110,6 +118,30 @@ function Menu({ show, closeMenu }: { show: boolean; closeMenu: () => void }) {
     </>
   );
 }
+
+const UserInfoHolder = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 2rem;
+
+  gap: 1rem;
+`;
+
+const UserName = styled.div`
+  font-weight: 600;
+  font-size: 2rem;
+  height: 100%;
+`;
+
+const UserImg = styled.img`
+  width: 50px;
+  height: 50px;
+
+  border-radius: 50%;
+
+  border: 5px solid ${colors.unfBlue};
+`;
 
 const LogoutButton = styled.button`
   all: unset;
