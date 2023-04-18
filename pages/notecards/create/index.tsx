@@ -104,7 +104,7 @@ export default function Create() {
 
 const Hero = styled.div`
   height: 5rem;
-  background-color: ${colors.unfBlueWhite};
+  background-color: white;
 `;
 
 const CustomForm = styled.form`
