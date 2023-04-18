@@ -61,6 +61,11 @@ const Locations = styled.div`
 const FavoriteLocationsWrapper = styled.div`
   padding: 1rem;
   margin: 0rem 2rem;
+
+  @media (max-width: ${screen.mobile}) {
+    padding: 1rem 0;
+    margin: 0rem 0.5rem;
+  }
 `;
 
 const Title = styled.div`
@@ -114,7 +119,4 @@ const Location = styled.div`
     }
   }
 
-  @media (max-width: ${screen.tablet}) {
-    margin: 0.25rem;
-  }
 `;
