@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
-import { colors, fonts } from "@/styles/styleConstants";
+import { colors, fonts, screen } from "@/styles/styleConstants";
 import { Menu2, X } from "tabler-icons-react";
 import Link from "next/link";
 import { UserContext } from "./LoginContext";
@@ -199,6 +199,12 @@ const MenuFlex = styled.div`
   justify-content: space-between;
   flex-direction: column;
   height: 100%;
+
+  @media (max-width: ${screen.tablet}) {
+    padding-bottom: 5rem;
+  }
+
+  box-sizing: border-box;
 `;
 
 const NavButtons = styled.div`
