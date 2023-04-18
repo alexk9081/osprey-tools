@@ -60,6 +60,10 @@ const TaskTitle = styled.div`
   width: fit-content;
   border-bottom: 2px solid transparent;
   font-family: ${fonts.sansSerifSecondary};
+
+  @media (max-width: ${screen.mobile}) {
+    font-size: 1.5rem;
+  }
 `;
 
 const TaskWrapper = styled.div`

@@ -95,6 +95,10 @@ const LocationText = styled.div`
   color: white;
 
   transition: 0.2s ease all;
+
+  @media (max-width: ${screen.mobile}) {
+    font-size: 1.25rem;
+  }
 `;
 
 const Location = styled.div`
@@ -118,5 +122,4 @@ const Location = styled.div`
       backdrop-filter: brightness(0.9);
     }
   }
-
 `;

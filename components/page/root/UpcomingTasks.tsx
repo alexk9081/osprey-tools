@@ -95,4 +95,8 @@ const FullCalendarLink = styled(Link)`
 
   text-decoration: none;
   margin: 1rem 2rem;
+
+  @media (max-width: ${screen.mobile}) {
+    margin: 1rem 0.5rem;
+  }
 `;
