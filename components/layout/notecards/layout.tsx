@@ -1,3 +1,4 @@
+import { colors, screen } from "@/styles/styleConstants";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import styled from "styled-components";
@@ -60,6 +61,11 @@ const MainHeaderSafeArea = styled.div`
 const PageLayout = styled.div`
   display: grid;
   grid-template-columns: 5rem calc(100% - 5rem);
+
+  @media (max-width: ${screen.tablet}) {
+    grid-template-columns: 100%;
+    grid-template-rows: 5rem calc(100vh - 5rem - 5rem);
+  }
 `;
 
 const MainContent = styled.div`
@@ -74,23 +80,37 @@ const Navbar = styled.nav`
   align-items: center;
   padding: 1rem 0;
 
-  background-color: #e0e0e0;
-  border-right: 1px solid #bbb;
+  background-color: ${colors.unfBlue};
+
+  @media (max-width: ${screen.tablet}) {
+    flex-direction: row;
+    padding: 0 0.5rem;
+  }
+
+  @media (max-width: ${screen.mobile}) {
+    padding: 0 0.25rem;
+  }
 `;
 
 const NavButtons = styled.div`
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 0.5rem;
 
   width: 100%;
+
+  @media (max-width: ${screen.tablet}) {
+    height: 100%;
+    flex-direction: row;
+  }
 `;
 
 const StyledLink = styled(Link)`
   color: ${(props: { isActive: boolean }) =>
-    props.isActive ? "#000000" : "#777"};
+    props.isActive ? colors.unfBlueWhite : colors.unfBlueNearWhite};
 
   border-right: ${({ isActive }: { isActive: boolean }) =>
-    isActive ? "6px solid black" : "6px solid transparent"};
+    isActive ? "6px solid " + colors.unfBlueWhite : "6px solid transparent"};
 
   box-sizing: border-box;
 
@@ -106,13 +126,30 @@ const StyledLink = styled(Link)`
   padding: 1rem 0;
 
   &:hover {
-    background-color: #ccc;
-    color: #000066;
+    background-color: ${colors.unfBlueLight};
+    color: ${colors.unfBlueWhite};
+  }
+
+  @media (max-width: ${screen.tablet}) {
+    border-right: none;
+    height: 100%;
+    padding: 0;
+
+    border-bottom: ${({ isActive }: { isActive: boolean }) =>
+      isActive ? "6px solid " + colors.unfBlueWhite : "6px solid transparent"};
+
+    font-size: 1.5rem;
+
+    &:hover {
+      background-color: transparent;
+      color: ${(props: { isActive: boolean }) =>
+        props.isActive ? colors.unfBlueWhite : colors.unfBlueNearWhite};
+    }
   }
 `;
 
 const ExitLink = styled(Link)`
-  color: #000000;
+  color: ${colors.unfBlueWhite};
 
   box-sizing: border-box;
 
@@ -128,5 +165,14 @@ const ExitLink = styled(Link)`
   &:hover {
     background-color: #ccc;
     color: #000066;
+  }
+
+  @media (max-width: ${screen.tablet}) {
+    justify-content: right;
+    padding: 0 0.5rem;
+  }
+
+  @media (max-width: ${screen.mobile}) {
+    padding: 0 0.25rem;
   }
 `;

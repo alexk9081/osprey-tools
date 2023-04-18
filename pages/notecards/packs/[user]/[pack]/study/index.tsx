@@ -36,8 +36,6 @@ export default function StudyPage({
               <SwiperSlide key={card.question + card.answer}>
                 <SlideWrapper>
                   <NoteCard
-                    height="50vh"
-                    width="100vh"
                     question={card.question}
                     answer={card.answer}
                   />

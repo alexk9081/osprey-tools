@@ -1,32 +1,24 @@
+import { screen } from "@/styles/styleConstants";
 import { useState } from "react";
 import styled from "styled-components";
 
 export default function NoteCard({
   question,
   answer,
-  height,
-  width,
 }: {
   question: string;
   answer: string;
-  height: string;
-  width: string;
 }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
-      <NoteCardWrapper
-        height={height}
-        width={width}
-        isOpen={isOpen}
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        <Text isOpen={!isOpen}>
+      <NoteCardWrapper isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
+        <Text isOpen={!isOpen} isBackSide={false}>
           {question}
           <SmallText>Click to Open</SmallText>
         </Text>
-        <Text isOpen={isOpen} style={{ transform: "rotateX(180deg)" }}>
+        <Text isOpen={isOpen} isBackSide={true}>
           {answer}
         </Text>
       </NoteCardWrapper>
@@ -36,23 +28,32 @@ export default function NoteCard({
 
 const SmallText = styled.div`
   padding-top: 0.25rem;
-  font-size: 1.25rem;
+  font-size: 0.5em;
   font-weight: 500;
 `;
 
 const Text = styled.span`
-  font-size: 2.5rem;
-  
+  font-size: 2em;
+
   position: absolute;
   text-align: center;
 
   margin: 3rem;
 
   transition: 0s 0.2s linear opacity;
-  opacity: ${(props: { isOpen: boolean }) => (props.isOpen ? "1" : "0")};
+  opacity: ${(props: { isOpen: boolean; isBackSide: boolean }) =>
+    props.isOpen ? "1" : "0"};
+
+  transform: ${(props: { isOpen: boolean; isBackSide: boolean }) =>
+    props.isBackSide ? "rotateX(180deg)" : "rotateX(0)"};
+
+  @media (max-width: ${screen.tablet}) {
+    transform: ${(props: { isOpen: boolean; isBackSide: boolean }) =>
+      props.isBackSide ? "rotateY(180deg)" : "rotateY(0)"};
+  }
 `;
 
-type wrapperProps = { width: string; height: string; isOpen: boolean };
+type wrapperProps = { isOpen: boolean };
 
 const NoteCardWrapper = styled.div`
   display: flex;
@@ -61,14 +62,11 @@ const NoteCardWrapper = styled.div`
 
   flex-shrink: 0;
 
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-weight: 700;
 
   box-sizing: border-box;
   background-color: #fafafa;
-
-  height: ${(props: wrapperProps) => props.height};
-  width: ${(props: wrapperProps) => props.width};
 
   margin: 1rem;
 
@@ -81,4 +79,36 @@ const NoteCardWrapper = styled.div`
   transform: ${(props: wrapperProps) =>
     props.isOpen ? "rotateX(180deg)" : "rotateX(0deg)"};
   cursor: pointer;
+
+  height: 50vh;
+  width: 50vw;
+
+  @media (max-width: ${screen.desktop}) {
+    font-size: 1.5rem;
+  }
+
+  @media (max-width: ${screen.laptop}) {
+    font-size: 1.25rem;
+  }
+
+  @media (max-width: ${screen.tablet}) {
+    font-size: 1rem;
+
+    box-shadow: ${(props: wrapperProps) =>
+      props.isOpen
+        ? "-0.5rem  0.25rem 1.25rem #00000040"
+        : "0.5rem  0.25rem 1.25rem #00000040"};
+
+    transform: ${(props: wrapperProps) =>
+      props.isOpen ? "rotateY(180deg)" : "rotateY(0deg)"};
+    cursor: pointer;
+    
+    width: 75vw;
+  }
+
+  @media (max-width: ${screen.mobile}) {
+    font-size: 0.9rem;
+  height: 40vh;
+    width: 90vw;
+  }
 `;
