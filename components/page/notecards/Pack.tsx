@@ -1,4 +1,4 @@
-import { colors } from "@/styles/styleConstants";
+import { colors, screen } from "@/styles/styleConstants";
 import Link from "next/link";
 import styled from "styled-components";
 
@@ -36,15 +36,20 @@ export default function Pack({
 const PackHolder = styled.div`
   width: 300px;
   height: 400px;
-  
+
   margin: 0rem auto 3rem auto;
 
   display: flex;
+
+  @media (max-width: ${screen.mobile}) {
+    width: 210px;
+    height: 280px;
+  }
 `;
 
 const Image = styled.img`
-  width: 300px;
-  height: 400px;
+  width: 100%;
+  height: 100%;
   border-radius: 1rem;
   object-fit: cover;
 
@@ -59,8 +64,8 @@ const Image = styled.img`
 `;
 
 const PackWrapper = styled(Link)`
-  width: 300px;
-  height: 400px;
+  width: 100%;
+  height: 100%;
 
   text-decoration: none;
   color: ${colors.nearBlack};
@@ -90,11 +95,20 @@ const Title = styled.div`
   font-size: 1.6rem;
   font-weight: 600;
   margin: 0.25rem 0;
+
+  @media (max-width: ${screen.mobile}) {
+    font-size: 1.5rem;
+  }
 `;
 
 const Description = styled.div`
   line-height: 0.8rem;
   font-size: 0.8rem;
+
+  @media (max-width: ${screen.mobile}) {
+    line-height: 0.75rem;
+    font-size: 0.75rem;
+  }
 `;
 
 const Creator = styled.div`
