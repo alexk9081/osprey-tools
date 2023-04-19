@@ -20,7 +20,7 @@ export default function StudyPage({
   return (
     <>
         <Head>
-          <title>Notecard Pack | UNF App</title>
+          <title>Study Notecards | UNF App</title>
         </Head>
         <main>
           <h2>Notecard pack by {name}</h2>
