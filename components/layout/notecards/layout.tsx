@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import { ArrowBarLeft, Cards, List, Pencil } from "tabler-icons-react";
+import { useEffect } from "react";
 
 export default function NotecardLayout({
   children,
@@ -10,6 +11,9 @@ export default function NotecardLayout({
   children: React.ReactNode;
 }) {
   const router = useRouter();
+
+  //TODO Update notecard set context on set change
+  useEffect(() => {}, [router.query.pack]);
 
   const lastSlash = router.asPath.lastIndexOf("/");
   const currentRoute = router.asPath.substring(0, lastSlash);
