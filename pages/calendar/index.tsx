@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import styled from "styled-components";
 import "devextreme/dist/css/dx.light.css";
 import { Scheduler } from "devextreme-react/scheduler";
@@ -13,6 +13,7 @@ export default function TodoPage() {
   }
 
   function updateEvent(e: any) {
+    // e.cancel = true;
     console.log(e);
   }
 
@@ -21,6 +22,7 @@ export default function TodoPage() {
   }
 
   function editAppointmentForm(e: any) {
+    console.log(dataSource);
     const form = e.form;
     let mainGroupItems = form.itemOption("mainGroup").items;
 
@@ -36,6 +38,10 @@ export default function TodoPage() {
 
   const { events, setEvents } = useContext(CalendarContext);
 
+  const ref: any = useRef();
+
+  let dataSource = [...events];
+
   return (
     <>
       <Head>
@@ -45,7 +51,7 @@ export default function TodoPage() {
         <Hero></Hero>
         <Scheduler
           timeZone="America/New_York"
-          dataSource={[...events]}
+          dataSource={dataSource}
           views={[
             "day",
             "week",
@@ -63,6 +69,7 @@ export default function TodoPage() {
           onAppointmentAdded={addEvent}
           onAppointmentUpdating={updateEvent}
           onAppointmentDeleted={deleteEvent}
+          ref={ref}
         ></Scheduler>
       </main>
     </>

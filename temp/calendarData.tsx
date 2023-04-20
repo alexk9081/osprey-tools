@@ -6,6 +6,7 @@ const data: Appointment[] = [
     startDate: new Date("2023-05-10T16:30:00.000Z"),
     endDate: new Date("2023-05-10T18:30:00.000Z"),
     eventType: "Reoccuring Event",
+    disabled: true,
   },
   {
     text: "Design Project Architecture",
@@ -13,6 +14,7 @@ const data: Appointment[] = [
     endDate: new Date("2023-05-11T18:30:00.000Z"),
     allDay: true,
     eventType: "Personal Event",
+    disabled: true,
   },
   {
     text: "Finish Project",
@@ -20,6 +22,7 @@ const data: Appointment[] = [
     endDate: new Date("2023-12-11T18:30:00.000Z"),
     allDay: true,
     eventType: "Annual Holiday",
+    disabled: true,
   },
   {
     text: "Present My Project",
@@ -27,6 +30,7 @@ const data: Appointment[] = [
     endDate: new Date("2024-01-11T18:30:00.000Z"),
     allDay: true,
     eventType: "Annual Holiday",
+    disabled: true,
   },
 ];
 
