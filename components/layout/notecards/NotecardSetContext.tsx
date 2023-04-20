@@ -1,5 +1,5 @@
 import data from "@/temp/calendarData";
-import { NotecardSet } from "@/types/types";
+import { NotecardSet } from "@/values/types";
 import { Appointment } from "devextreme/ui/scheduler";
 import {
   useMemo,
