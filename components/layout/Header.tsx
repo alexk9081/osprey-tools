@@ -5,6 +5,7 @@ import { Menu2, X } from "tabler-icons-react";
 import Link from "next/link";
 import { UserContext } from "./LoginContext";
 import { CalendarContext } from "./CalendarContext";
+import data from "@/temp/calendarData";
 
 export default function Header() {
   //Makes header background transparent or frosted glass when user scrolls down past 10px
@@ -75,6 +76,7 @@ export default function Header() {
 }
 
 function Menu({ show, closeMenu }: { show: boolean; closeMenu: () => void }) {
+  const { events, setEvents } = useContext(CalendarContext);
   const { user, setUser } = useContext(UserContext);
   return (
     <>
@@ -102,6 +104,7 @@ function Menu({ show, closeMenu }: { show: boolean; closeMenu: () => void }) {
               </UserInfoHolder>
               <LogoutButton
                 onClick={() => {
+                  setEvents(data);
                   setUser(null);
                 }}
               >

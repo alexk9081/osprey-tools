@@ -7,7 +7,10 @@ import { UserContext } from "@/components/layout/LoginContext";
 import { useRouter } from "next/router";
 import { User } from "@/values/types";
 import { Store } from "react-notifications-component";
+import { Appointment } from "devextreme/ui/scheduler";
 import { baseURL } from "@/values/api";
+import { CalendarContext } from "@/components/layout/CalendarContext";
+import plannerData from "@/temp/calendarData";
 
 export default function Users() {
   const router = useRouter();
@@ -17,6 +20,7 @@ export default function Users() {
     formState: { errors },
   } = useForm<User>();
 
+  const { setEvents } = useContext(CalendarContext);
   const { user, setUser } = useContext(UserContext);
 
   useEffect(() => {
@@ -34,6 +38,67 @@ export default function Users() {
             .then((res: User) => {
               if (res.name == data.name) {
                 setUser(res);
+
+                fetch(baseURL + `planner/getall?nNumber=${res.nNumber}`)
+                  .then((res) => {
+                    if (res.ok) {
+                      res.json().then((res: Appointment[]) => {
+                        setEvents(plannerData.concat(res));
+                      });
+                    } else if (res.status === 404) {
+                      Store.addNotification({
+                        title: "Could not find planner data",
+                        message: "User planner data not found",
+                        type: "danger",
+                        insert: "top",
+                        container: "top-center",
+                        animationIn: ["animate__animated", "animate__fadeIn"],
+                        animationOut: ["animate__animated", "animate__fadeOut"],
+                        dismiss: {
+                          duration: 5000,
+                          onScreen: true,
+                          pauseOnHover: true,
+                          showIcon: true,
+                        },
+                      });
+                    } else {
+                      Store.addNotification({
+                        title: "ERROR: Unexpected behavior",
+                        message: `${res.status}: ${res.statusText}`,
+                        type: "danger",
+                        insert: "top",
+                        container: "top-center",
+                        animationIn: ["animate__animated", "animate__fadeIn"],
+                        animationOut: ["animate__animated", "animate__fadeOut"],
+                        dismiss: {
+                          duration: 5000,
+                          onScreen: true,
+                          pauseOnHover: true,
+                          showIcon: true,
+                        },
+                      });
+                    }
+                  })
+                  .catch((error) => {
+                    Store.addNotification({
+                      title: "Client failed to connect to API",
+                      message: "Possible network error or disruption",
+                      type: "danger",
+                      insert: "top",
+                      container: "top-center",
+                      animationIn: ["animate__animated", "animate__fadeIn"],
+                      animationOut: ["animate__animated", "animate__fadeOut"],
+                      dismiss: {
+                        duration: 5000,
+                        onScreen: true,
+                        pauseOnHover: true,
+                        showIcon: true,
+                      },
+                    });
+
+                    console.log(error);
+                  });
+
                 router.push("/");
               } else {
                 Store.addNotification({

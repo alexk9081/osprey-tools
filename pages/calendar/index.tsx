@@ -12,9 +12,6 @@ export default function TodoPage() {
   function addEvent(e: any) {
     const f = { ...e.appointmentData, eventType: "Personal Event" };
 
-    console.log(f);
-    
-
     setEvents([...events, f]);
   }
 
