@@ -1,4 +1,4 @@
-import { colors } from "@/styles/styleConstants";
+import { colors, fonts } from "@/styles/styleConstants";
 import Head from "next/head";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
@@ -6,12 +6,8 @@ import { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import { UserContext } from "@/components/layout/LoginContext";
 
-import { Store } from 'react-notifications-component';
-
-type Inputs = {
-  title: string;
-  desc: string;
-};
+import { Store } from "react-notifications-component";
+import { NotecardSet } from "@/types/types";
 
 export default function Create() {
   const router = useRouter();
@@ -19,19 +15,21 @@ export default function Create() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<NotecardSet>();
 
-  function onSubmit(data: Inputs): void {
-    const userInfo = { name: "Wall-E", image: "www.image.com/image.jpg" };
+  function onSubmit(data: NotecardSet): void {
     console.log(data);
-    console.log(userInfo);
 
-    const isValid = true;
-    const fauxData = { packName: "softwareEngineering" };
+    // const userInfo = { name: "Wall-E", image: "www.image.com/image.jpg" };
+    // console.log(data);
+    // console.log(userInfo);
 
-    if (isValid) {
-      router.push(`/notecards/packs/${userInfo.name}/${fauxData.packName}`);
-    }
+    // const isValid = true;
+    // const fauxData = { packName: "softwareEngineering" };
+
+    // if (isValid) {
+    //   router.push(`/notecards/packs/${userInfo.name}/${fauxData.packName}`);
+    // }
   }
 
   const { user, setUser } = useContext(UserContext);
@@ -51,7 +49,7 @@ export default function Create() {
           onScreen: true,
           pauseOnHover: true,
           showIcon: true,
-        }
+        },
       });
 
       router.push("/users/create");
@@ -67,26 +65,40 @@ export default function Create() {
         <main>
           <Hero></Hero>
 
+          <FormTitle>Create Notecard</FormTitle>
+
           <CustomForm onSubmit={handleSubmit(onSubmit)}>
-            <input
-              placeholder="Title"
-              {...register("title", {
+            <InputName>Display Title</InputName>
+            <StyledInput
+              placeholder="Display Title"
+              {...register("name", {
                 required: true,
                 pattern: /^[\w]{3,30}$/i,
               })}
             />
-            {errors.title && <span>This field is required</span>}
-            <input
-              placeholder="Description"
-              {...register("desc", { pattern: /^[\w]{0,300}$/i })}
-            />
-            {errors.desc && <span>This field is required</span>}
+            {errors.name && <ErrorMessage>This field is required</ErrorMessage>}
 
-            {/* <select {...register("gender")}>
-            <option value="female">female</option>
-            <option value="male">male</option>
-            <option value="other">other</option>
-          </select> */}
+            <InputName>Description</InputName>
+            <StyledTextArea
+              placeholder="Description"
+              {...register("description", { pattern: /^[\w]{0,300}$/i })}
+            />
+            {errors.description && (
+              <ErrorMessage>This field is required</ErrorMessage>
+            )}
+
+            <InputName>Public</InputName>
+            <input type="checkbox" value="Public" {...register("isPublic")} />
+
+            <InputName>Set Name</InputName>
+            <StyledInput
+              placeholder="Set Name"
+              {...register("id", {
+                required: true,
+                pattern: /^[\w]{3,30}$/i,
+              })}
+            />
+            {errors.id && <ErrorMessage>This field is required</ErrorMessage>}
 
             <SubmitButton type="submit" />
           </CustomForm>
@@ -101,6 +113,54 @@ export default function Create() {
     );
   }
 }
+
+const FormTitle = styled.div`
+  font-size: 2.25rem;
+  font-weight: 800;
+
+  color: ${colors.unfBlueWhite};
+  background-color: ${colors.unfBlue};
+
+  padding: 1.5rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const InputName = styled.label`
+  font-size: 1.25rem;
+`;
+
+const StyledTextArea = styled.textarea`
+  border-radius: 1rem;
+  padding: 0.5rem;
+
+  font-size: 1rem;
+  font-family: ${fonts.sansSerifMain};
+  font-weight: 600;
+
+  border: 2px solid ${colors.unfBlue};
+
+  resize: vertical;
+`;
+
+const StyledInput = styled.input`
+  border-radius: 1rem;
+  padding: 0.5rem;
+
+  font-size: 1rem;
+  font-family: ${fonts.sansSerifMain};
+  font-weight: 600;
+  
+  border: 2px solid ${colors.unfBlue};
+`;
+
+const ErrorMessage = styled.div`
+  color: #c30000;
+  font-weight: 600;
+  margin: 0.25rem 0;
+`;
 
 const Hero = styled.div`
   height: 5rem;
