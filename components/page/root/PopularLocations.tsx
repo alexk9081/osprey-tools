@@ -5,22 +5,22 @@ import styled from "styled-components";
 export default function PopularLocations() {
   const data = [
     {
-      name: "Building 58 - Student Union",
+      name: "Student Union",
       url: "58",
       img: "https://www.unf.edu/studentunion/images/studentunion.jpg",
     },
     {
-      name: "Building 51 - Social Sciences",
+      name: "Social Sciences",
       url: "51",
       img: "https://thermomass.com/website/wp-content/uploads/2017/02/unf-bldg51-02.jpg",
     },
     {
-      name: "Building 12 - Tommy G",
+      name: "Thomas G. Carpenter Library",
       url: "12",
       img: "https://digitalcommons.unf.edu/assets/md5images/7d02d9983a170b7e6d8625c847806819.jpg",
     },
     {
-      name: "Building 41 - Poilce Building",
+      name: "Martin P. Garris Police Building",
       url: "41",
       img: "https://www.unf.edu/upd/images/upd-home-banner.jpg",
     },
