@@ -19,3 +19,13 @@ export type User = {
   name: string;
   imageUrl: string;
 };
+
+export type PlannerTask = {
+  startDate: String;
+  endDate: String;
+  taskSubject: String;
+  description: String;
+  allDayTrigger: boolean;
+  repeatValue: String;
+  userID: String;
+};

@@ -1,13 +1,19 @@
 import Head from "next/head";
-import { useContext, useRef } from "react";
+import { useContext, useRef, useEffect } from "react";
 import styled from "styled-components";
 import "devextreme/dist/css/dx.light.css";
 import { Scheduler } from "devextreme-react/scheduler";
 import { CalendarContext } from "@/components/layout/CalendarContext";
+import { UserContext } from "@/components/layout/LoginContext";
 
 export default function TodoPage() {
+  const { user, setUser } = useContext(UserContext);
+
   function addEvent(e: any) {
     const f = { ...e.appointmentData, eventType: "Personal Event" };
+
+    console.log(f);
+    
 
     setEvents([...events, f]);
   }

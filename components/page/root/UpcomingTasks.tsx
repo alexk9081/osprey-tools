@@ -4,10 +4,82 @@ import Link from "next/link";
 import styled from "styled-components";
 import { ChevronsRight } from "tabler-icons-react";
 import { CalendarContext } from "@/components/layout/CalendarContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import { UserContext } from "@/components/layout/LoginContext";
+import { baseURL } from "@/values/api";
+import data from "@/temp/calendarData";
+import { Store } from "react-notifications-component";
+import { Appointment } from "devextreme/ui/scheduler";
 
 export default function UpcomingTasks() {
-  const { events } = useContext(CalendarContext);
+  const { events, setEvents } = useContext(CalendarContext);
+  const { user } = useContext(UserContext);
+
+  useEffect(() => {
+    if (user) {
+      fetch(baseURL + `planner/getall?nNumber=${user.nNumber}`)
+        .then((res) => {
+          if (res.ok) {
+            res.json().then((res: Appointment[]) => {
+              setEvents(data.concat(res));
+            });
+          } else if (res.status === 404) {
+            Store.addNotification({
+              title: "Could not find planner data",
+              message: "User planner data not found",
+              type: "danger",
+              insert: "top",
+              container: "top-center",
+              animationIn: ["animate__animated", "animate__fadeIn"],
+              animationOut: ["animate__animated", "animate__fadeOut"],
+              dismiss: {
+                duration: 5000,
+                onScreen: true,
+                pauseOnHover: true,
+                showIcon: true,
+              },
+            });
+          } else {
+            Store.addNotification({
+              title: "ERROR: Unexpected behavior",
+              message: `${res.status}: ${res.statusText}`,
+              type: "danger",
+              insert: "top",
+              container: "top-center",
+              animationIn: ["animate__animated", "animate__fadeIn"],
+              animationOut: ["animate__animated", "animate__fadeOut"],
+              dismiss: {
+                duration: 5000,
+                onScreen: true,
+                pauseOnHover: true,
+                showIcon: true,
+              },
+            });
+          }
+        })
+        .catch((error) => {
+          Store.addNotification({
+            title: "Client failed to connect to API",
+            message: "Possible network error or disruption",
+            type: "danger",
+            insert: "top",
+            container: "top-center",
+            animationIn: ["animate__animated", "animate__fadeIn"],
+            animationOut: ["animate__animated", "animate__fadeOut"],
+            dismiss: {
+              duration: 5000,
+              onScreen: true,
+              pauseOnHover: true,
+              showIcon: true,
+            },
+          });
+
+          console.log(error);
+        });
+    } else {
+      setEvents(data);
+    }
+  }, [user]);
 
   return (
     <UpcomingTasksWrapper>
@@ -37,7 +109,7 @@ export default function UpcomingTasks() {
               startDate={event.startDate}
               endDate={event.endDate}
               allDay={event.allDay ? event.allDay : false}
-              eventType={event.eventType}
+              eventType={event.eventType ? event.eventType : (event.recurrenceRule ? "Reoccuring Event" : "Personal Event")}
             />
           </TaskLink>
         ))}
