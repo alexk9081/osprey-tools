@@ -1,14 +1,9 @@
+import { User } from "@/values/types";
 import { useMemo, useState, createContext, Dispatch, SetStateAction } from "react";
 
-export type User = {
-  nNumber: string;
-  name: string;
-  imageUrl: string;
-} | null;
-
 export const UserContext = createContext<{
-  user: User;
-  setUser: React.Dispatch<SetStateAction<User>>;
+  user: User | null;
+  setUser: React.Dispatch<SetStateAction<User | null>>;
 }>({
   user: null,
   setUser: () => {},
@@ -19,7 +14,7 @@ export default function UserProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [user, setUser] = useState<User>(null);
+  const [user, setUser] = useState<User | null>(null);
 
   const userProviderValue = useMemo(() => ({ user, setUser }), [user, setUser]);
 

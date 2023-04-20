@@ -13,3 +13,9 @@ export type NotecardSet = {
   description?: String;
   notecards?: Notecard[];
 };
+
+export type User = {
+  nNumber: string;
+  name: string;
+  imageUrl: string;
+};

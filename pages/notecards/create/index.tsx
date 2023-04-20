@@ -5,9 +5,8 @@ import styled from "styled-components";
 import { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import { UserContext } from "@/components/layout/LoginContext";
-
 import { Store } from "react-notifications-component";
-import { NotecardSet } from "@/types/types";
+import { NotecardSet } from "@/values/types";
 
 export default function Create() {
   const router = useRouter();

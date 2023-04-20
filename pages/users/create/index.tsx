@@ -2,30 +2,27 @@ import Head from "next/head";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { UserContext } from "@/components/layout/LoginContext";
 import { baseURL } from "@/values/api";
 import { useRouter } from "next/router";
 import { Store } from "react-notifications-component";
-
-type Inputs = {
-  nNumber: string;
-  name: string;
-  imageUrl: string;
-};
+import { User } from "@/values/types";
 
 export default function Users() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<Inputs>();
+  const { register, handleSubmit, formState: { errors } } = useForm<User>();
 
   const router = useRouter();
 
   const { user, setUser } = useContext(UserContext);
 
-  function onSubmit(data: Inputs): void {
+  useEffect(() => {
+    if (user) {
+      router.push("/");
+    }
+  }, [user]);
+
+  function onSubmit(data: User): void {
     fetch(baseURL + "user/create", {
       method: "POST",
       headers: {
@@ -35,14 +32,14 @@ export default function Users() {
     })
       .then((res) => {
         if (res.ok) {
-
           //TODO Update user login
+          setUser(data);
+
           router.push("/");
         } else if (res.status === 409) {
           Store.addNotification({
             title: "User already exists",
-            message:
-              "A user is already registered with that n-number",
+            message: "A user is already registered with that n-number",
             type: "danger",
             insert: "top",
             container: "top-center",

@@ -1,16 +1,13 @@
 import Head from "next/head";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Link from "next/link";
 import { UserContext } from "@/components/layout/LoginContext";
 import { useRouter } from "next/router";
-
-type Inputs = {
-  nNumber: string;
-  name: string;
-  imageUrl: string;
-};
+import { User } from "@/values/types";
+import { Store } from "react-notifications-component";
+import { baseURL } from "@/values/api";
 
 export default function Users() {
   const router = useRouter();
@@ -18,19 +15,116 @@ export default function Users() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<User>();
 
   const { user, setUser } = useContext(UserContext);
 
-  function onSubmit(data: Inputs): void {
-    console.log(data);
+  useEffect(() => {
+    if (user) {
+      router.push("/");
+    }
+  }, [user]);
 
-    setUser({imageUrl: "", name: "Alex Keo", nNumber: "n01450313"});
+  function onSubmit(data: User): void {
+    fetch(baseURL + `user/get?nNumber=${data.nNumber}`)
+      .then((res) => {
+        if (res.ok) {
+          res
+            .json()
+            .then((res: User) => {
+              if (res.name == data.name) {
+                setUser(res);
+                router.push("/");
+              } else {
+                Store.addNotification({
+                  title: "Incorrect login",
+                  message: "Incorrect username or n-number",
+                  type: "danger",
+                  insert: "top",
+                  container: "top-center",
+                  animationIn: ["animate__animated", "animate__fadeIn"],
+                  animationOut: ["animate__animated", "animate__fadeOut"],
+                  dismiss: {
+                    duration: 5000,
+                    onScreen: true,
+                    pauseOnHover: true,
+                    showIcon: true,
+                  },
+                });
+              }
+            })
+            .catch((error) => {
+              Store.addNotification({
+                title: "ERROR: Unexpected behavior",
+                message: "Data processing error",
+                type: "danger",
+                insert: "top",
+                container: "top-center",
+                animationIn: ["animate__animated", "animate__fadeIn"],
+                animationOut: ["animate__animated", "animate__fadeOut"],
+                dismiss: {
+                  duration: 5000,
+                  onScreen: true,
+                  pauseOnHover: true,
+                  showIcon: true,
+                },
+              });
 
-    // if (isValid) {
-    //   router.push(`/notecards/packs/${userInfo.name}/${fauxData.packName}`);
-    // }
-    router.push("/");
+              console.log(error);
+            });
+        } else if (res.status === 404) {
+          Store.addNotification({
+            title: "Invalid login",
+            message: "Incorrect username or n-number",
+            type: "danger",
+            insert: "top",
+            container: "top-center",
+            animationIn: ["animate__animated", "animate__fadeIn"],
+            animationOut: ["animate__animated", "animate__fadeOut"],
+            dismiss: {
+              duration: 5000,
+              onScreen: true,
+              pauseOnHover: true,
+              showIcon: true,
+            },
+          });
+        } else {
+          Store.addNotification({
+            title: "ERROR: Unexpected behavior",
+            message: `${res.status}: ${res.statusText}`,
+            type: "danger",
+            insert: "top",
+            container: "top-center",
+            animationIn: ["animate__animated", "animate__fadeIn"],
+            animationOut: ["animate__animated", "animate__fadeOut"],
+            dismiss: {
+              duration: 5000,
+              onScreen: true,
+              pauseOnHover: true,
+              showIcon: true,
+            },
+          });
+        }
+      })
+      .catch((error) => {
+        Store.addNotification({
+          title: "Client failed to connect to API",
+          message: "Possible network error or disruption",
+          type: "danger",
+          insert: "top",
+          container: "top-center",
+          animationIn: ["animate__animated", "animate__fadeIn"],
+          animationOut: ["animate__animated", "animate__fadeOut"],
+          dismiss: {
+            duration: 5000,
+            onScreen: true,
+            pauseOnHover: true,
+            showIcon: true,
+          },
+        });
+
+        console.log(error);
+      });
   }
 
   return (
