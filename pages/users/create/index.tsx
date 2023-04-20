@@ -4,6 +4,9 @@ import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { useContext } from "react";
 import { UserContext } from "@/components/layout/LoginContext";
+import { baseURL } from "@/values/api";
+import { useRouter } from "next/router";
+import { Store } from "react-notifications-component";
 
 type Inputs = {
   nNumber: string;
@@ -18,14 +21,93 @@ export default function Users() {
     formState: { errors },
   } = useForm<Inputs>();
 
+  const router = useRouter();
+
   const { user, setUser } = useContext(UserContext);
 
   function onSubmit(data: Inputs): void {
-    console.log(data);
+    fetch(baseURL + "user/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => {
+        if (res.ok) {
 
-    // if (isValid) {
-    //   router.push(`/notecards/packs/${userInfo.name}/${fauxData.packName}`);
-    // }
+          //TODO Update user login
+          router.push("/");
+        } else if (res.status === 409) {
+          Store.addNotification({
+            title: "User already exists",
+            message:
+              "A user is already registered with that n-number",
+            type: "danger",
+            insert: "top",
+            container: "top-center",
+            animationIn: ["animate__animated", "animate__fadeIn"],
+            animationOut: ["animate__animated", "animate__fadeOut"],
+            dismiss: {
+              duration: 5000,
+              onScreen: true,
+              pauseOnHover: true,
+              showIcon: true,
+            },
+          });
+        } else if (res.status === 500) {
+          Store.addNotification({
+            title: "Internal Server Error",
+            message: "Server is down, contact webmaster",
+            type: "danger",
+            insert: "top",
+            container: "top-center",
+            animationIn: ["animate__animated", "animate__fadeIn"],
+            animationOut: ["animate__animated", "animate__fadeOut"],
+            dismiss: {
+              duration: 5000,
+              onScreen: true,
+              pauseOnHover: true,
+              showIcon: true,
+            },
+          });
+        } else {
+          Store.addNotification({
+            title: "ERROR: Unexpected behavior",
+            message: `${res.status}: ${res.statusText}`,
+            type: "danger",
+            insert: "top",
+            container: "top-center",
+            animationIn: ["animate__animated", "animate__fadeIn"],
+            animationOut: ["animate__animated", "animate__fadeOut"],
+            dismiss: {
+              duration: 5000,
+              onScreen: true,
+              pauseOnHover: true,
+              showIcon: true,
+            },
+          });
+        }
+      })
+      .catch((error) => {
+        Store.addNotification({
+          title: "Client failed to connect to API",
+          message: "Possible network error or disruption",
+          type: "danger",
+          insert: "top",
+          container: "top-center",
+          animationIn: ["animate__animated", "animate__fadeIn"],
+          animationOut: ["animate__animated", "animate__fadeOut"],
+          dismiss: {
+            duration: 5000,
+            onScreen: true,
+            pauseOnHover: true,
+            showIcon: true,
+          },
+        });
+
+        console.log(error);
+      });
   }
 
   return (
