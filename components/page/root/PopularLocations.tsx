@@ -20,9 +20,9 @@ export default function PopularLocations() {
       img: "https://digitalcommons.unf.edu/assets/md5images/7d02d9983a170b7e6d8625c847806819.jpg",
     },
     {
-      name: "Martin P. Garris Police Building",
-      url: "41",
-      img: "https://www.unf.edu/upd/images/upd-home-banner.jpg",
+      name: "Skinner - Jones Hall",
+      url: "4",
+      img: "https://unfspinnaker.com/wp-content/uploads/2016/08/Skinner-Jones-rendering-600x389.jpg",
     },
   ];
 
