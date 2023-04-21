@@ -5,10 +5,6 @@ import { useRouter } from "next/router";
 import styled from "styled-components";
 
 export default function EditCardsPage() {
-  const router = useRouter();
-
-  console.log(router.query);
-
   return (
     <>
       <Head>
