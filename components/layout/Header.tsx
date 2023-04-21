@@ -76,8 +76,13 @@ export default function Header() {
 }
 
 function Menu({ show, closeMenu }: { show: boolean; closeMenu: () => void }) {
-  const { events, setEvents } = useContext(CalendarContext);
+  const { setEvents } = useContext(CalendarContext);
   const { user, setUser } = useContext(UserContext);
+
+  function addDefaultSrc(ev: any) {
+    ev.target.src = "anon-user.png";
+  }
+
   return (
     <>
       <MenuWrapper show={show}>
@@ -99,6 +104,7 @@ function Menu({ show, closeMenu }: { show: boolean; closeMenu: () => void }) {
               <UserInfoHolder>
                 <UserImg
                   src={user.imageUrl ? user.imageUrl : "anon-user.png"}
+                  onError={addDefaultSrc}
                 />
                 <UserName>{user.name}</UserName>
               </UserInfoHolder>

@@ -16,6 +16,10 @@ export default function Pack({
   link: string;
   creator: User;
 }) {
+  function addDefaultSrc(ev: any) {
+    ev.target.src = "anon-user.png";
+  }
+
   return (
     <>
       <PackHolder>
@@ -25,7 +29,11 @@ export default function Pack({
             <Title>{title}</Title>
             <Description>{desc}</Description>
             <Creator>
-              <CreatorImg src={creator.imageUrl} alt="" />
+              <CreatorImg
+                src={creator.imageUrl}
+                onError={addDefaultSrc}
+                alt=""
+              />
               <CreatorName>{creator.name}</CreatorName>
             </Creator>
           </TextHolder>
