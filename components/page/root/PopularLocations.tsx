@@ -7,22 +7,22 @@ export default function PopularLocations() {
     {
       name: "Student Union",
       url: "58",
-      img: "https://www.unf.edu/studentunion/images/studentunion.jpg",
+      img: "https://files.alexkeo.com/file/Osprey-Productivity-Tools/58.jpg",
     },
     {
       name: "Social Sciences",
       url: "51",
-      img: "https://thermomass.com/website/wp-content/uploads/2017/02/unf-bldg51-02.jpg",
+      img: "https://files.alexkeo.com/file/Osprey-Productivity-Tools/51.jpg",
     },
     {
       name: "Thomas G. Carpenter Library",
       url: "12",
-      img: "https://digitalcommons.unf.edu/assets/md5images/7d02d9983a170b7e6d8625c847806819.jpg",
+      img: "https://files.alexkeo.com/file/Osprey-Productivity-Tools/59.jpg",
     },
     {
       name: "Skinner - Jones Hall",
       url: "4",
-      img: "https://unfspinnaker.com/wp-content/uploads/2016/08/Skinner-Jones-rendering-600x389.jpg",
+      img: "https://files.alexkeo.com/file/Osprey-Productivity-Tools/4.jpg",
     },
   ];
 

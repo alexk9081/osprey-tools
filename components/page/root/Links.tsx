@@ -61,7 +61,7 @@ function PageLink({
   return (
     <>
       <LinkWrapper>
-        <Image src={imgSrc} alt="" />
+        <Image src={imgSrc} alt="" loading="lazy" />
         <Title>{title}</Title>
         <Description>{desc}</Description>
         <LearnMore href={route}>
