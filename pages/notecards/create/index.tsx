@@ -8,7 +8,7 @@ import { UserContext } from "@/components/layout/LoginContext";
 import { Store } from "react-notifications-component";
 import { NotecardSet } from "@/values/types";
 
-export default function Create() {
+export default function CreateNotecardSet() {
   const router = useRouter();
   const {
     register,
@@ -31,7 +31,7 @@ export default function Create() {
     // }
   }
 
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     if (!user) {
@@ -59,45 +59,52 @@ export default function Create() {
     return (
       <>
         <Head>
-          <title>Create Notecard Pack | UNF App</title>
+          <title>Create Notecard Set | UNF App</title>
         </Head>
         <main>
           <Hero></Hero>
 
-          <FormTitle>Create Notecard</FormTitle>
+          <FormTitle>Create Notecard Set</FormTitle>
 
           <CustomForm onSubmit={handleSubmit(onSubmit)}>
             <InputName>Display Title</InputName>
             <StyledInput
-              placeholder="Display Title"
+              placeholder="Software Engineering"
               {...register("name", {
                 required: true,
                 pattern: /^[\w]{3,30}$/i,
               })}
             />
             {errors.name && <ErrorMessage>This field is required</ErrorMessage>}
+            {errors.name && <ErrorMessage>Max characters: 30</ErrorMessage>}
 
             <InputName>Description</InputName>
             <StyledTextArea
-              placeholder="Description"
+              placeholder="I haven't paid any attention a day in my life, someone please help me"
               {...register("description", { pattern: /^[\w]{0,300}$/i })}
             />
             {errors.description && (
-              <ErrorMessage>This field is required</ErrorMessage>
+              <ErrorMessage>Max characters: 300</ErrorMessage>
             )}
 
-            <InputName>Public</InputName>
-            <input type="checkbox" value="Public" {...register("isPublic")} />
-
-            <InputName>Set Name</InputName>
+            <InputName>Set ID</InputName>
             <StyledInput
-              placeholder="Set Name"
+              placeholder="AlexSoftwareEngineering"
               {...register("id", {
                 required: true,
                 pattern: /^[\w]{3,30}$/i,
               })}
             />
             {errors.id && <ErrorMessage>This field is required</ErrorMessage>}
+
+            <CheckboxHolder>
+              <Checkbox
+                type="checkbox"
+                value="Public"
+                {...register("isPublic")}
+              />
+              <InputName>Public</InputName>
+            </CheckboxHolder>
 
             <SubmitButton type="submit" />
           </CustomForm>
@@ -113,14 +120,62 @@ export default function Create() {
   }
 }
 
+const CheckboxHolder = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+`;
+
+const Checkbox = styled.input`
+  appearance: none;
+  background-color: #fff;
+  margin: 0;
+  font: inherit;
+  color: ${colors.unfBlue};
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 0.15em solid ${colors.unfBlue};
+  border-radius: 0.15em;
+  transform: translateY(-0.075em);
+
+  display: grid;
+  place-content: center;
+
+  &::before {
+    content: "";
+    width: 0.75rem;
+    height: 0.75rem;
+    transform: scale(0);
+    transition: 100ms transform ease-in-out;
+    box-shadow: inset 1em 1em black;
+    background-color: ${colors.unfBlue};
+
+    transform-origin: center;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  }
+
+  &:checked::before {
+    transform: scale(1);
+  }
+
+  &:focus {
+    outline: 2px solid ${colors.unfBlue};
+  }
+
+  &:disabled {
+    color: #888;
+    cursor: not-allowed;
+  }
+`;
+
 const FormTitle = styled.div`
-  font-size: 2.25rem;
+  font-size: 2.5rem;
   font-weight: 800;
 
-  color: ${colors.unfBlueWhite};
+  color: #eee;
   background-color: ${colors.unfBlue};
 
-  padding: 1.5rem;
+  padding: 2.25rem;
 
   display: flex;
   justify-content: center;
@@ -129,11 +184,16 @@ const FormTitle = styled.div`
 
 const InputName = styled.label`
   font-size: 1.25rem;
+  font-weight: 600;
+
+  color: ${colors.unfBlue};
 `;
 
 const StyledTextArea = styled.textarea`
   border-radius: 1rem;
   padding: 0.5rem;
+
+  height: 6rem;
 
   font-size: 1rem;
   font-family: ${fonts.sansSerifMain};
@@ -151,7 +211,7 @@ const StyledInput = styled.input`
   font-size: 1rem;
   font-family: ${fonts.sansSerifMain};
   font-weight: 600;
-  
+
   border: 2px solid ${colors.unfBlue};
 `;
 
@@ -177,4 +237,25 @@ const CustomForm = styled.form`
 const SubmitButton = styled.input`
   flex-grow: 0;
   width: max-content;
+
+  background-color: ${colors.unfBlue};
+  color: ${colors.unfBlueWhite};
+
+  padding: 1.25rem;
+  border: none;
+
+  font-size: 1.1rem;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 100ms ease background-color;
+
+  &:hover {
+    background-color: ${colors.unfBlueLight};
+  }
+
+  &:focus {
+    outline: 2px solid red;
+  }
 `;
