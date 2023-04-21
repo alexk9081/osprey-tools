@@ -83,6 +83,9 @@ const TextHolder = styled.div`
   position: absolute;
   bottom: 0;
 
+  width: 100%;
+  box-sizing: border-box;
+
   color: white;
 
   text-shadow: 0 0 1rem black;
@@ -96,6 +99,15 @@ const Title = styled.div`
   font-weight: 600;
   margin: 0.25rem 0;
 
+  white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
+  white-space: -webkit-pre-wrap; /* Chrome & Safari */
+  white-space: -pre-wrap; /* Opera 4-6 */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  white-space: pre-wrap; /* CSS3 */
+  word-wrap: break-word; /* Internet Explorer 5.5+ */
+  word-break: normal;
+  white-space: normal;
+
   @media (max-width: ${screen.mobile}) {
     font-size: 1.5rem;
   }
@@ -104,6 +116,15 @@ const Title = styled.div`
 const Description = styled.div`
   line-height: 0.8rem;
   font-size: 0.8rem;
+
+  white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
+  white-space: -webkit-pre-wrap; /* Chrome & Safari */
+  white-space: -pre-wrap; /* Opera 4-6 */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  white-space: pre-wrap; /* CSS3 */
+  word-wrap: break-word; /* Internet Explorer 5.5+ */
+  word-break: normal;
+  white-space: normal;
 
   @media (max-width: ${screen.mobile}) {
     line-height: 0.75rem;
