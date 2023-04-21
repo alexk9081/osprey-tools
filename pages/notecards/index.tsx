@@ -1,13 +1,10 @@
 import CardSection from "@/components/page/notecards/CardSection";
 import Hero from "@/components/page/notecards/Hero";
 import Pack from "@/components/page/notecards/Pack";
-import data from "@/temp/notecardPacksData";
 import Head from "next/head";
 import styled from "styled-components";
-import { Navigation, Pagination } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { SwiperSlide } from "swiper/react";
 import { useEffect, useState, useContext } from "react";
-import { screen } from "@/styles/styleConstants";
 import { Store } from "react-notifications-component";
 import { NotecardSet } from "@/values/types";
 import { baseURL } from "@/values/api";
