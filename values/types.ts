@@ -1,17 +1,18 @@
 export type Notecard = {
-  noteid: String;
-  setid: String;
-  question: String;
-  answer: String;
+  noteid: string;
+  setid: string;
+  question: string;
+  answer: string;
 };
 
 export type NotecardSet = {
-  id: String;
-  name: String;
+  id: string;
+  name: string;
   isPublic: boolean;
-  nNumber: String;
-  description?: String;
+  nNumber: string;
+  description?: string;
   notecards?: Notecard[];
+  creator: User;
 };
 
 export type User = {
@@ -21,11 +22,11 @@ export type User = {
 };
 
 export type PlannerTask = {
-  startDate: String;
-  endDate: String;
-  taskSubject: String;
-  description: String;
+  startDate: string;
+  endDate: string;
+  taskSubject: string;
+  description: string;
   allDayTrigger: boolean;
-  repeatValue: String;
-  userID: String;
+  repeatValue: string;
+  userID: string;
 };

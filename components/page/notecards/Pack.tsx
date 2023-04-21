@@ -1,4 +1,5 @@
 import { colors, screen } from "@/styles/styleConstants";
+import { User } from "@/values/types";
 import Link from "next/link";
 import styled from "styled-components";
 
@@ -10,10 +11,10 @@ export default function Pack({
   creator,
 }: {
   title: string;
-  desc: string;
+  desc?: string;
   img: string;
   link: string;
-  creator: { img: string; name: string };
+  creator: User;
 }) {
   return (
     <>
@@ -24,7 +25,7 @@ export default function Pack({
             <Title>{title}</Title>
             <Description>{desc}</Description>
             <Creator>
-              <CreatorImg src={creator.img} alt="" />
+              <CreatorImg src={creator.imageUrl} alt="" />
               <CreatorName>{creator.name}</CreatorName>
             </Creator>
           </TextHolder>
