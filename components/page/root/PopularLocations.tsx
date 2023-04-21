@@ -5,24 +5,24 @@ import styled from "styled-components";
 export default function PopularLocations() {
   const data = [
     {
-      name: "Building 58 - Student Union",
+      name: "Student Union",
       url: "58",
       img: "https://www.unf.edu/studentunion/images/studentunion.jpg",
     },
     {
-      name: "Building 51 - Social Sciences",
+      name: "Social Sciences",
       url: "51",
       img: "https://thermomass.com/website/wp-content/uploads/2017/02/unf-bldg51-02.jpg",
     },
     {
-      name: "Building 12 - Tommy G",
+      name: "Thomas G. Carpenter Library",
       url: "12",
       img: "https://digitalcommons.unf.edu/assets/md5images/7d02d9983a170b7e6d8625c847806819.jpg",
     },
     {
-      name: "Building 41 - Poilce Building",
-      url: "41",
-      img: "https://www.unf.edu/upd/images/upd-home-banner.jpg",
+      name: "Skinner - Jones Hall",
+      url: "4",
+      img: "https://unfspinnaker.com/wp-content/uploads/2016/08/Skinner-Jones-rendering-600x389.jpg",
     },
   ];
 
@@ -61,6 +61,11 @@ const Locations = styled.div`
 const FavoriteLocationsWrapper = styled.div`
   padding: 1rem;
   margin: 0rem 2rem;
+
+  @media (max-width: ${screen.mobile}) {
+    padding: 1rem 0;
+    margin: 0rem 0.5rem;
+  }
 `;
 
 const Title = styled.div`
@@ -90,6 +95,10 @@ const LocationText = styled.div`
   color: white;
 
   transition: 0.2s ease all;
+
+  @media (max-width: ${screen.mobile}) {
+    font-size: 1.25rem;
+  }
 `;
 
 const Location = styled.div`
@@ -112,9 +121,5 @@ const Location = styled.div`
     ${LocationText} {
       backdrop-filter: brightness(0.9);
     }
-  }
-
-  @media (max-width: ${screen.tablet}) {
-    margin: 0.25rem;
   }
 `;

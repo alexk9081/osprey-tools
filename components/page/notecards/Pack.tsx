@@ -1,4 +1,5 @@
-import { colors } from "@/styles/styleConstants";
+import { colors, screen } from "@/styles/styleConstants";
+import { User } from "@/values/types";
 import Link from "next/link";
 import styled from "styled-components";
 
@@ -10,11 +11,15 @@ export default function Pack({
   creator,
 }: {
   title: string;
-  desc: string;
+  desc?: string;
   img: string;
   link: string;
-  creator: { img: string; name: string };
+  creator: User;
 }) {
+  function addDefaultSrc(ev: any) {
+    ev.target.src = "anon-user.png";
+  }
+
   return (
     <>
       <PackHolder>
@@ -24,7 +29,11 @@ export default function Pack({
             <Title>{title}</Title>
             <Description>{desc}</Description>
             <Creator>
-              <CreatorImg src={creator.img} alt="" />
+              <CreatorImg
+                src={creator.imageUrl}
+                onError={addDefaultSrc}
+                alt=""
+              />
               <CreatorName>{creator.name}</CreatorName>
             </Creator>
           </TextHolder>
@@ -36,15 +45,20 @@ export default function Pack({
 const PackHolder = styled.div`
   width: 300px;
   height: 400px;
-  
+
   margin: 0rem auto 3rem auto;
 
   display: flex;
+
+  @media (max-width: ${screen.mobile}) {
+    width: 210px;
+    height: 280px;
+  }
 `;
 
 const Image = styled.img`
-  width: 300px;
-  height: 400px;
+  width: 100%;
+  height: 100%;
   border-radius: 1rem;
   object-fit: cover;
 
@@ -59,8 +73,8 @@ const Image = styled.img`
 `;
 
 const PackWrapper = styled(Link)`
-  width: 300px;
-  height: 400px;
+  width: 100%;
+  height: 100%;
 
   text-decoration: none;
   color: ${colors.nearBlack};
@@ -78,6 +92,9 @@ const TextHolder = styled.div`
   position: absolute;
   bottom: 0;
 
+  width: 100%;
+  box-sizing: border-box;
+
   color: white;
 
   text-shadow: 0 0 1rem black;
@@ -90,11 +107,38 @@ const Title = styled.div`
   font-size: 1.6rem;
   font-weight: 600;
   margin: 0.25rem 0;
+
+  white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
+  white-space: -webkit-pre-wrap; /* Chrome & Safari */
+  white-space: -pre-wrap; /* Opera 4-6 */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  white-space: pre-wrap; /* CSS3 */
+  word-wrap: break-word; /* Internet Explorer 5.5+ */
+  word-break: normal;
+  white-space: normal;
+
+  @media (max-width: ${screen.mobile}) {
+    font-size: 1.5rem;
+  }
 `;
 
 const Description = styled.div`
   line-height: 0.8rem;
   font-size: 0.8rem;
+
+  white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
+  white-space: -webkit-pre-wrap; /* Chrome & Safari */
+  white-space: -pre-wrap; /* Opera 4-6 */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  white-space: pre-wrap; /* CSS3 */
+  word-wrap: break-word; /* Internet Explorer 5.5+ */
+  word-break: normal;
+  white-space: normal;
+
+  @media (max-width: ${screen.mobile}) {
+    line-height: 0.75rem;
+    font-size: 0.75rem;
+  }
 `;
 
 const Creator = styled.div`

@@ -18,8 +18,8 @@ export const colors = {
 
   unfBlue: "#0a233f",
   unfBlueLight: "#1a334f",
-  unfBlueNearWhite: "#7a93af",
-  unfBlueWhite: "#cae3ff",
+  unfBlueNearWhite: "#557190",
+  unfBlueWhite: "#AEBDCE",
 };
 
 export const fonts = {

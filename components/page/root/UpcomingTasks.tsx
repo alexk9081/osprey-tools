@@ -1,5 +1,5 @@
 import Task from "@/components/resuseable/Task";
-import { colors } from "@/styles/styleConstants";
+import { colors, screen } from "@/styles/styleConstants";
 import Link from "next/link";
 import styled from "styled-components";
 import { ChevronsRight } from "tabler-icons-react";
@@ -22,8 +22,11 @@ export default function UpcomingTasks() {
             return event.endDate?.getTime() > new Date().getTime();
           }
         })
-        .sort((a,b) => {
-          if(a.startDate instanceof Date && b.startDate instanceof Date) return ( new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
+        .sort((a, b) => {
+          if (a.startDate instanceof Date && b.startDate instanceof Date)
+            return (
+              new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
+            );
           else return 0;
         })
         .slice(0, 3)
@@ -34,7 +37,7 @@ export default function UpcomingTasks() {
               startDate={event.startDate}
               endDate={event.endDate}
               allDay={event.allDay ? event.allDay : false}
-              eventType={event.eventType}
+              eventType={event.eventType ? event.eventType : (event.recurrenceRule ? "Reoccuring Event" : "Personal Event")}
             />
           </TaskLink>
         ))}
@@ -53,15 +56,23 @@ const TaskLink = styled(Link)`
 
 const UpcomingTasksWrapper = styled.div`
   padding: 1rem;
+
+  @media (max-width: ${screen.mobile}) {
+    padding: 1rem 0;
+  }
 `;
 
 const UpcomingTasksTitle = styled.div`
-  font-size: 1.75rem;
+  font-size: 1.85rem;
   font-weight: 800;
 
   margin: 0rem 2rem;
   padding-bottom: 0.5rem;
   border-bottom: 2px solid black;
+
+  @media (max-width: ${screen.mobile}) {
+    margin: 0rem 0.5rem;
+  }
 `;
 
 const TextColoring = styled.span`
@@ -84,4 +95,8 @@ const FullCalendarLink = styled(Link)`
 
   text-decoration: none;
   margin: 1rem 2rem;
+
+  @media (max-width: ${screen.mobile}) {
+    margin: 1rem 0.5rem;
+  }
 `;

@@ -1,4 +1,4 @@
-import { colors } from "@/styles/styleConstants";
+import { colors, screen } from "@/styles/styleConstants";
 import Link from "next/link";
 import styled from "styled-components";
 import Button from "@/components/resuseable/button";
@@ -60,6 +60,10 @@ const Title = styled.div`
 
   color: white;
   text-shadow: 0 0 1rem black;
+
+  @media (max-width: ${screen.mobile}) {
+    font-size: 2.25rem;
+  }
 `;
 
 const HeroWrapper = styled.div`
@@ -76,6 +80,10 @@ const Description = styled.div`
   font-size: 0.9rem;
   color: white;
   text-shadow: 0 0 1rem black;
+
+  @media (max-width: ${screen.mobile}) {
+    font-size: 0.8rem;
+  }
 `;
 
 const CreateLink = styled(Link)`

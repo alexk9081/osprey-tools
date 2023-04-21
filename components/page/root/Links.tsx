@@ -43,7 +43,7 @@ const LinksLayout = styled.div`
   @media (max-width: ${screen.tablet}) {
     grid-template-columns: 1fr;
     gap: 4rem;
-    padding: 5rem max(2rem, calc(50vw - 13rem));
+    padding: 5rem max(0.5rem, calc(50vw - 13rem));
   }
 `;
 
@@ -109,6 +109,8 @@ const LinkWrapper = styled.div`
 const Image = styled.img`
   width: 100%;
   height: 15rem;
+
+  object-fit: cover;
 
   @media (max-width: ${screen.desktop}) {
     height: 12rem;

@@ -1,77 +1,249 @@
 import Head from "next/head";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Link from "next/link";
 import { UserContext } from "@/components/layout/LoginContext";
-
-type Inputs = {
-  nNumber: string;
-  name: string;
-  imageUrl: string;
-};
+import { useRouter } from "next/router";
+import { User } from "@/values/types";
+import { Store } from "react-notifications-component";
+import { Appointment } from "devextreme/ui/scheduler";
+import { baseURL } from "@/values/api";
+import { CalendarContext } from "@/components/layout/CalendarContext";
+import plannerData from "@/temp/calendarData";
 
 export default function Users() {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<User>();
 
+  const { setEvents } = useContext(CalendarContext);
   const { user, setUser } = useContext(UserContext);
 
-  function onSubmit(data: Inputs): void {
-    console.log(data);
+  useEffect(() => {
+    if (user) {
+      router.push("/");
+    }
+  }, [user]);
 
-    // if (isValid) {
-    //   router.push(`/notecards/packs/${userInfo.name}/${fauxData.packName}`);
-    // }
+  function onSubmit(data: User): void {
+    fetch(baseURL + `user/get?nNumber=${data.nNumber}`)
+      .then((res) => {
+        if (res.ok) {
+          res
+            .json()
+            .then((res: User) => {
+              if (res.name == data.name) {
+                setUser(res);
+
+                fetch(baseURL + `planner/getall?nNumber=${res.nNumber}`)
+                  .then((res) => {
+                    if (res.ok) {
+                      res.json().then((res: Appointment[]) => {
+                        setEvents(plannerData.concat(res));
+                      });
+                    } else if (res.status === 404) {
+                      Store.addNotification({
+                        title: "Could not find planner data",
+                        message: "User planner data not found",
+                        type: "danger",
+                        insert: "top",
+                        container: "top-center",
+                        animationIn: ["animate__animated", "animate__fadeIn"],
+                        animationOut: ["animate__animated", "animate__fadeOut"],
+                        dismiss: {
+                          duration: 5000,
+                          onScreen: true,
+                          pauseOnHover: true,
+                          showIcon: true,
+                        },
+                      });
+                    } else {
+                      Store.addNotification({
+                        title: "ERROR: Unexpected behavior",
+                        message: `${res.status}: ${res.statusText}`,
+                        type: "danger",
+                        insert: "top",
+                        container: "top-center",
+                        animationIn: ["animate__animated", "animate__fadeIn"],
+                        animationOut: ["animate__animated", "animate__fadeOut"],
+                        dismiss: {
+                          duration: 5000,
+                          onScreen: true,
+                          pauseOnHover: true,
+                          showIcon: true,
+                        },
+                      });
+                    }
+                  })
+                  .catch((error) => {
+                    Store.addNotification({
+                      title: "Client failed to connect to API",
+                      message: "Possible network error or disruption",
+                      type: "danger",
+                      insert: "top",
+                      container: "top-center",
+                      animationIn: ["animate__animated", "animate__fadeIn"],
+                      animationOut: ["animate__animated", "animate__fadeOut"],
+                      dismiss: {
+                        duration: 5000,
+                        onScreen: true,
+                        pauseOnHover: true,
+                        showIcon: true,
+                      },
+                    });
+
+                    console.log(error);
+                  });
+
+                router.push("/");
+              } else {
+                Store.addNotification({
+                  title: "Incorrect login",
+                  message: "Incorrect username or n-number",
+                  type: "danger",
+                  insert: "top",
+                  container: "top-center",
+                  animationIn: ["animate__animated", "animate__fadeIn"],
+                  animationOut: ["animate__animated", "animate__fadeOut"],
+                  dismiss: {
+                    duration: 5000,
+                    onScreen: true,
+                    pauseOnHover: true,
+                    showIcon: true,
+                  },
+                });
+              }
+            })
+            .catch((error) => {
+              Store.addNotification({
+                title: "ERROR: Unexpected behavior",
+                message: "Data processing error",
+                type: "danger",
+                insert: "top",
+                container: "top-center",
+                animationIn: ["animate__animated", "animate__fadeIn"],
+                animationOut: ["animate__animated", "animate__fadeOut"],
+                dismiss: {
+                  duration: 5000,
+                  onScreen: true,
+                  pauseOnHover: true,
+                  showIcon: true,
+                },
+              });
+
+              console.log(error);
+            });
+        } else if (res.status === 404) {
+          Store.addNotification({
+            title: "Invalid login",
+            message: "Incorrect username or n-number",
+            type: "danger",
+            insert: "top",
+            container: "top-center",
+            animationIn: ["animate__animated", "animate__fadeIn"],
+            animationOut: ["animate__animated", "animate__fadeOut"],
+            dismiss: {
+              duration: 5000,
+              onScreen: true,
+              pauseOnHover: true,
+              showIcon: true,
+            },
+          });
+        } else {
+          Store.addNotification({
+            title: "ERROR: Unexpected behavior",
+            message: `${res.status}: ${res.statusText}`,
+            type: "danger",
+            insert: "top",
+            container: "top-center",
+            animationIn: ["animate__animated", "animate__fadeIn"],
+            animationOut: ["animate__animated", "animate__fadeOut"],
+            dismiss: {
+              duration: 5000,
+              onScreen: true,
+              pauseOnHover: true,
+              showIcon: true,
+            },
+          });
+        }
+      })
+      .catch((error) => {
+        Store.addNotification({
+          title: "Client failed to connect to API",
+          message: "Possible network error or disruption",
+          type: "danger",
+          insert: "top",
+          container: "top-center",
+          animationIn: ["animate__animated", "animate__fadeIn"],
+          animationOut: ["animate__animated", "animate__fadeOut"],
+          dismiss: {
+            duration: 5000,
+            onScreen: true,
+            pauseOnHover: true,
+            showIcon: true,
+          },
+        });
+
+        console.log(error);
+      });
   }
 
-  return (
-    <>
+  if (user) {
+    return (
       <Head>
         <title>Login User | UNF App</title>
       </Head>
-      <ContentLayout>
-        <Hero></Hero>
+    );
+  } else {
+    return (
+      <>
+        <Head>
+          <title>Login User | UNF App</title>
+        </Head>
+        <ContentLayout>
+          <Hero></Hero>
 
-        <RegisterElement onSubmit={handleSubmit(onSubmit)}>
-          <FormTitle>Login</FormTitle>
-          <InputName>Username</InputName>
-          <StyledInput
-            placeholder="John Doe"
-            {...register("name", {
-              required: true,
-              pattern: /^[\w\s]{1,20}$/i,
-            })}
-          />
-          {errors.name && (
-            <ErrorMessage>Alphanumeric characters only</ErrorMessage>
-          )}
+          <RegisterElement onSubmit={handleSubmit(onSubmit)}>
+            <FormTitle>Login</FormTitle>
+            <InputName>Username</InputName>
+            <StyledInput
+              placeholder="John Doe"
+              {...register("name", {
+                required: true,
+                pattern: /^[\w\s]{1,20}$/i,
+              })}
+            />
+            {errors.name && (
+              <ErrorMessage>Alphanumeric characters only</ErrorMessage>
+            )}
 
-          <br />
+            <br />
 
-          <InputName>N-Number</InputName>
-          <StyledInput
-            placeholder="n01234567"
-            {...register("nNumber", {
-              required: true,
-              pattern: /^[nN][0-9]{8}$/i,
-            })}
-          />
-          {errors.nNumber && <ErrorMessage>Invalid n-number</ErrorMessage>}
+            <InputName>N-Number</InputName>
+            <StyledInput
+              placeholder="n01234567"
+              {...register("nNumber", {
+                required: true,
+                pattern: /^[nN][0-9]{8}$/i,
+              })}
+            />
+            {errors.nNumber && <ErrorMessage>Invalid n-number</ErrorMessage>}
 
-          <br />
+            <br />
 
-          <Buttons>
-            <SubmitButton type="submit" value="Login" />
-            <RegisterButton href="/users/create">Register</RegisterButton>
-          </Buttons>
-        </RegisterElement>
-      </ContentLayout>
-    </>
-  );
+            <Buttons>
+              <SubmitButton type="submit" value="Login" />
+              <RegisterButton href="/users/create">Register</RegisterButton>
+            </Buttons>
+          </RegisterElement>
+        </ContentLayout>
+      </>
+    );
+  }
 }
 
 const RegisterButton = styled(Link)`
@@ -140,6 +312,8 @@ const Hero = styled.div`
 `;
 
 const ContentLayout = styled.main`
+  padding-top: 5rem;
+
   display: flex;
   justify-content: center;
   align-items: center;

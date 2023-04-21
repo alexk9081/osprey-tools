@@ -22,6 +22,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.5",
+    "react-notifications-component": "^4.0.1",
     "react-parallax": "^3.5.1",
     "styled-components": "^5.3.6",
     "swiper": "^9.1.0",

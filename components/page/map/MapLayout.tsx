@@ -3,7 +3,7 @@ import { Search } from "tabler-icons-react";
 import { useState } from "react";
 import { locationType } from "@/temp/locationData";
 import SearchElement from "./Search";
-import { screen } from "@/styles/styleConstants";
+import { colors, screen } from "@/styles/styleConstants";
 
 export default function MapLayout({
   setCenter,
@@ -41,7 +41,7 @@ export default function MapLayout({
               isActive={false}
               onClick={() => setMenuOpen(!menuOpen)}
             >
-              <Search size="3rem" />
+              <Search size="3rem" color="#DCE3EA" />
             </NavButtonHolder>
             {floors.map((floor, index) => (
               <NavButtonHolder
@@ -92,8 +92,10 @@ const NavButtonHolder = styled.div`
   font-size: 1.75rem;
   font-weight: 800;
 
+  color: ${colors.unfBlueWhite};
+
   border-right: ${({ isActive }: { isActive: boolean }) =>
-    isActive ? "4px solid black" : "4px solid transparent"};
+    isActive ? "6px solid " + colors.unfBlueWhite : "6px solid transparent"};
 
   transition: 0.1s ease background-color;
 
@@ -108,7 +110,9 @@ const NavButtonHolder = styled.div`
     padding: 0;
 
     border-bottom: ${({ isActive }: { isActive: boolean }) =>
-      isActive ? "4px solid black" : "4px solid transparent"};
+      isActive ? "6px solid " + colors.unfBlueWhite : "6px solid transparent"};
+
+    font-size: 1.5rem;
 
     &:hover {
       cursor: pointer;
@@ -195,11 +199,21 @@ const Navbar = styled.nav`
 
   padding: 1rem 0;
 
-  background-color: #e0e0e0;
+  background-color: ${colors.unfBlue};
   border-right: 1px solid #bbb;
 
   @media (max-width: ${screen.tablet}) {
     flex-direction: row;
-    padding: 0 1rem;
+    padding: 0 0.5rem;
+
+    gap: 0.5rem;
+
+    border-right: 0px;
+    border-bottom: 1px solid #bbb;
+  }
+
+  @media (max-width: ${screen.mobile}) {
+    padding: 0 0.25rem;
+    gap: 0.25rem;
   }
 `;

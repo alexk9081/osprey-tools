@@ -134,6 +134,11 @@ const SearchComponent = styled.div`
 
   border-radius: 3rem;
   border: 2px solid #0005;
+
+  @media (max-width: ${screen.mobile}) {
+    margin-left: 0.5rem;
+    margin-right: calc(0.5rem - 10px);
+  }
 `;
 
 const POIList = styled.div`
@@ -158,6 +163,10 @@ const POIList = styled.div`
       background-color: #5c6568;
     }
   }
+
+  @media (max-width: ${screen.mobile}) {
+    padding: 0 0.5rem;
+  }
 `;
 
 const Title = styled.div`
@@ -172,15 +181,15 @@ const Title = styled.div`
   @media (max-width: ${screen.tablet}) {
     font-size: 1.5rem;
     line-height: 1.5rem;
-    
-    margin-bottom: 1.5rem; 
+
+    margin-bottom: 1.5rem;
   }
 
   @media (max-width: ${screen.mobile}) {
     font-size: 1.25rem;
     line-height: 1rem;
-    
-    margin-bottom: 1.75rem; 
+
+    margin-bottom: 1.75rem;
   }
 `;
 
@@ -211,4 +220,9 @@ const KeyPointsOfInterest = styled.div`
   padding: 1rem;
 
   height: calc(100vh - 5rem);
+
+  @media (max-width: ${screen.mobile}) {
+    font-size: 1.25rem;
+    padding: 1rem 0.5rem;
+  }
 `;

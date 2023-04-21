@@ -57,6 +57,8 @@ export default function MapPage({ location }: { location: locationType }) {
               center={center}
               activeLocation={activeLocation}
               setActiveLocation={setActiveLocation}
+              setImageIndex={setImageIndex}
+              setActiveImage={setActiveImage}
             />
           ) : (
             <FloorViewer

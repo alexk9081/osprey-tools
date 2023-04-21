@@ -1,4 +1,4 @@
-import { colors, fonts } from "@/styles/styleConstants";
+import { colors, fonts, screen } from "@/styles/styleConstants";
 import styled from "styled-components";
 import { isStringLiteral } from "typescript";
 
@@ -34,7 +34,7 @@ export default function Task({
     <>
       <TaskWrapper>
         <TaskHeader>
-          <Tag>{eventType ? eventType : "Personal Event"}</Tag>
+          <Tag>{eventType}</Tag>
           <TaskTitle>{title}</TaskTitle>
           <Date>
             {allDay || getDateString(startDate) == getDateString(endDate)
@@ -60,6 +60,10 @@ const TaskTitle = styled.div`
   width: fit-content;
   border-bottom: 2px solid transparent;
   font-family: ${fonts.sansSerifSecondary};
+
+  @media (max-width: ${screen.mobile}) {
+    font-size: 1.5rem;
+  }
 `;
 
 const TaskWrapper = styled.div`
@@ -69,6 +73,11 @@ const TaskWrapper = styled.div`
   transition: 0.1s ease all;
 
   color: ${colors.nearBlack};
+
+  @media (max-width: ${screen.mobile}) {
+    margin: 1rem 0rem;
+    padding: 1rem 0.5rem;
+  }
 
   &:hover {
     cursor: pointer;

@@ -2,97 +2,189 @@ import Head from "next/head";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { UserContext } from "@/components/layout/LoginContext";
-
-type Inputs = {
-  nNumber: string;
-  name: string;
-  imageUrl: string;
-};
+import { baseURL } from "@/values/api";
+import { useRouter } from "next/router";
+import { Store } from "react-notifications-component";
+import { User } from "@/values/types";
 
 export default function Users() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<User>();
+
+  const router = useRouter();
 
   const { user, setUser } = useContext(UserContext);
 
-  function onSubmit(data: Inputs): void {
-    console.log(data);
+  useEffect(() => {
+    if (user) {
+      router.push("/");
+    }
+  }, [user]);
 
-    // if (isValid) {
-    //   router.push(`/notecards/packs/${userInfo.name}/${fauxData.packName}`);
-    // }
+  function onSubmit(data: User): void {
+    fetch(baseURL + "user/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => {
+        if (res.ok) {
+          //TODO Update user login
+          setUser(data);
+
+          router.push("/");
+        } else if (res.status === 409) {
+          Store.addNotification({
+            title: "User already exists",
+            message: "A user is already registered with that n-number",
+            type: "danger",
+            insert: "top",
+            container: "top-center",
+            animationIn: ["animate__animated", "animate__fadeIn"],
+            animationOut: ["animate__animated", "animate__fadeOut"],
+            dismiss: {
+              duration: 5000,
+              onScreen: true,
+              pauseOnHover: true,
+              showIcon: true,
+            },
+          });
+        } else if (res.status === 500) {
+          Store.addNotification({
+            title: "Internal Server Error",
+            message: "Server is down, contact webmaster",
+            type: "danger",
+            insert: "top",
+            container: "top-center",
+            animationIn: ["animate__animated", "animate__fadeIn"],
+            animationOut: ["animate__animated", "animate__fadeOut"],
+            dismiss: {
+              duration: 5000,
+              onScreen: true,
+              pauseOnHover: true,
+              showIcon: true,
+            },
+          });
+        } else {
+          Store.addNotification({
+            title: "ERROR: Unexpected behavior",
+            message: `${res.status}: ${res.statusText}`,
+            type: "danger",
+            insert: "top",
+            container: "top-center",
+            animationIn: ["animate__animated", "animate__fadeIn"],
+            animationOut: ["animate__animated", "animate__fadeOut"],
+            dismiss: {
+              duration: 5000,
+              onScreen: true,
+              pauseOnHover: true,
+              showIcon: true,
+            },
+          });
+        }
+      })
+      .catch((error) => {
+        Store.addNotification({
+          title: "Client failed to connect to API",
+          message: "Possible network error or disruption",
+          type: "danger",
+          insert: "top",
+          container: "top-center",
+          animationIn: ["animate__animated", "animate__fadeIn"],
+          animationOut: ["animate__animated", "animate__fadeOut"],
+          dismiss: {
+            duration: 5000,
+            onScreen: true,
+            pauseOnHover: true,
+            showIcon: true,
+          },
+        });
+
+        console.log(error);
+      });
   }
 
-  return (
-    <>
+  if (user) {
+    return (
       <Head>
         <title>Create User | UNF App</title>
       </Head>
-      <ContentLayout>
-        <Hero></Hero>
+    );
+  } else {
+    return (
+      <>
+        <Head>
+          <title>Create User | UNF App</title>
+        </Head>
+        <ContentLayout>
+          <Hero></Hero>
 
-        <RegisterElement onSubmit={handleSubmit(onSubmit)}>
-          <FormTitle>Register</FormTitle>
-          <InputName>
-            Username<RequiredStar>*</RequiredStar>
-          </InputName>
-          <StyledInput
-            placeholder="John Doe"
-            {...register("name", {
-              required: true,
-              pattern: /^[\w\s]{1,20}$/i,
-            })}
-          />
-          {errors.name && (
-            <ErrorMessage>Alphanumeric characters only</ErrorMessage>
-          )}
+          <RegisterElement onSubmit={handleSubmit(onSubmit)}>
+            <FormTitle>Register</FormTitle>
+            <InputName>
+              Username<RequiredStar>*</RequiredStar>
+            </InputName>
+            <StyledInput
+              placeholder="John Doe"
+              {...register("name", {
+                required: true,
+                pattern: /^[\w\s]{1,20}$/i,
+              })}
+            />
+            {errors.name && (
+              <ErrorMessage>Alphanumeric characters only</ErrorMessage>
+            )}
 
-          <br />
+            <br />
 
-          <InputName>
-            N-Number<RequiredStar>*</RequiredStar>
-          </InputName>
-          <StyledInput
-            placeholder="n01234567"
-            {...register("nNumber", {
-              required: true,
-              pattern: /^[nN][0-9]{8}$/i,
-            })}
-          />
-          {errors.nNumber && <ErrorMessage>Invalid n-number</ErrorMessage>}
+            <InputName>
+              N-Number<RequiredStar>*</RequiredStar>
+            </InputName>
+            <StyledInput
+              placeholder="n01234567"
+              {...register("nNumber", {
+                required: true,
+                pattern: /^[nN][0-9]{8}$/i,
+              })}
+            />
+            {errors.nNumber && <ErrorMessage>Invalid n-number</ErrorMessage>}
 
-          <br />
+            <br />
 
-          <InputName>Profile Picture Url</InputName>
-          <StyledInput
-            placeholder="i.imgur.com/XtqOTWr"
-            {...register("imageUrl", {
-              required: false,
-              pattern:
-                /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/,
-            })}
-          />
-          {errors.imageUrl && (
-            <ErrorMessage>A valid url is required</ErrorMessage>
-          )}
+            <InputName>Profile Picture Url</InputName>
+            <StyledInput
+              placeholder="i.imgur.com/XtqOTWr"
+              {...register("imageUrl", {
+                required: false,
+                maxLength: 150,
+                pattern:
+                  /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/,
+              })}
+            />
+            {errors.imageUrl && (
+              <ErrorMessage>A valid url is required, max characters: 150</ErrorMessage>
+            )}
 
-          <br />
+            <br />
 
-          <RequiredMessage>*Required</RequiredMessage>
+            <RequiredMessage>*Required</RequiredMessage>
 
-          <Buttons>
-            <SubmitButton type="submit" value="Register" />
-            <RegisterButton href="/users/login">Login</RegisterButton>
-          </Buttons>
-        </RegisterElement>
-      </ContentLayout>
-    </>
-  );
+            <Buttons>
+              <SubmitButton type="submit" value="Register" />
+              <RegisterButton href="/users/login">Login</RegisterButton>
+            </Buttons>
+          </RegisterElement>
+        </ContentLayout>
+      </>
+    );
+  }
 }
 
 const RegisterButton = styled(Link)`

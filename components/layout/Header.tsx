@@ -1,10 +1,11 @@
 import { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
-import { colors, fonts } from "@/styles/styleConstants";
+import { colors, fonts, screen } from "@/styles/styleConstants";
 import { Menu2, X } from "tabler-icons-react";
 import Link from "next/link";
 import { UserContext } from "./LoginContext";
 import { CalendarContext } from "./CalendarContext";
+import data from "@/temp/calendarData";
 
 export default function Header() {
   //Makes header background transparent or frosted glass when user scrolls down past 10px
@@ -75,7 +76,13 @@ export default function Header() {
 }
 
 function Menu({ show, closeMenu }: { show: boolean; closeMenu: () => void }) {
+  const { setEvents } = useContext(CalendarContext);
   const { user, setUser } = useContext(UserContext);
+
+  function addDefaultSrc(ev: any) {
+    ev.target.src = "anon-user.png";
+  }
+
   return (
     <>
       <MenuWrapper show={show}>
@@ -93,13 +100,23 @@ function Menu({ show, closeMenu }: { show: boolean; closeMenu: () => void }) {
           </NavButtons>
 
           {user ? (
-            <LogoutButton
-              onClick={() => {
-                setUser(null);
-              }}
-            >
-              Logout
-            </LogoutButton>
+            <div>
+              <UserInfoHolder>
+                <UserImg
+                  src={user.imageUrl ? user.imageUrl : "anon-user.png"}
+                  onError={addDefaultSrc}
+                />
+                <UserName>{user.name}</UserName>
+              </UserInfoHolder>
+              <LogoutButton
+                onClick={() => {
+                  setEvents(data);
+                  setUser(null);
+                }}
+              >
+                Logout
+              </LogoutButton>
+            </div>
           ) : (
             <LoginButton href="/users/create" onClick={closeMenu}>
               Login / Register
@@ -110,6 +127,30 @@ function Menu({ show, closeMenu }: { show: boolean; closeMenu: () => void }) {
     </>
   );
 }
+
+const UserInfoHolder = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 2rem;
+
+  gap: 1rem;
+`;
+
+const UserName = styled.div`
+  font-weight: 600;
+  font-size: 2rem;
+  height: 100%;
+`;
+
+const UserImg = styled.img`
+  width: 50px;
+  height: 50px;
+
+  border-radius: 50%;
+
+  border: 5px solid ${colors.unfBlue};
+`;
 
 const LogoutButton = styled.button`
   all: unset;
@@ -167,6 +208,12 @@ const MenuFlex = styled.div`
   justify-content: space-between;
   flex-direction: column;
   height: 100%;
+
+  @media (max-width: ${screen.tablet}) {
+    padding-bottom: 5rem;
+  }
+
+  box-sizing: border-box;
 `;
 
 const NavButtons = styled.div`

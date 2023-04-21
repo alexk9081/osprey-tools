@@ -8,11 +8,15 @@ export default function CampusMap({
   setCenter,
   activeLocation,
   setActiveLocation,
+  setImageIndex,
+  setActiveImage,
 }: {
   center: { lat: number; lng: number };
   setCenter: React.Dispatch<React.SetStateAction<{ lat: number; lng: number }>>;
   activeLocation: locationType;
   setActiveLocation: React.Dispatch<React.SetStateAction<locationType>>;
+  setImageIndex: React.Dispatch<React.SetStateAction<number>>;
+  setActiveImage: React.Dispatch<React.SetStateAction<string>>;
 }) {
   function _onChange({
     center,
@@ -46,6 +50,8 @@ export default function CampusMap({
                 lng: point.coordinates.lng,
               });
               setActiveLocation(point);
+              setActiveImage(point.images[0].image);
+              setImageIndex(0);
             }}
             isActive={activeLocation.number == point.number}
             key={point.number}

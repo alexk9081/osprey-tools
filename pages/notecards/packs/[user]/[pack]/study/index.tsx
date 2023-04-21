@@ -20,7 +20,7 @@ export default function StudyPage({
   return (
     <>
         <Head>
-          <title>Notecard Pack | UNF App</title>
+          <title>Study Notecards | UNF App</title>
         </Head>
         <main>
           <h2>Notecard pack by {name}</h2>
@@ -36,8 +36,6 @@ export default function StudyPage({
               <SwiperSlide key={card.question + card.answer}>
                 <SlideWrapper>
                   <NoteCard
-                    height="50vh"
-                    width="100vh"
                     question={card.question}
                     answer={card.answer}
                   />

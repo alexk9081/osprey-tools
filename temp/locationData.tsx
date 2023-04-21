@@ -62,18 +62,33 @@ const data: locationType[] = [
       },
     ],
   },
-  // {
-  //   number: "12",
-  //   name: "Building 12 - Tommy G",
-  //   coordinates: { lat: 30.269504032957066, lng: -81.50865484296324 },
-  //   images: [
-  //     {
-  //       floor: "",
-  //       shorthand: "",
-  //       image: "",
-  //     },
-  //   ],
-  // },
+  {
+    number: "12",
+    name: "Building 12 - Thomas G. Carpenter Library",
+    coordinates: { lat: 30.269504032957066, lng: -81.50865484296324 },
+    images: [
+      {
+        floor: "Floor 1",
+        shorthand: "F1",
+        image: "https://cdn.discordapp.com/attachments/608139184347152405/1098449481852256266/1stfloor_catalog__2020_.png",
+      },
+      {
+        floor: "Floor 2",
+        shorthand: "F2",
+        image: "https://cdn.discordapp.com/attachments/608139184347152405/1098449533156982784/2ndfloor_catalog_2018.png",
+      },
+      {
+        floor: "Floor 3",
+        shorthand: "F3",
+        image: "https://cdn.discordapp.com/attachments/608139184347152405/1098449552262037504/3rdfloor_catalog__2020_.png",
+      },
+      {
+        floor: "Floor 4",
+        shorthand: "F4",
+        image: "https://cdn.discordapp.com/attachments/608139184347152405/1098449567357349999/4thfloor_catalog__2020_.png",
+      },
+    ],
+  },
   // {
   //   number: "41",
   //   name: "Building 41 - Police Building",
