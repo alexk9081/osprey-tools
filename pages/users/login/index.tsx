@@ -192,50 +192,58 @@ export default function Users() {
       });
   }
 
-  return (
-    <>
+  if (user) {
+    return (
       <Head>
         <title>Login User | UNF App</title>
       </Head>
-      <ContentLayout>
-        <Hero></Hero>
+    );
+  } else {
+    return (
+      <>
+        <Head>
+          <title>Login User | UNF App</title>
+        </Head>
+        <ContentLayout>
+          <Hero></Hero>
 
-        <RegisterElement onSubmit={handleSubmit(onSubmit)}>
-          <FormTitle>Login</FormTitle>
-          <InputName>Username</InputName>
-          <StyledInput
-            placeholder="John Doe"
-            {...register("name", {
-              required: true,
-              pattern: /^[\w\s]{1,20}$/i,
-            })}
-          />
-          {errors.name && (
-            <ErrorMessage>Alphanumeric characters only</ErrorMessage>
-          )}
+          <RegisterElement onSubmit={handleSubmit(onSubmit)}>
+            <FormTitle>Login</FormTitle>
+            <InputName>Username</InputName>
+            <StyledInput
+              placeholder="John Doe"
+              {...register("name", {
+                required: true,
+                pattern: /^[\w\s]{1,20}$/i,
+              })}
+            />
+            {errors.name && (
+              <ErrorMessage>Alphanumeric characters only</ErrorMessage>
+            )}
 
-          <br />
+            <br />
 
-          <InputName>N-Number</InputName>
-          <StyledInput
-            placeholder="n01234567"
-            {...register("nNumber", {
-              required: true,
-              pattern: /^[nN][0-9]{8}$/i,
-            })}
-          />
-          {errors.nNumber && <ErrorMessage>Invalid n-number</ErrorMessage>}
+            <InputName>N-Number</InputName>
+            <StyledInput
+              placeholder="n01234567"
+              {...register("nNumber", {
+                required: true,
+                pattern: /^[nN][0-9]{8}$/i,
+              })}
+            />
+            {errors.nNumber && <ErrorMessage>Invalid n-number</ErrorMessage>}
 
-          <br />
+            <br />
 
-          <Buttons>
-            <SubmitButton type="submit" value="Login" />
-            <RegisterButton href="/users/create">Register</RegisterButton>
-          </Buttons>
-        </RegisterElement>
-      </ContentLayout>
-    </>
-  );
+            <Buttons>
+              <SubmitButton type="submit" value="Login" />
+              <RegisterButton href="/users/create">Register</RegisterButton>
+            </Buttons>
+          </RegisterElement>
+        </ContentLayout>
+      </>
+    );
+  }
 }
 
 const RegisterButton = styled(Link)`

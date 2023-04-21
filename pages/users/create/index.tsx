@@ -10,7 +10,11 @@ import { Store } from "react-notifications-component";
 import { User } from "@/values/types";
 
 export default function Users() {
-  const { register, handleSubmit, formState: { errors } } = useForm<User>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<User>();
 
   const router = useRouter();
 
@@ -107,71 +111,79 @@ export default function Users() {
       });
   }
 
-  return (
-    <>
+  if (user) {
+    return (
       <Head>
         <title>Create User | UNF App</title>
       </Head>
-      <ContentLayout>
-        <Hero></Hero>
+    );
+  } else {
+    return (
+      <>
+        <Head>
+          <title>Create User | UNF App</title>
+        </Head>
+        <ContentLayout>
+          <Hero></Hero>
 
-        <RegisterElement onSubmit={handleSubmit(onSubmit)}>
-          <FormTitle>Register</FormTitle>
-          <InputName>
-            Username<RequiredStar>*</RequiredStar>
-          </InputName>
-          <StyledInput
-            placeholder="John Doe"
-            {...register("name", {
-              required: true,
-              pattern: /^[\w\s]{1,20}$/i,
-            })}
-          />
-          {errors.name && (
-            <ErrorMessage>Alphanumeric characters only</ErrorMessage>
-          )}
+          <RegisterElement onSubmit={handleSubmit(onSubmit)}>
+            <FormTitle>Register</FormTitle>
+            <InputName>
+              Username<RequiredStar>*</RequiredStar>
+            </InputName>
+            <StyledInput
+              placeholder="John Doe"
+              {...register("name", {
+                required: true,
+                pattern: /^[\w\s]{1,20}$/i,
+              })}
+            />
+            {errors.name && (
+              <ErrorMessage>Alphanumeric characters only</ErrorMessage>
+            )}
 
-          <br />
+            <br />
 
-          <InputName>
-            N-Number<RequiredStar>*</RequiredStar>
-          </InputName>
-          <StyledInput
-            placeholder="n01234567"
-            {...register("nNumber", {
-              required: true,
-              pattern: /^[nN][0-9]{8}$/i,
-            })}
-          />
-          {errors.nNumber && <ErrorMessage>Invalid n-number</ErrorMessage>}
+            <InputName>
+              N-Number<RequiredStar>*</RequiredStar>
+            </InputName>
+            <StyledInput
+              placeholder="n01234567"
+              {...register("nNumber", {
+                required: true,
+                pattern: /^[nN][0-9]{8}$/i,
+              })}
+            />
+            {errors.nNumber && <ErrorMessage>Invalid n-number</ErrorMessage>}
 
-          <br />
+            <br />
 
-          <InputName>Profile Picture Url</InputName>
-          <StyledInput
-            placeholder="i.imgur.com/XtqOTWr"
-            {...register("imageUrl", {
-              required: false,
-              pattern:
-                /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/,
-            })}
-          />
-          {errors.imageUrl && (
-            <ErrorMessage>A valid url is required</ErrorMessage>
-          )}
+            <InputName>Profile Picture Url</InputName>
+            <StyledInput
+              placeholder="i.imgur.com/XtqOTWr"
+              {...register("imageUrl", {
+                required: false,
+                pattern:
+                  /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/,
+              })}
+            />
+            {errors.imageUrl && (
+              <ErrorMessage>A valid url is required</ErrorMessage>
+            )}
 
-          <br />
+            <br />
 
-          <RequiredMessage>*Required</RequiredMessage>
+            <RequiredMessage>*Required</RequiredMessage>
 
-          <Buttons>
-            <SubmitButton type="submit" value="Register" />
-            <RegisterButton href="/users/login">Login</RegisterButton>
-          </Buttons>
-        </RegisterElement>
-      </ContentLayout>
-    </>
-  );
+            <Buttons>
+              <SubmitButton type="submit" value="Register" />
+              <RegisterButton href="/users/login">Login</RegisterButton>
+            </Buttons>
+          </RegisterElement>
+        </ContentLayout>
+      </>
+    );
+  }
 }
 
 const RegisterButton = styled(Link)`
