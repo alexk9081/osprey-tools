@@ -27,6 +27,8 @@ export default function Users() {
   }, [user]);
 
   function onSubmit(data: User): void {
+    data.nNumber = data.nNumber.toLowerCase()
+
     fetch(baseURL + "user/create", {
       method: "POST",
       headers: {
@@ -36,7 +38,6 @@ export default function Users() {
     })
       .then((res) => {
         if (res.ok) {
-          //TODO Update user login
           setUser(data);
 
           router.push("/");
