@@ -34,7 +34,7 @@ export default function Task({
     <>
       <TaskWrapper>
         <TaskHeader>
-          <Tag>{eventType ? eventType : "Personal Event"}</Tag>
+          <Tag>{eventType}</Tag>
           <TaskTitle>{title}</TaskTitle>
           <Date>
             {allDay || getDateString(startDate) == getDateString(endDate)

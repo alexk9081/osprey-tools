@@ -8,6 +8,7 @@ import { useContext } from "react";
 
 export default function UpcomingTasks() {
   const { events } = useContext(CalendarContext);
+
   return (
     <UpcomingTasksWrapper>
       <UpcomingTasksTitle>Upcoming Tasks</UpcomingTasksTitle>
@@ -62,7 +63,7 @@ const UpcomingTasksWrapper = styled.div`
 `;
 
 const UpcomingTasksTitle = styled.div`
-  font-size: 1.75rem;
+  font-size: 1.85rem;
   font-weight: 800;
 
   margin: 0rem 2rem;
