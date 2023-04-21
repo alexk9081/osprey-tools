@@ -163,12 +163,13 @@ export default function Users() {
               placeholder="i.imgur.com/XtqOTWr"
               {...register("imageUrl", {
                 required: false,
+                maxLength: 150,
                 pattern:
                   /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/,
               })}
             />
             {errors.imageUrl && (
-              <ErrorMessage>A valid url is required</ErrorMessage>
+              <ErrorMessage>A valid url is required, max characters: 150</ErrorMessage>
             )}
 
             <br />

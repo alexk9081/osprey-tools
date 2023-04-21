@@ -13,6 +13,7 @@ export type NotecardSet = {
   description?: string;
   notecards?: Notecard[];
   creator: User;
+  imageUrl: string;
 };
 
 export type User = {

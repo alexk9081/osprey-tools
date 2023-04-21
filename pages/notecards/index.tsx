@@ -165,7 +165,11 @@ export default function NoteCardsPage() {
                   <Pack
                     title={cardCollection.name}
                     desc={cardCollection.description}
-                    img={images[getRandomInt(0, images.length)]}
+                    img={
+                      cardCollection.imageUrl
+                        ? cardCollection.imageUrl
+                        : images[getRandomInt(0, images.length)]
+                    }
                     link={cardCollection.id + "/overview"}
                     creator={cardCollection.creator}
                   />
@@ -200,7 +204,11 @@ export default function NoteCardsPage() {
               <Pack
                 title={cardCollection.name}
                 desc={cardCollection.description}
-                img={images[getRandomInt(0, images.length)]}
+                img={
+                  cardCollection.imageUrl
+                    ? cardCollection.imageUrl
+                    : images[getRandomInt(0, images.length)]
+                }
                 link={cardCollection.id + "/overview"}
                 creator={cardCollection.creator}
               />

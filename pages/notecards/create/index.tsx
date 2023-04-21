@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { UserContext } from "@/components/layout/LoginContext";
 import { Store } from "react-notifications-component";
 import { NotecardSet } from "@/values/types";
+import { baseURL } from "@/values/api";
 
 export default function CreateNotecardSet() {
   const router = useRouter();
@@ -17,18 +18,96 @@ export default function CreateNotecardSet() {
   } = useForm<NotecardSet>();
 
   function onSubmit(data: NotecardSet): void {
-    console.log(data);
+    if(data.isPublic) {
+      data.isPublic = true;
+    }
+    else {
+      data.isPublic = false;
+    }
 
-    // const userInfo = { name: "Wall-E", image: "www.image.com/image.jpg" };
-    // console.log(data);
-    // console.log(userInfo);
+    data.creator = user!;
 
-    // const isValid = true;
-    // const fauxData = { packName: "softwareEngineering" };
+    data.nNumber = user!.nNumber;
 
-    // if (isValid) {
-    //   router.push(`/notecards/packs/${userInfo.name}/${fauxData.packName}`);
-    // }
+    fetch(baseURL + "notecardset/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => {
+        if (res.ok) {
+          router.push(`/notecards/packs/${user!.name}/${data.id}`);
+        } else if (res.status === 409) {
+          Store.addNotification({
+            title: "Pack with that id already exists",
+            message: "A pack is already created with that id",
+            type: "danger",
+            insert: "top",
+            container: "top-center",
+            animationIn: ["animate__animated", "animate__fadeIn"],
+            animationOut: ["animate__animated", "animate__fadeOut"],
+            dismiss: {
+              duration: 5000,
+              onScreen: true,
+              pauseOnHover: true,
+              showIcon: true,
+            },
+          });
+        } else if (res.status === 500) {
+          Store.addNotification({
+            title: "Internal Server Error",
+            message: "Server is down, contact webmaster",
+            type: "danger",
+            insert: "top",
+            container: "top-center",
+            animationIn: ["animate__animated", "animate__fadeIn"],
+            animationOut: ["animate__animated", "animate__fadeOut"],
+            dismiss: {
+              duration: 5000,
+              onScreen: true,
+              pauseOnHover: true,
+              showIcon: true,
+            },
+          });
+        } else {
+          Store.addNotification({
+            title: "ERROR: Unexpected behavior",
+            message: `${res.status}: ${res.statusText}`,
+            type: "danger",
+            insert: "top",
+            container: "top-center",
+            animationIn: ["animate__animated", "animate__fadeIn"],
+            animationOut: ["animate__animated", "animate__fadeOut"],
+            dismiss: {
+              duration: 5000,
+              onScreen: true,
+              pauseOnHover: true,
+              showIcon: true,
+            },
+          });
+        }
+      })
+      .catch((error) => {
+        Store.addNotification({
+          title: "Client failed to connect to API",
+          message: "Possible network error or disruption",
+          type: "danger",
+          insert: "top",
+          container: "top-center",
+          animationIn: ["animate__animated", "animate__fadeIn"],
+          animationOut: ["animate__animated", "animate__fadeOut"],
+          dismiss: {
+            duration: 5000,
+            onScreen: true,
+            pauseOnHover: true,
+            showIcon: true,
+          },
+        });
+
+        console.log(error);
+      });
   }
 
   const { user } = useContext(UserContext);
@@ -72,7 +151,7 @@ export default function CreateNotecardSet() {
               placeholder="Software Engineering"
               {...register("name", {
                 required: true,
-                pattern: /^[\w]{3,30}$/i,
+                pattern: /^[\w\s]{1,30}$/i,
               })}
             />
             {errors.name && <ErrorMessage>This field is required</ErrorMessage>}
@@ -81,7 +160,7 @@ export default function CreateNotecardSet() {
             <InputName>Description</InputName>
             <StyledTextArea
               placeholder="I haven't paid any attention a day in my life, someone please help me"
-              {...register("description", { pattern: /^[\w]{0,300}$/i })}
+              {...register("description", { pattern: /^[\w\s]{0,300}$/i })}
             />
             {errors.description && (
               <ErrorMessage>Max characters: 300</ErrorMessage>
@@ -96,6 +175,20 @@ export default function CreateNotecardSet() {
               })}
             />
             {errors.id && <ErrorMessage>This field is required</ErrorMessage>}
+
+            <InputName>Image URL</InputName>
+            <StyledInput
+              placeholder="i.imgur.com/XtqOTWr"
+              {...register("imageUrl", {
+                required: false,
+                maxLength: 150,
+                pattern:
+                  /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/,
+              })}
+            />
+            {errors.imageUrl && (
+              <ErrorMessage>Max characters: 150</ErrorMessage>
+            )}
 
             <CheckboxHolder>
               <Checkbox
@@ -256,6 +349,6 @@ const SubmitButton = styled.input`
   }
 
   &:focus {
-    outline: 2px solid red;
+    outline: 2px solid blue;
   }
 `;
