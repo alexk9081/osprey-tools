@@ -1,7 +1,7 @@
 import EventsProvider from "@/components/layout/CalendarContext";
 import Layout from "@/components/layout/Layout";
 import UserProvider from "@/components/layout/LoginContext";
-import NotecardSetProvider from "@/components/layout/notecards/NoteCardSetContext";
+import NotecardSetProvider from "@/components/layout/notecards/NotecardSetContext";
 import "@/styles/globals.css";
 import { NextPage } from "next";
 import type { AppProps } from "next/app";

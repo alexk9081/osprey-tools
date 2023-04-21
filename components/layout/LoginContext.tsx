@@ -1,5 +1,5 @@
 import { User } from "@/values/types";
-import { useMemo, useState, createContext, Dispatch, SetStateAction } from "react";
+import { useMemo, useState, createContext, Dispatch, SetStateAction, useEffect } from "react";
 
 export const UserContext = createContext<{
   user: User | null;
@@ -17,6 +17,23 @@ export default function UserProvider({
   const [user, setUser] = useState<User | null>(null);
 
   const userProviderValue = useMemo(() => ({ user, setUser }), [user, setUser]);
+
+  useEffect(()=>{
+    const loggedInUser = localStorage.getItem("user");
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      setUser(foundUser);
+    }
+  },[])
+
+  useEffect(()=>{
+    if(user) {
+      localStorage.setItem('user', JSON.stringify(user))
+    }
+    else {
+      localStorage.clear();
+    }
+  },[user])
 
   return (
     <>
