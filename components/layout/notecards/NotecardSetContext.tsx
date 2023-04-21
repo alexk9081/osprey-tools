@@ -18,6 +18,8 @@ export const NotecardSetContext = createContext<{
     name: "",
     isPublic: false,
     nNumber: "",
+    creator: {imageUrl: "", name: "", nNumber: ""},
+    imageUrl: "",
   },
   setNotecardSet: () => {},
 });
@@ -32,6 +34,8 @@ export default function NotecardSetProvider({
     name: "",
     isPublic: false,
     nNumber: "",
+    creator: {imageUrl: "", name: "", nNumber: ""},
+    imageUrl: "",
   });
 
   const notecardSetProviderValue = useMemo(
