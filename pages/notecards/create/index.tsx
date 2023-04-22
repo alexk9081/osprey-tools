@@ -38,7 +38,7 @@ export default function CreateNotecardSet() {
     })
       .then((res) => {
         if (res.ok) {
-          router.push(`/notecards/packs/${user!.name}/${data.id}`);
+          router.push(`/notecards/packs/${user!.nNumber}/${data.id}/overview`);
         } else if (res.status === 409) {
           Store.addNotification({
             title: "Pack with that id already exists",

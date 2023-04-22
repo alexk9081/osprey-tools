@@ -172,7 +172,7 @@ export default function NoteCardsPage() {
                         ? cardCollection.imageUrl
                         : images[getRandomInt(0, images.length)]
                     }
-                    link={cardCollection.id + "/overview"}
+                    link={`notecards/packs/${cardCollection.creator.nNumber}/${cardCollection.id}/overview`}
                     creator={cardCollection.creator}
                   />
                 </SwiperSlide>
@@ -211,7 +211,7 @@ export default function NoteCardsPage() {
                     ? cardCollection.imageUrl
                     : images[getRandomInt(0, images.length)]
                 }
-                link={cardCollection.id + "/overview"}
+                link={`notecards/packs/${cardCollection.creator.nNumber}/${cardCollection.id}/overview`}
                 creator={cardCollection.creator}
               />
             </SwiperSlide>

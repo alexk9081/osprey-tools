@@ -1,29 +1,26 @@
+import { NotecardSetContext } from "@/components/layout/notecards/NotecardSetContext";
 import NotecardLayout from "@/components/layout/notecards/layout";
-import data from "@/temp/notecardData";
+import { useContext } from "react";
 import Head from "next/head";
 import styled from "styled-components";
 
-export default function NotecardsOverviewPage({
-  name,
-  cards,
-}: {
-  name: string;
-  cards: { question: string; answer: string }[];
-}) {
+export default function NotecardsOverviewPage() {
+  const { notecardSet, setNotecardSet } = useContext(NotecardSetContext);
+
   return (
     <>
       <Head>
         <title>Notecards Overview | Alex Keo</title>
       </Head>
       <main>
-        <PackTitle>Notecard pack by {name}</PackTitle>
+        {/* <PackTitle>Notecard pack by {name}</PackTitle> */}
         <GridHolder>
           <StickyElement>
             <ColumnTitle>Question</ColumnTitle>
             <ColumnTitle>Answer</ColumnTitle>
           </StickyElement>
           <CardGrid>
-            {cards.map((card) => (
+            {/* {cards.map((card) => (
               <>
                 <GridElement>
                   <QuestionElement>{card.question}</QuestionElement>
@@ -31,7 +28,7 @@ export default function NotecardsOverviewPage({
                 </GridElement>
                 <HorizontalRule />
               </>
-            ))}
+            ))} */}
           </CardGrid>
         </GridHolder>
       </main>
@@ -143,30 +140,3 @@ const PackTitle = styled.div`
 NotecardsOverviewPage.getLayout = function getLayout(page: any) {
   return <NotecardLayout>{page}</NotecardLayout>;
 };
-
-export async function getStaticPaths() {
-  const paths = data
-    .map((user) =>
-      user.packs.map((pack) => ({
-        params: { user: user.name, pack: pack.id },
-      }))
-    )
-    .flat(1);
-
-  return { paths, fallback: false };
-}
-
-export async function getStaticProps({
-  params,
-}: {
-  params: { user: string; pack: string };
-}) {
-  return {
-    props: {
-      name: params.user,
-      cards: data
-        .find((user) => user.name === params.user)
-        ?.packs.find((pack) => pack.id === params.pack)?.cards,
-    },
-  };
-}

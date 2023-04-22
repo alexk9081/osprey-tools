@@ -1,4 +1,3 @@
-import type { ReactElement } from "react";
 import NotecardLayout from "@/components/layout/notecards/layout";
 import Head from "next/head";
 import styled from "styled-components";
@@ -8,22 +7,19 @@ import { Navigation, Pagination } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import data from "@/temp/notecardData";
+import { NotecardSetContext } from "@/components/layout/notecards/NotecardSetContext";
+import { useContext } from "react";
 
-export default function StudyPage({
-  name,
-  cards,
-}: {
-  name: string;
-  cards: { question: string; answer: string }[];
-}) {
+export default function StudyPage() {
+  const { notecardSet, setNotecardSet } = useContext(NotecardSetContext);
+  
   return (
     <>
         <Head>
           <title>Study Notecards | UNF App</title>
         </Head>
         <main>
-          <h2>Notecard pack by {name}</h2>
+          {/* <h2>Notecard pack by {name}</h2> */}
 
           <Swiper
             modules={[Navigation, Pagination]}
@@ -32,7 +28,7 @@ export default function StudyPage({
             navigation
             pagination={{ clickable: true }}
           >
-            {cards.map((card) => (
+            {/* {cards.map((card) => (
               <SwiperSlide key={card.question + card.answer}>
                 <SlideWrapper>
                   <NoteCard
@@ -41,7 +37,7 @@ export default function StudyPage({
                   />
                 </SlideWrapper>
               </SwiperSlide>
-            ))}
+            ))} */}
           </Swiper>
         </main>
     </>
@@ -59,30 +55,3 @@ const SlideWrapper = styled.div`
 
   margin: 2rem;
 `;
-
-export async function getStaticPaths() {
-  const paths = data
-    .map((user) =>
-      user.packs.map((pack) => ({
-        params: { user: user.name, pack: pack.id },
-      }))
-    )
-    .flat(1);
-
-  return { paths, fallback: false };
-}
-
-export async function getStaticProps({
-  params,
-}: {
-  params: { user: string; pack: string };
-}) {
-  return {
-    props: {
-      name: params.user,
-      cards: data
-        .find((user) => user.name === params.user)
-        ?.packs.find((pack) => pack.id === params.pack)?.cards,
-    },
-  };
-}
