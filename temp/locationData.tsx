@@ -7,8 +7,7 @@ const data: locationType[] = [
       {
         floor: "Campus Map",
         shorthand: "MAP",
-        image:
-          "https://www.unf.edu/ehs/images/vehicle-safety-cart-map.jpeg",
+        image: "https://www.unf.edu/ehs/images/vehicle-safety-cart-map.jpeg",
       },
     ],
   },
@@ -52,13 +51,13 @@ const data: locationType[] = [
         floor: "East Building",
         shorthand: "EAST",
         image:
-          "https://cdn.discordapp.com/attachments/1068603528051966022/1069677109351551006/20230130_125307.jpg",
+          "https://cdn.discordapp.com/attachments/1068603528051966022/1069677109582250084/20230130_125414.jpg",
       },
       {
         floor: "West Building",
         shorthand: "WEST",
         image:
-          "https://cdn.discordapp.com/attachments/1068603528051966022/1069677109582250084/20230130_125414.jpg",
+          "https://cdn.discordapp.com/attachments/1068603528051966022/1069677109351551006/20230130_125307.jpg",
       },
     ],
   },
@@ -70,22 +69,26 @@ const data: locationType[] = [
       {
         floor: "Floor 1",
         shorthand: "F1",
-        image: "https://cdn.discordapp.com/attachments/608139184347152405/1098449481852256266/1stfloor_catalog__2020_.png",
+        image:
+          "https://cdn.discordapp.com/attachments/608139184347152405/1098449481852256266/1stfloor_catalog__2020_.png",
       },
       {
         floor: "Floor 2",
         shorthand: "F2",
-        image: "https://cdn.discordapp.com/attachments/608139184347152405/1098449533156982784/2ndfloor_catalog_2018.png",
+        image:
+          "https://cdn.discordapp.com/attachments/608139184347152405/1098449533156982784/2ndfloor_catalog_2018.png",
       },
       {
         floor: "Floor 3",
         shorthand: "F3",
-        image: "https://cdn.discordapp.com/attachments/608139184347152405/1098449552262037504/3rdfloor_catalog__2020_.png",
+        image:
+          "https://cdn.discordapp.com/attachments/608139184347152405/1098449552262037504/3rdfloor_catalog__2020_.png",
       },
       {
         floor: "Floor 4",
         shorthand: "F4",
-        image: "https://cdn.discordapp.com/attachments/608139184347152405/1098449567357349999/4thfloor_catalog__2020_.png",
+        image:
+          "https://cdn.discordapp.com/attachments/608139184347152405/1098449567357349999/4thfloor_catalog__2020_.png",
       },
     ],
   },

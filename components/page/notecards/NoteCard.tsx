@@ -38,7 +38,7 @@ const Text = styled.span`
   position: absolute;
   text-align: center;
 
-  margin: 3rem;
+  margin: 1.5rem;
 
   transition: 0s 0.2s linear opacity;
   opacity: ${(props: { isOpen: boolean; isBackSide: boolean }) =>
@@ -47,9 +47,18 @@ const Text = styled.span`
   transform: ${(props: { isOpen: boolean; isBackSide: boolean }) =>
     props.isBackSide ? "rotateX(180deg)" : "rotateX(0)"};
 
+@media (max-width: ${screen.laptop}) {
+    margin: 1rem;
+  }
+
   @media (max-width: ${screen.tablet}) {
+    margin: 0.5rem;
     transform: ${(props: { isOpen: boolean; isBackSide: boolean }) =>
       props.isBackSide ? "rotateY(180deg)" : "rotateY(0)"};
+  }
+
+  @media (max-width: ${screen.mobile}) {
+    margin: 0.25rem;
   }
 `;
 
@@ -62,7 +71,7 @@ const NoteCardWrapper = styled.div`
 
   flex-shrink: 0;
 
-  font-size: 1.75rem;
+  font-size: 1.25rem;
   font-weight: 700;
 
   box-sizing: border-box;
@@ -84,15 +93,15 @@ const NoteCardWrapper = styled.div`
   width: 50vw;
 
   @media (max-width: ${screen.desktop}) {
-    font-size: 1.5rem;
-  }
-
-  @media (max-width: ${screen.laptop}) {
     font-size: 1.25rem;
   }
 
-  @media (max-width: ${screen.tablet}) {
+  @media (max-width: ${screen.laptop}) {
     font-size: 1rem;
+  }
+
+  @media (max-width: ${screen.tablet}) {
+    font-size: 0.9rem;
 
     box-shadow: ${(props: wrapperProps) =>
       props.isOpen
@@ -102,13 +111,13 @@ const NoteCardWrapper = styled.div`
     transform: ${(props: wrapperProps) =>
       props.isOpen ? "rotateY(180deg)" : "rotateY(0deg)"};
     cursor: pointer;
-    
+
     width: 75vw;
   }
 
   @media (max-width: ${screen.mobile}) {
-    font-size: 0.9rem;
-  height: 40vh;
+    font-size: 0.8rem;
+    height: 40vh;
     width: 90vw;
   }
 `;

@@ -3,7 +3,12 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import { ArrowBarLeft, Cards, List, Pencil } from "tabler-icons-react";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
+import { NotecardSetContext } from "./NotecardSetContext";
+import { baseURL } from "@/values/api";
+import { NotecardSet } from "@/values/types";
+import { Store } from "react-notifications-component";
+import { UserContext } from "../LoginContext";
 
 export default function NotecardLayout({
   children,
@@ -11,9 +16,57 @@ export default function NotecardLayout({
   children: React.ReactNode;
 }) {
   const router = useRouter();
+  const { notecardSet, setNotecardSet } = useContext(NotecardSetContext);
+  const { user } = useContext(UserContext);
 
-  //TODO Update notecard set context on set change
-  useEffect(() => {}, [router.query.pack]);
+  useEffect(() => {
+    fetch(
+      baseURL +
+        `notecardset/get/set?nNumber=${router.query.user}&id=${router.query.pack}`
+    )
+      .then((res) => {
+        if (res.ok) {
+          res.json().then((res: NotecardSet) => {
+            setNotecardSet(res);
+          });
+        } else if (res.status == 404) {
+          Store.addNotification({
+            title: "Could not find notecard set",
+            message: "Invalid set information or server error",
+            type: "danger",
+            insert: "top",
+            container: "top-center",
+            animationIn: ["animate__animated", "animate__fadeIn"],
+            animationOut: ["animate__animated", "animate__fadeOut"],
+            dismiss: {
+              duration: 5000,
+              onScreen: true,
+              pauseOnHover: true,
+              showIcon: true,
+            },
+          });
+        }
+      })
+      .catch((error) => {
+        Store.addNotification({
+          title: "Client failed to connect to API",
+          message: "Possible network error or disruption",
+          type: "danger",
+          insert: "top",
+          container: "top-center",
+          animationIn: ["animate__animated", "animate__fadeIn"],
+          animationOut: ["animate__animated", "animate__fadeOut"],
+          dismiss: {
+            duration: 5000,
+            onScreen: true,
+            pauseOnHover: true,
+            showIcon: true,
+          },
+        });
+
+        console.log(error);
+      });
+  }, [router.query]);
 
   const lastSlash = router.asPath.lastIndexOf("/");
   const currentRoute = router.asPath.substring(0, lastSlash);
@@ -38,12 +91,14 @@ export default function NotecardLayout({
             >
               <Cards size="3rem" />
             </StyledLink>
-            <StyledLink
-              href={currentRoute + "/edit"}
-              isActive={relativeRoute === "/edit"}
-            >
-              <Pencil size="3rem" />
-            </StyledLink>
+            {user?.nNumber === notecardSet.creator.nNumber && (
+              <StyledLink
+                href={currentRoute + "/edit"}
+                isActive={relativeRoute === "/edit"}
+              >
+                <Pencil size="3rem" />
+              </StyledLink>
+            )}
           </NavButtons>
           <NavButtons>
             <ExitLink href="/notecards">

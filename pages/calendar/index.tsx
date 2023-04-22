@@ -133,8 +133,6 @@ export default function TodoPage() {
   }
 
   function updateEvent(e: any) {
-    console.log(e);
-
     if (user) {
       const oldPlannerTask: PlannerTask = {
         allDayTrigger: e.oldData.allDay,
@@ -227,8 +225,6 @@ export default function TodoPage() {
   }
 
   function deleteEvent(e: any) {
-    console.log(e);
-
     if (user) {
       fetch(
         baseURL +

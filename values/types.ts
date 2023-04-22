@@ -1,6 +1,6 @@
 export type Notecard = {
-  noteid: string;
   setid: string;
+  noteid: string;
   question: string;
   answer: string;
 };

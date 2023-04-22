@@ -30,6 +30,8 @@ export default function Users() {
   }, [user]);
 
   function onSubmit(data: User): void {
+    data.nNumber = data.nNumber.toLowerCase()
+    
     fetch(baseURL + `user/get?nNumber=${data.nNumber}`)
       .then((res) => {
         if (res.ok) {

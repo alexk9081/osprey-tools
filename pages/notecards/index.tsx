@@ -76,7 +76,9 @@ export default function NoteCardsPage() {
 
         console.log(error);
       });
+  }, []);
 
+  useEffect(() => {
     if (user) {
       fetch(baseURL + `notecardset/get/personal?nNumber=${user.nNumber}`)
         .then((res) => {
@@ -138,7 +140,7 @@ export default function NoteCardsPage() {
           console.log(error);
         });
     }
-  }, []);
+  }, [user]);
 
   function getRandomInt(min: number, max: number) {
     min = Math.ceil(min);
@@ -170,7 +172,7 @@ export default function NoteCardsPage() {
                         ? cardCollection.imageUrl
                         : images[getRandomInt(0, images.length)]
                     }
-                    link={cardCollection.id + "/overview"}
+                    link={`notecards/packs/${cardCollection.creator.nNumber}/${cardCollection.id}/overview`}
                     creator={cardCollection.creator}
                   />
                 </SwiperSlide>
@@ -209,7 +211,7 @@ export default function NoteCardsPage() {
                     ? cardCollection.imageUrl
                     : images[getRandomInt(0, images.length)]
                 }
-                link={cardCollection.id + "/overview"}
+                link={`notecards/packs/${cardCollection.creator.nNumber}/${cardCollection.id}/overview`}
                 creator={cardCollection.creator}
               />
             </SwiperSlide>
