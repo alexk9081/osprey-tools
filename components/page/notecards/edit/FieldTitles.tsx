@@ -15,7 +15,6 @@ const FieldTitlesWrapper = styled.div`
 
   margin: 0 0.5rem;
 
-  border: 2px solid #aaa;
 `;
 
 const InputFieldTitle = styled.div`
@@ -23,9 +22,9 @@ const InputFieldTitle = styled.div`
   justify-content: center;
   align-items: center;
 
-  font-weight: 800;
-  font-size: 2rem;
-  padding: 0.5rem 0;
+  font-weight: 600;
+  font-size: 1.75rem;
+  padding: 1.25rem 0;
 
-  background-color: #ddd;
+  background-color: #eee;
 `;

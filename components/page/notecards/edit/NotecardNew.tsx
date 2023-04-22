@@ -219,9 +219,9 @@ const ButtonHolder = styled.div`
 const NotecardEditWrapper = styled.form`
   margin: 1.5rem 0.5rem;
   padding: 0.75rem;
-  background-color: #ddd;
+  background-color: #f4f4f4;
 
-  border: 2px solid #aaa;
+  border: 2px solid #eee;
 `;
 
 const InputField = styled.textarea`
@@ -238,6 +238,8 @@ const InputField = styled.textarea`
   resize: vertical;
 
   min-height: 2rem;
+
+  border: 2px solid #eee;
 `;
 
 const Button = styled.button`
@@ -258,8 +260,11 @@ const Button = styled.button`
 const SaveButton = styled(Button)`
   background-color: #3dac3d;
 
+  border: 2px solid #329432;
+
   &:disabled {
     background-color: #aed2ae;
+  border: 2px solid #9fc59f;
   }
 `;
 
@@ -279,7 +284,10 @@ const DeleteButton = styled(Button)`
 
   background-color: #f23b3b;
 
+  border: 2px solid #c72d2d;
+
   &:disabled {
+  border: 2px solid #dda7a7;
     background-color: #e4b1b1;
   }
 `;
