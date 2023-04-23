@@ -293,4 +293,6 @@ const RegisterElement = styled.form`
 
   display: flex;
   flex-direction: column;
+
+  border: 2px solid #e8e8e8;
 `;

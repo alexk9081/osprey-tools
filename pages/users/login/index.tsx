@@ -286,6 +286,15 @@ const FormTitle = styled.div`
 
 const StyledInput = styled.input`
   width: 15rem;
+
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.25rem;
+  margin: 0.25rem 0;
+
+  border: 2px solid #ccc;
+  border-radius: 6px;
 `;
 
 const InputName = styled.label`
@@ -330,4 +339,6 @@ const RegisterElement = styled.form`
 
   display: flex;
   flex-direction: column;
+
+  border: 2px solid #e8e8e8;
 `;
