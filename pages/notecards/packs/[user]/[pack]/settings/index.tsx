@@ -356,7 +356,13 @@ export default function NotecardsOverviewPage() {
           {confirmDelete ? (
             <>
               <ConfirmationQuestion>Are you sure?</ConfirmationQuestion>
-              <YesButton onClick={() => {onDelete()}}>Yes</YesButton>
+              <YesButton
+                onClick={() => {
+                  onDelete();
+                }}
+              >
+                Yes
+              </YesButton>
               <NoButton onClick={() => setConfirmDelete(false)}>No</NoButton>
             </>
           ) : (
@@ -409,7 +415,7 @@ const ButtonHolder = styled.div`
   justify-content: center;
   align-items: center;
 
-  margin-top: 8rem;
+  margin-top: 1rem;
 `;
 
 const DeleteSetButton = styled.button`
@@ -565,6 +571,10 @@ const StyledTextArea = styled.textarea`
   border: 2px solid ${colors.unfBlue};
 
   resize: none;
+
+  @media (max-width: ${screen.tablet}) {
+    height: 6rem;
+  }
 `;
 
 const StyledInput = styled.input`
@@ -595,6 +605,11 @@ const CustomForm = styled.form`
   gap: 1rem;
 
   margin: 2rem 3rem;
+
+  @media (max-width: ${screen.tablet}) {
+    gap: 0.5rem;
+    margin: 2rem 1rem;
+  }
 `;
 
 const SubmitButton = styled.input`
@@ -630,5 +645,9 @@ const SubmitButton = styled.input`
 
   &:focus {
     outline: 2px solid blue;
+  }
+
+  @media (max-width: ${screen.tablet}) {
+    padding: 0.9rem;
   }
 `;
