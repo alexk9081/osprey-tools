@@ -53,6 +53,18 @@ export default function CardSection({
 const SectionSet = styled.div`
   margin: 3rem 3rem;
   border-radius: 2rem;
+
+  @media (max-width: ${screen.laptop}) {
+    margin: 3rem 2rem;
+  }
+
+  @media (max-width: ${screen.tablet}) {
+    margin: 3rem 1rem;
+  }
+
+  @media (max-width: ${screen.mobile}) {
+    margin: 3rem 0.5rem;
+  }
 `;
 
 const SectionName = styled.div`
