@@ -207,7 +207,7 @@ export default function CreateNotecardSet() {
   } else {
     return (
       <Head>
-        <title>Create Notecard Pack | UNF App</title>
+        <title>Create Notecard Set | UNF App</title>
       </Head>
     );
   }

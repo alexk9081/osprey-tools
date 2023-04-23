@@ -34,7 +34,7 @@ export default function EditCardsPage() {
   return (
     <>
       <Head>
-        <title>Edit Notecards | Alex Keo</title>
+        <title>Edit Notecards | UNF App</title>
       </Head>
       <main>
       <Header>

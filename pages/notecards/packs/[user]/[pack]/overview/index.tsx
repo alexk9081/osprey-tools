@@ -18,7 +18,7 @@ export default function NotecardsOverviewPage() {
   return (
     <>
       <Head>
-        <title>Notecards Overview | Alex Keo</title>
+        <title>Notecards Overview | UNF App</title>
       </Head>
       <main>
         <Header>
