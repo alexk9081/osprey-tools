@@ -51,8 +51,8 @@ const PackHolder = styled.div`
   display: flex;
 
   @media (max-width: ${screen.mobile}) {
-    width: 210px;
-    height: 280px;
+    width: 255px;
+    height: 340px;
   }
 `;
 
