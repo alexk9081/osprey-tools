@@ -2,7 +2,13 @@ import { colors, screen } from "@/styles/styleConstants";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import { ArrowBarLeft, Cards, List, Pencil } from "tabler-icons-react";
+import {
+  ArrowBarLeft,
+  Cards,
+  List,
+  Pencil,
+  Settings,
+} from "tabler-icons-react";
 import { useEffect, useContext } from "react";
 import { NotecardSetContext } from "./NotecardSetContext";
 import { baseURL } from "@/values/api";
@@ -66,7 +72,7 @@ export default function NotecardLayout({
 
         console.log(error);
       });
-  }, [router.query]);
+  }, [router.query, setNotecardSet]);
 
   const lastSlash = router.asPath.lastIndexOf("/");
   const currentRoute = router.asPath.substring(0, lastSlash);
@@ -92,12 +98,20 @@ export default function NotecardLayout({
               <Cards size="3rem" />
             </StyledLink>
             {user?.nNumber === notecardSet.creator.nNumber && (
-              <StyledLink
-                href={currentRoute + "/edit"}
-                isActive={relativeRoute === "/edit"}
-              >
-                <Pencil size="3rem" />
-              </StyledLink>
+              <>
+                <StyledLink
+                  href={currentRoute + "/edit"}
+                  isActive={relativeRoute === "/edit"}
+                >
+                  <Pencil size="3rem" />
+                </StyledLink>
+                <StyledLink
+                  href={currentRoute + "/settings"}
+                  isActive={relativeRoute === "/settings"}
+                >
+                  <Settings size="3rem" />
+                </StyledLink>
+              </>
             )}
           </NavButtons>
           <NavButtons>

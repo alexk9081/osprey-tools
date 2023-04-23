@@ -18,6 +18,7 @@ export const colors = {
 
   unfBlue: "#0a233f",
   unfBlueLight: "#1a334f",
+  unfBlueLighter: "#325173",
   unfBlueNearWhite: "#557190",
   unfBlueWhite: "#AEBDCE",
 };

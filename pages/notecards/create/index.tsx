@@ -132,7 +132,7 @@ export default function CreateNotecardSet() {
 
       router.push("/users/create");
     }
-  }, [user]);
+  }, [user, router]);
 
   if (user) {
     return (
@@ -171,7 +171,7 @@ export default function CreateNotecardSet() {
               placeholder="AlexSoftwareEngineering"
               {...register("id", {
                 required: true,
-                pattern: /^[\w]{3,30}$/i,
+                pattern: /^\w{3,30}$/i,
               })}
             />
             {errors.id && <ErrorMessage>This field is required</ErrorMessage>}
@@ -207,7 +207,7 @@ export default function CreateNotecardSet() {
   } else {
     return (
       <Head>
-        <title>Create Notecard Pack | UNF App</title>
+        <title>Create Notecard Set | UNF App</title>
       </Head>
     );
   }

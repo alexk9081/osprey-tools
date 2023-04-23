@@ -1,50 +1,82 @@
 import Head from "next/head";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
+import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
-import { useContext, useEffect } from "react";
 import { UserContext } from "@/components/layout/LoginContext";
-import { baseURL } from "@/values/api";
 import { useRouter } from "next/router";
-import { Store } from "react-notifications-component";
 import { User } from "@/values/types";
+import { Store } from "react-notifications-component";
+import { Appointment } from "devextreme/ui/scheduler";
+import { baseURL } from "@/values/api";
+import { CalendarContext } from "@/components/layout/CalendarContext";
 
-export default function Users() {
+export default function EditUser() {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<User>();
 
-  const router = useRouter();
-
   const { user, setUser } = useContext(UserContext);
 
   useEffect(() => {
-    if (user) {
+    if (!user) {
       router.push("/");
     }
   }, [user, router]);
 
-  function onSubmit(data: User): void {
-    data.nNumber = data.nNumber.toLowerCase()
+  const [userInfo, setUserInfo] = useState<User>(user!);
 
-    fetch(baseURL + "user/create", {
-      method: "POST",
+  function onSubmit(data: User): void {
+    fetch(baseURL + "user/update", {
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(userInfo),
     })
       .then((res) => {
         if (res.ok) {
-          setUser(data);
+          setUser(userInfo);
 
-          router.push("/");
+          Store.addNotification({
+            title: "Success",
+            message: "Updating user was successful",
+            type: "success",
+            insert: "top",
+            container: "top-center",
+            animationIn: ["animate__animated", "animate__fadeIn"],
+            animationOut: ["animate__animated", "animate__fadeOut"],
+            dismiss: {
+              duration: 5000,
+              onScreen: true,
+              pauseOnHover: true,
+              showIcon: true,
+            },
+          });
+        } else if (res.status === 404) {
+          Store.addNotification({
+            title: "User modification failed",
+            message: "Could not find user",
+            type: "danger",
+            insert: "top",
+            container: "top-center",
+            animationIn: ["animate__animated", "animate__fadeIn"],
+            animationOut: ["animate__animated", "animate__fadeOut"],
+            dismiss: {
+              duration: 5000,
+              onScreen: true,
+              pauseOnHover: true,
+              showIcon: true,
+            },
+          });
         } else if (res.status === 409) {
           Store.addNotification({
-            title: "User already exists",
-            message: "A user is already registered with that n-number",
+            title: "User modification failed",
+            message:
+              "Error occured while modifiying User, please try again",
             type: "danger",
             insert: "top",
             container: "top-center",
@@ -114,48 +146,30 @@ export default function Users() {
 
   if (user) {
     return (
-      <Head>
-        <title>Create User | UNF App</title>
-      </Head>
-    );
-  } else {
-    return (
       <>
         <Head>
-          <title>Create User | UNF App</title>
+          <title>Edit User | UNF App</title>
         </Head>
         <ContentLayout>
           <Hero></Hero>
 
           <RegisterElement onSubmit={handleSubmit(onSubmit)}>
-            <FormTitle>Register</FormTitle>
-            <InputName>
-              Username<RequiredStar>*</RequiredStar>
-            </InputName>
+            <FormTitle>Edit User</FormTitle>
+            <InputName>Username</InputName>
             <StyledInput
               placeholder="John Doe"
               {...register("name", {
                 required: true,
                 pattern: /^[\w\s]{1,20}$/i,
               })}
+              value={userInfo.name}
+              onChange={(evt) =>
+                setUserInfo({ ...userInfo, name: evt.target.value })
+              }
             />
             {errors.name && (
               <ErrorMessage>Alphanumeric characters only</ErrorMessage>
             )}
-
-            <br />
-
-            <InputName>
-              N-Number<RequiredStar>*</RequiredStar>
-            </InputName>
-            <StyledInput
-              placeholder="n01234567"
-              {...register("nNumber", {
-                required: true,
-                pattern: /^[nN][0-9]{8}$/i,
-              })}
-            />
-            {errors.nNumber && <ErrorMessage>Invalid n-number</ErrorMessage>}
 
             <br />
 
@@ -168,45 +182,38 @@ export default function Users() {
                 pattern:
                   /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/,
               })}
+              value={userInfo.imageUrl}
+              onChange={(evt) =>
+                setUserInfo({ ...userInfo, imageUrl: evt.target.value })
+              }
             />
             {errors.imageUrl && (
-              <ErrorMessage>A valid url is required, max characters: 150</ErrorMessage>
+              <ErrorMessage>
+                A valid url is required, max characters: 150
+              </ErrorMessage>
             )}
 
             <br />
 
-            <RequiredMessage>*Required</RequiredMessage>
-
             <Buttons>
-              <SubmitButton type="submit" value="Register" />
-              <RegisterButton href="/users/login">Login</RegisterButton>
+              <SubmitButton disabled={user.name === userInfo.name && user.imageUrl === userInfo.imageUrl} type="submit" value="Save" />
             </Buttons>
           </RegisterElement>
         </ContentLayout>
       </>
     );
+  } else {
+    return (
+      <Head>
+        <title>Edit User | UNF App</title>
+      </Head>
+    );
   }
 }
 
-const RegisterButton = styled(Link)`
-  all: unset;
-  background-color: #2d2d2d;
-  color: white;
-  padding: 0.75rem;
-  font-weight: 600;
-
-  width: max-content;
-
-  cursor: pointer;
-
-  &:focus {
-    outline: 1px solid blue;
-  }
-`;
-
 const Buttons = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 `;
 
 const ErrorMessage = styled.div`
@@ -237,16 +244,6 @@ const StyledInput = styled.input`
   border-radius: 6px;
 `;
 
-const RequiredStar = styled.span`
-  color: #c30000;
-`;
-
-const RequiredMessage = styled.div`
-  color: #c30000;
-  font-size: 0.75rem;
-  margin-bottom: 0.5rem;
-`;
-
 const InputName = styled.label`
   font-size: 1.25rem;
 `;
@@ -262,8 +259,15 @@ const SubmitButton = styled.input`
 
   cursor: pointer;
 
+  border: 2px solid #13139a;
+
   &:focus {
     outline: 1px solid blue;
+  }
+
+  &:disabled {
+  background-color: #8181e8;
+  border: 2px solid #7272ce;
   }
 `;
 

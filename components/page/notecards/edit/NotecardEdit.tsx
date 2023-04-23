@@ -43,6 +43,8 @@ export default function NotecardEdit({ notecard }: { notecard: Notecard }) {
           } else {
             setNotecardSet({ ...notecardSet, notecards: [notecardInfo] });
           }
+
+          setIsOpen(false);
         } else if (res.status === 404) {
           Store.addNotification({
             title: "Card modification failed",

@@ -7,7 +7,7 @@ import { images } from "@/temp/images";
 import { screen } from "@/styles/styleConstants";
 
 export default function NotecardsOverviewPage() {
-  const { notecardSet, setNotecardSet } = useContext(NotecardSetContext);
+  const { notecardSet } = useContext(NotecardSetContext);
 
   function getRandomInt(min: number, max: number) {
     min = Math.ceil(min);
@@ -18,7 +18,7 @@ export default function NotecardsOverviewPage() {
   return (
     <>
       <Head>
-        <title>Notecards Overview | Alex Keo</title>
+        <title>Notecards Overview | UNF App</title>
       </Head>
       <main>
         <Header>

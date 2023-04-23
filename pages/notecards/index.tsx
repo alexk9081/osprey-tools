@@ -2,7 +2,7 @@ import CardSection from "@/components/page/notecards/CardSection";
 import Hero from "@/components/page/notecards/Hero";
 import Pack from "@/components/page/notecards/Pack";
 import Head from "next/head";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { SwiperSlide } from "swiper/react";
 import { useEffect, useState, useContext } from "react";
 import { Store } from "react-notifications-component";
@@ -10,6 +10,7 @@ import { NotecardSet } from "@/values/types";
 import { baseURL } from "@/values/api";
 import { UserContext } from "@/components/layout/LoginContext";
 import { images } from "@/temp/images";
+import { screen } from "@/styles/styleConstants";
 
 export default function NoteCardsPage() {
   const [personalSets, setPersonalSets] = useState<NotecardSet[]>([]);
@@ -201,21 +202,38 @@ export default function NoteCardsPage() {
           title="Public Notecards"
           description="Community shared notecards"
         >
-          {publicSets.map((cardCollection: NotecardSet) => (
-            <SwiperSlide key={cardCollection.id}>
-              <Pack
-                title={cardCollection.name}
-                desc={cardCollection.description}
-                img={
-                  cardCollection.imageUrl
-                    ? cardCollection.imageUrl
-                    : images[getRandomInt(0, images.length)]
-                }
-                link={`notecards/packs/${cardCollection.creator.nNumber}/${cardCollection.id}/overview`}
-                creator={cardCollection.creator}
-              />
-            </SwiperSlide>
-          ))}
+          {publicSets.length === 0 ? (
+            <>
+              <SwiperSlide>
+                <PackSkeleton />
+              </SwiperSlide>
+              <SwiperSlide>
+                <PackSkeleton />
+              </SwiperSlide>
+              <SwiperSlide>
+                <PackSkeleton />
+              </SwiperSlide>
+              <SwiperSlide>
+                <PackSkeleton />
+              </SwiperSlide>
+            </>
+          ) : (
+            publicSets.map((cardCollection: NotecardSet) => (
+              <SwiperSlide key={cardCollection.id}>
+                <Pack
+                  title={cardCollection.name}
+                  desc={cardCollection.description}
+                  img={
+                    cardCollection.imageUrl
+                      ? cardCollection.imageUrl
+                      : images[getRandomInt(0, images.length)]
+                  }
+                  link={`notecards/packs/${cardCollection.creator.nNumber}/${cardCollection.id}/overview`}
+                  creator={cardCollection.creator}
+                />
+              </SwiperSlide>
+            ))
+          )}
         </CardSection>
       </main>
     </>
@@ -224,4 +242,38 @@ export default function NoteCardsPage() {
 
 const HorizontalRule = styled.hr`
   margin: 0 2rem;
+`;
+
+const placeHolderShimmer = keyframes`
+    0% {
+      background-position: -800px 0;
+    }
+    100% {
+      background-position: 800px 0;
+    }
+`;
+
+const PackSkeleton = styled.div`
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: ${placeHolderShimmer};
+  animation-timing-function: linear;
+  background-color: #f6f7f8;
+  background: linear-gradient(to right, #eeeeee 8%, #bbbbbb 18%, #eeeeee 33%);
+  background-size: 800px 104px;
+  height: 70px;
+  position: relative;
+
+  border-radius: 1rem;
+
+  width: 300px;
+  height: 400px;
+
+  margin: 0rem auto 3rem auto;
+
+  @media (max-width: ${screen.mobile}) {
+    width: 210px;
+    height: 280px;
+  }
 `;

@@ -23,7 +23,7 @@ export default function EditCardsPage() {
         `/notecards`
       );
     }
-  }, [user]);
+  }, [user, router, notecardSet.creator.nNumber]);
 
   function getRandomInt(min: number, max: number) {
     min = Math.ceil(min);
@@ -34,7 +34,7 @@ export default function EditCardsPage() {
   return (
     <>
       <Head>
-        <title>Edit Notecards | Alex Keo</title>
+        <title>Edit Notecards | UNF App</title>
       </Head>
       <main>
       <Header>

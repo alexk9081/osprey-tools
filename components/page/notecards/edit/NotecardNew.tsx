@@ -1,21 +1,12 @@
 import { Notecard } from "@/values/types";
 import { useForm } from "react-hook-form";
-import { useState, useEffect, useContext } from "react";
+import { useContext, useReducer } from "react";
 import styled from "styled-components";
 import { NotecardSetContext } from "@/components/layout/notecards/NotecardSetContext";
 import { baseURL } from "@/values/api";
 import { Store } from "react-notifications-component";
 
-export default function NotecardNew() {
-  const { notecardSet, setNotecardSet } = useContext(NotecardSetContext);
-
-  const [notecardInfo, setNotecardInfo] = useState<Notecard>({
-    answer: "",
-    noteid: "",
-    question: "",
-    setid: notecardSet.id,
-  });
-
+function reducer(prev: Notecard, next: Notecard): Notecard {
   function makeid(length: number) {
     let result = "";
     const characters =
@@ -29,15 +20,28 @@ export default function NotecardNew() {
     return result;
   }
 
-  useEffect(() => {
-    setNotecardInfo({
-      ...notecardInfo,
-      noteid:
-        notecardInfo.question.substring(0, 10) +
-        notecardInfo.answer.substring(0, 10) +
-        makeid(10),
-    });
-  }, [notecardInfo.answer, notecardInfo.question]);
+  return {
+    ...prev,
+    ...next,
+    noteid:
+      next.question.substring(0, 10) +
+      next.answer.substring(0, 10) +
+      makeid(10),
+  };
+}
+
+export default function NotecardNew() {
+  const { notecardSet, setNotecardSet } = useContext(NotecardSetContext);
+
+  const [notecardInfo, setNotecardInfo] = useReducer(
+    reducer,
+    {
+      answer: "",
+      noteid: "",
+      question: "",
+      setid: notecardSet.id,
+    }
+  );
 
   const {
     register,
@@ -50,7 +54,6 @@ export default function NotecardNew() {
     console.log(json);
     console.log(notecardInfo);
 
-    
     fetch(baseURL + "notecard/create", {
       method: "POST",
       headers: {
@@ -68,6 +71,7 @@ export default function NotecardNew() {
           } else {
             setNotecardSet({ ...notecardSet, notecards: [notecardInfo] });
           }
+          setNotecardInfo({ ...notecardInfo, answer: "", question: "" });
         } else if (res.status === 409) {
           Store.addNotification({
             title: "Could not add notecard to pack",
@@ -264,7 +268,7 @@ const SaveButton = styled(Button)`
 
   &:disabled {
     background-color: #aed2ae;
-  border: 2px solid #9fc59f;
+    border: 2px solid #9fc59f;
   }
 `;
 
@@ -287,7 +291,7 @@ const DeleteButton = styled(Button)`
   border: 2px solid #c72d2d;
 
   &:disabled {
-  border: 2px solid #dda7a7;
+    border: 2px solid #dda7a7;
     background-color: #e4b1b1;
   }
 `;
