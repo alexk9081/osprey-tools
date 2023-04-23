@@ -68,6 +68,7 @@ export default function NotecardNew() {
           } else {
             setNotecardSet({ ...notecardSet, notecards: [notecardInfo] });
           }
+          setNotecardInfo({ ...notecardInfo, answer: "", question: "" });
         } else if (res.status === 409) {
           Store.addNotification({
             title: "Could not add notecard to pack",
