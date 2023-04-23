@@ -132,7 +132,7 @@ export default function CreateNotecardSet() {
 
       router.push("/users/create");
     }
-  }, [user]);
+  }, [user, router]);
 
   if (user) {
     return (

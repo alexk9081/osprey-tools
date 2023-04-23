@@ -72,7 +72,7 @@ export default function NotecardLayout({
 
         console.log(error);
       });
-  }, [router.query]);
+  }, [router.query, setNotecardSet]);
 
   const lastSlash = router.asPath.lastIndexOf("/");
   const currentRoute = router.asPath.substring(0, lastSlash);

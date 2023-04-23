@@ -24,7 +24,7 @@ export default function Users() {
     if (user) {
       router.push("/");
     }
-  }, [user]);
+  }, [user, router]);
 
   function onSubmit(data: User): void {
     data.nNumber = data.nNumber.toLowerCase()

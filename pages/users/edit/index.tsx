@@ -25,7 +25,7 @@ export default function EditUser() {
     if (!user) {
       router.push("/");
     }
-  }, [user]);
+  }, [user, router]);
 
   const [userInfo, setUserInfo] = useState<User>(user!);
 

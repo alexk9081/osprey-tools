@@ -23,7 +23,7 @@ export default function EditCardsPage() {
         `/notecards`
       );
     }
-  }, [user]);
+  }, [user, router, notecardSet.creator.nNumber]);
 
   function getRandomInt(min: number, max: number) {
     min = Math.ceil(min);

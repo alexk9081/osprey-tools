@@ -37,7 +37,7 @@ export default function NotecardNew() {
         notecardInfo.answer.substring(0, 10) +
         makeid(10),
     });
-  }, [notecardInfo.answer, notecardInfo.question]);
+  }, [notecardInfo.answer, notecardInfo.question, notecardInfo]);
 
   const {
     register,
