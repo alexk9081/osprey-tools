@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { baseURL } from "@/values/api";
 import { NotecardSetContext } from "@/components/layout/notecards/NotecardSetContext";
 import { Store } from "react-notifications-component";
+import { screen } from "@/styles/styleConstants";
 
 export default function NotecardEdit({ notecard }: { notecard: Notecard }) {
   const { notecardSet, setNotecardSet } = useContext(NotecardSetContext);
@@ -300,6 +301,10 @@ const Fields = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
+
+  @media (max-width: ${screen.mobile}) {
+    gap: 0.25rem;
+  }
 `;
 
 const ButtonHolder = styled.div`
@@ -316,6 +321,14 @@ const NotecardEditWrapper = styled.form`
   background-color: #f4f4f4;
 
   border: 2px solid #eee;
+
+  @media (max-width: ${screen.tablet}) {
+    margin: 1.5rem 0rem;
+  }
+
+  @media (max-width: ${screen.mobile}) {
+    padding: 0.25rem;
+  }
 `;
 
 const InputField = styled.textarea`

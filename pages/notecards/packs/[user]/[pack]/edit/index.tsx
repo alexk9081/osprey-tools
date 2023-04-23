@@ -19,9 +19,7 @@ export default function EditCardsPage() {
 
   useEffect(() => {
     if (!user || user.nNumber != notecardSet.creator.nNumber) {
-      router.push(
-        `/notecards`
-      );
+      router.push(`/notecards`);
     }
   }, [user, router, notecardSet.creator.nNumber]);
 
@@ -37,7 +35,7 @@ export default function EditCardsPage() {
         <title>Edit Notecards | UNF App</title>
       </Head>
       <main>
-      <Header>
+        <Header>
           <StyledImage
             src={
               notecardSet.imageUrl
@@ -45,9 +43,7 @@ export default function EditCardsPage() {
                 : images[getRandomInt(0, images.length)]
             }
           />
-          <HeaderText>
-            Edit notecards
-          </HeaderText>
+          <HeaderText>Edit notecards</HeaderText>
         </Header>
         <NotecardsElements>
           <FieldTitles />
@@ -71,19 +67,21 @@ const NotecardsElements = styled.div`
 
   overflow-y: scroll;
 
-  ::-webkit-scrollbar {
-    width: 20px;
-  }
-  ::-webkit-scrollbar-track {
-    background-color: transparent;
-  }
-  ::-webkit-scrollbar-thumb {
-    background-color: #9ba5a9;
-    border-radius: 20px;
-    border: 6px solid transparent;
-    background-clip: content-box;
-    &:hover {
-      background-color: #5c6568;
+  @media (min-width: ${screen.tablet}) {
+    ::-webkit-scrollbar {
+      width: 20px;
+    }
+    ::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: #9ba5a9;
+      border-radius: 20px;
+      border: 6px solid transparent;
+      background-clip: content-box;
+      &:hover {
+        background-color: #5c6568;
+      }
     }
   }
 `;
@@ -135,5 +133,4 @@ const Header = styled.div`
   background-color: #111;
 
   position: relative;
-
 `;
