@@ -9,7 +9,7 @@ import {
   Pencil,
   Settings,
 } from "tabler-icons-react";
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import { NotecardSetContext } from "./NotecardSetContext";
 import { baseURL } from "@/values/api";
 import { NotecardSet } from "@/values/types";
@@ -24,21 +24,45 @@ export default function NotecardLayout({
   const router = useRouter();
   const { notecardSet, setNotecardSet } = useContext(NotecardSetContext);
   const { user } = useContext(UserContext);
+  const [oldQuery, setOldQuery] = useState<any>({ user: "", pack: "" });
 
   useEffect(() => {
-    fetch(
-      baseURL +
-        `notecardset/get/set?nNumber=${router.query.user}&id=${router.query.pack}`
-    )
-      .then((res) => {
-        if (res.ok) {
-          res.json().then((res: NotecardSet) => {
-            setNotecardSet(res);
-          });
-        } else if (res.status == 404) {
+    if (
+      router.query.user != oldQuery.user ||
+      router.query.pack != oldQuery.pack
+    ) {
+      setOldQuery({ user: router.query.user, pack: router.query.pack });
+      fetch(
+        baseURL +
+          `notecardset/get/set?nNumber=${router.query.user}&id=${router.query.pack}`
+      )
+        .then((res) => {
+          if (res.ok) {
+            res.json().then((res: NotecardSet) => {
+              setNotecardSet(res);
+            });
+          } else if (res.status == 404) {
+            Store.addNotification({
+              title: "Could not find notecard set",
+              message: "Invalid set information or server error",
+              type: "danger",
+              insert: "top",
+              container: "top-center",
+              animationIn: ["animate__animated", "animate__fadeIn"],
+              animationOut: ["animate__animated", "animate__fadeOut"],
+              dismiss: {
+                duration: 5000,
+                onScreen: true,
+                pauseOnHover: true,
+                showIcon: true,
+              },
+            });
+          }
+        })
+        .catch((error) => {
           Store.addNotification({
-            title: "Could not find notecard set",
-            message: "Invalid set information or server error",
+            title: "Client failed to connect to API",
+            message: "Possible network error or disruption",
             type: "danger",
             insert: "top",
             container: "top-center",
@@ -51,27 +75,10 @@ export default function NotecardLayout({
               showIcon: true,
             },
           });
-        }
-      })
-      .catch((error) => {
-        Store.addNotification({
-          title: "Client failed to connect to API",
-          message: "Possible network error or disruption",
-          type: "danger",
-          insert: "top",
-          container: "top-center",
-          animationIn: ["animate__animated", "animate__fadeIn"],
-          animationOut: ["animate__animated", "animate__fadeOut"],
-          dismiss: {
-            duration: 5000,
-            onScreen: true,
-            pauseOnHover: true,
-            showIcon: true,
-          },
-        });
 
-        console.log(error);
-      });
+          console.log(error);
+        });
+    }
   }, [router.query, setNotecardSet]);
 
   const lastSlash = router.asPath.lastIndexOf("/");

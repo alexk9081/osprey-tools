@@ -4,7 +4,7 @@ import { useContext } from "react";
 import Head from "next/head";
 import styled from "styled-components";
 import { images } from "@/temp/images";
-import { screen } from "@/styles/styleConstants";
+import { colors, screen } from "@/styles/styleConstants";
 
 export default function NotecardsOverviewPage() {
   const { notecardSet } = useContext(NotecardSetContext);
@@ -40,13 +40,10 @@ export default function NotecardsOverviewPage() {
           </StickyElement>
           <CardGrid>
             {notecardSet.notecards?.map((card) => (
-              <div key={card.noteid}>
-                <GridElement>
-                  <QuestionElement>{card.question}</QuestionElement>
-                  <AnswerElement>{card.answer}</AnswerElement>
-                </GridElement>
-                <HorizontalRule />
-              </div>
+              <GridElement key={card.noteid}>
+                <QuestionElement>{card.question}</QuestionElement>
+                <AnswerElement>{card.answer}</AnswerElement>
+              </GridElement>
             ))}
           </CardGrid>
         </GridHolder>
@@ -79,16 +76,23 @@ const GridHolder = styled.div`
 
 const GridElement = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr 2fr;
 
   font-weight: 600;
   font-size: 1.5rem;
+
+  background-color: #eee;
+
+  border: 2px solid #e8e8e8;
+
+  margin: 1.25rem 0.5rem;
 
   @media (max-width: ${screen.laptop}) {
     font-size: 1.25rem;
   }
 
   @media (max-width: ${screen.tablet}) {
+    grid-template-columns: 1fr 1fr;
     font-size: 1.1rem;
   }
 
@@ -107,13 +111,18 @@ const StickyElement = styled.div`
   padding-right: 20px;
 
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr 2fr;
 
   height: 4rem;
 
   width: 100%;
-  color: white;
-  background-color: #666;
+  color: black;
+  /* background-color: #ddd; */
+  border-bottom: 3px solid ${colors.unfBlueNearWhite};
+
+  @media (max-width: ${screen.tablet}) {
+    grid-template-columns: 1fr 1fr;
+  }
 `;
 
 const QuestionElement = styled.div`
@@ -126,7 +135,9 @@ const QuestionElement = styled.div`
   margin: 1rem;
   padding: 1rem;
 
-  border-right: 1px solid black;
+  word-break: break-word;
+
+  border-right: 3px solid #c8c8c8;
 
   @media (max-width: ${screen.tablet}) {
     margin: 0.5rem;
@@ -148,6 +159,8 @@ const AnswerElement = styled.div`
 
   margin: 1rem;
   padding: 1rem;
+
+  word-break: break-word;
 
   @media (max-width: ${screen.tablet}) {
     margin: 0.5rem;

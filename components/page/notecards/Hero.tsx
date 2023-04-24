@@ -12,8 +12,8 @@ export default function NotecardsHero() {
         <ContentWrapper>
           <Title>Create your own notecards!</Title>
           <Description>
-            Put highlighted note card packs here or a call to action to make a
-            new notecard pack
+            Create a personalized notecard pack to study efficiently for tests
+            and quizzes. Share it with others to help them succeed too!
           </Description>
 
           <CreateLink href="/notecards/create">
