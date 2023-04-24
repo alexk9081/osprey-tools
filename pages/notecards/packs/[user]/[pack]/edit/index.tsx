@@ -51,11 +51,16 @@ export default function EditCardsPage() {
             <NotecardEdit notecard={notecard} key={notecard.noteid} />
           ))}
           <NotecardNew />
+          <BottomScollPadding />
         </NotecardsElements>
       </main>
     </>
   );
 }
+
+const BottomScollPadding = styled.div`
+  height: 8rem;
+`;
 
 EditCardsPage.getLayout = function getLayout(page: any) {
   return <NotecardLayout>{page}</NotecardLayout>;
