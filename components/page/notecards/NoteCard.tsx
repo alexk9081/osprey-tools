@@ -38,6 +38,8 @@ const Text = styled.span`
   position: absolute;
   text-align: center;
 
+  word-break: break-word;
+
   margin: 1.5rem;
 
   transition: 0s 0.2s linear opacity;
