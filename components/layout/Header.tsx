@@ -309,6 +309,8 @@ const UpperHeader = styled.header<{ isTransparent: boolean }>`
   position: fixed;
   z-index: 99;
 
+  top: 0;
+
   height: 5rem;
   width: 100%;
   box-sizing: border-box;
