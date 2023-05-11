@@ -130,7 +130,7 @@ export default function CreateNotecardSet() {
         },
       });
 
-      router.push("/users/create");
+      router.push("/users/register");
     }
   }, [user, router]);
 

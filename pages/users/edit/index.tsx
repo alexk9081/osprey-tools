@@ -1,214 +1,85 @@
-import Head from "next/head";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
-import { useContext, useEffect, useState } from "react";
-import Link from "next/link";
-import { UserContext } from "@/components/layout/LoginContext";
-import { useRouter } from "next/router";
-import { User } from "@/values/types";
-import { Store } from "react-notifications-component";
-import { Appointment } from "devextreme/ui/scheduler";
-import { baseURL } from "@/values/api";
-import { CalendarContext } from "@/components/layout/CalendarContext";
+import { useContext, useState } from "react";
+import { UserAuthContext } from "@/components/layout/UserAuthContext";
+import RouteProtector from "@/components/page/users/RouteProtector";
 
 export default function EditUser() {
-  const router = useRouter();
+  type InputType = {
+    name: string;
+    imageUrl: string;
+  };
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<User>();
+  } = useForm<InputType>();
 
-  const { user, setUser } = useContext(UserContext);
+  const { userAuth } = useContext(UserAuthContext);
 
-  useEffect(() => {
-    if (!user) {
-      router.push("/");
-    }
-  }, [user, router]);
+  const [userInfo, setUserInfo] = useState<any>(userAuth);
 
-  const [userInfo, setUserInfo] = useState<User>(user!);
+  function onSubmit(data: InputType): void {}
 
-  function onSubmit(data: User): void {
-    fetch(baseURL + "user/update", {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userInfo),
-    })
-      .then((res) => {
-        if (res.ok) {
-          setUser(userInfo);
+  return (
+    <RouteProtector isInverse pageName="Edit User | UNF App">
+      <ContentLayout>
+        <Hero></Hero>
 
-          Store.addNotification({
-            title: "Success",
-            message: "Updating user was successful",
-            type: "success",
-            insert: "top",
-            container: "top-center",
-            animationIn: ["animate__animated", "animate__fadeIn"],
-            animationOut: ["animate__animated", "animate__fadeOut"],
-            dismiss: {
-              duration: 5000,
-              onScreen: true,
-              pauseOnHover: true,
-              showIcon: true,
-            },
-          });
-        } else if (res.status === 404) {
-          Store.addNotification({
-            title: "User modification failed",
-            message: "Could not find user",
-            type: "danger",
-            insert: "top",
-            container: "top-center",
-            animationIn: ["animate__animated", "animate__fadeIn"],
-            animationOut: ["animate__animated", "animate__fadeOut"],
-            dismiss: {
-              duration: 5000,
-              onScreen: true,
-              pauseOnHover: true,
-              showIcon: true,
-            },
-          });
-        } else if (res.status === 409) {
-          Store.addNotification({
-            title: "User modification failed",
-            message:
-              "Error occured while modifiying User, please try again",
-            type: "danger",
-            insert: "top",
-            container: "top-center",
-            animationIn: ["animate__animated", "animate__fadeIn"],
-            animationOut: ["animate__animated", "animate__fadeOut"],
-            dismiss: {
-              duration: 5000,
-              onScreen: true,
-              pauseOnHover: true,
-              showIcon: true,
-            },
-          });
-        } else if (res.status === 500) {
-          Store.addNotification({
-            title: "Internal Server Error",
-            message: "Server is down, contact webmaster",
-            type: "danger",
-            insert: "top",
-            container: "top-center",
-            animationIn: ["animate__animated", "animate__fadeIn"],
-            animationOut: ["animate__animated", "animate__fadeOut"],
-            dismiss: {
-              duration: 5000,
-              onScreen: true,
-              pauseOnHover: true,
-              showIcon: true,
-            },
-          });
-        } else {
-          Store.addNotification({
-            title: "ERROR: Unexpected behavior",
-            message: `${res.status}: ${res.statusText}`,
-            type: "danger",
-            insert: "top",
-            container: "top-center",
-            animationIn: ["animate__animated", "animate__fadeIn"],
-            animationOut: ["animate__animated", "animate__fadeOut"],
-            dismiss: {
-              duration: 5000,
-              onScreen: true,
-              pauseOnHover: true,
-              showIcon: true,
-            },
-          });
-        }
-      })
-      .catch((error) => {
-        Store.addNotification({
-          title: "Client failed to connect to API",
-          message: "Possible network error or disruption",
-          type: "danger",
-          insert: "top",
-          container: "top-center",
-          animationIn: ["animate__animated", "animate__fadeIn"],
-          animationOut: ["animate__animated", "animate__fadeOut"],
-          dismiss: {
-            duration: 5000,
-            onScreen: true,
-            pauseOnHover: true,
-            showIcon: true,
-          },
-        });
+        <RegisterElement onSubmit={handleSubmit(onSubmit)}>
+          <FormTitle>Edit User</FormTitle>
+          <InputName>Username</InputName>
+          <StyledInput
+            placeholder="John Doe"
+            {...register("name", {
+              required: true,
+            })}
+            value={userInfo?.displayName ?? ""}
+            onChange={(evt) =>
+              setUserInfo({ ...userInfo, displayName: evt.target.value })
+            }
+          />
+          {errors.name && (
+            <ErrorMessage>Alphanumeric characters only</ErrorMessage>
+          )}
 
-        console.log(error);
-      });
-  }
+          <br />
 
-  if (user) {
-    return (
-      <>
-        <Head>
-          <title>Edit User | UNF App</title>
-        </Head>
-        <ContentLayout>
-          <Hero></Hero>
+          <InputName>Profile Picture Url</InputName>
+          <StyledInput
+            placeholder="i.imgur.com/XtqOTWr"
+            {...register("imageUrl", {
+              required: false,
+              maxLength: 150,
+            })}
+            value={userInfo?.photoURL ?? ""}
+            onChange={(evt) =>
+              setUserInfo({ ...userInfo, imageUrl: evt.target.value })
+            }
+          />
+          {errors.imageUrl && (
+            <ErrorMessage>
+              A valid url is required, max characters: 150
+            </ErrorMessage>
+          )}
 
-          <RegisterElement onSubmit={handleSubmit(onSubmit)}>
-            <FormTitle>Edit User</FormTitle>
-            <InputName>Username</InputName>
-            <StyledInput
-              placeholder="John Doe"
-              {...register("name", {
-                required: true,
-                pattern: /^[\w\s]{1,20}$/i,
-              })}
-              value={userInfo.name}
-              onChange={(evt) =>
-                setUserInfo({ ...userInfo, name: evt.target.value })
+          <br />
+
+          <Buttons>
+            <SubmitButton
+              disabled={
+                userAuth?.displayName === userInfo?.displayName &&
+                userAuth?.photoURL === userInfo?.photoURL
               }
+              type="submit"
+              value="Save"
             />
-            {errors.name && (
-              <ErrorMessage>Alphanumeric characters only</ErrorMessage>
-            )}
-
-            <br />
-
-            <InputName>Profile Picture Url</InputName>
-            <StyledInput
-              placeholder="i.imgur.com/XtqOTWr"
-              {...register("imageUrl", {
-                required: false,
-                maxLength: 150,
-                pattern:
-                  /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/,
-              })}
-              value={userInfo.imageUrl}
-              onChange={(evt) =>
-                setUserInfo({ ...userInfo, imageUrl: evt.target.value })
-              }
-            />
-            {errors.imageUrl && (
-              <ErrorMessage>
-                A valid url is required, max characters: 150
-              </ErrorMessage>
-            )}
-
-            <br />
-
-            <Buttons>
-              <SubmitButton disabled={user.name === userInfo.name && user.imageUrl === userInfo.imageUrl} type="submit" value="Save" />
-            </Buttons>
-          </RegisterElement>
-        </ContentLayout>
-      </>
-    );
-  } else {
-    return (
-      <Head>
-        <title>Edit User | UNF App</title>
-      </Head>
-    );
-  }
+          </Buttons>
+        </RegisterElement>
+      </ContentLayout>
+    </RouteProtector>
+  );
 }
 
 const Buttons = styled.div`
@@ -266,8 +137,8 @@ const SubmitButton = styled.input`
   }
 
   &:disabled {
-  background-color: #8181e8;
-  border: 2px solid #7272ce;
+    background-color: #8181e8;
+    border: 2px solid #7272ce;
   }
 `;
 

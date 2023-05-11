@@ -1,182 +1,48 @@
-import Head from "next/head";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
-import { useContext, useEffect } from "react";
-import Link from "next/link";
-import { UserContext } from "@/components/layout/LoginContext";
 import { useRouter } from "next/router";
-import { User } from "@/values/types";
+import ErrorMessage from "@/components/page/users/Error";
+import FormTitle from "@/components/page/users/FormTitle";
+import Form from "@/components/page/users/Form";
+import SubmitButton from "@/components/page/users/SubmitButton";
+import StyledInput from "@/components/page/users/StyledInput";
+import InputName from "@/components/page/users/InputName";
+import RouteProtector from "@/components/page/users/RouteProtector";
+import Services from "@/components/page/users/Services";
+import PasswordField from "@/components/page/users/PasswordField";
+import ShowPasswordButton from "@/components/page/users/ShowPasswordButton";
+import { Eye, EyeOff } from "tabler-icons-react";
+import { useState } from "react";
+import Link from "next/link";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Store } from "react-notifications-component";
-import { Appointment } from "devextreme/ui/scheduler";
-import { baseURL } from "@/values/api";
-import { CalendarContext } from "@/components/layout/CalendarContext";
-import plannerData from "@/temp/calendarData";
 
 export default function Users() {
+  const [passwordShown, setPasswordShown] = useState(false);
+  const auth = getAuth();
   const router = useRouter();
+
+  type InputType = {
+    email: string;
+    password: string;
+  };
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<User>();
+  } = useForm<InputType>();
 
-  const { setEvents } = useContext(CalendarContext);
-  const { user, setUser } = useContext(UserContext);
-
-  useEffect(() => {
-    if (user) {
-      router.push("/");
-    }
-  }, [user, router]);
-
-  function onSubmit(data: User): void {
-    data.nNumber = data.nNumber.toLowerCase()
-    
-    fetch(baseURL + `user/get?nNumber=${data.nNumber}`)
-      .then((res) => {
-        if (res.ok) {
-          res
-            .json()
-            .then((res: User) => {
-              if (res.name == data.name) {
-                setUser(res);
-
-                fetch(baseURL + `planner/getall?nNumber=${res.nNumber}`)
-                  .then((res) => {
-                    if (res.ok) {
-                      res.json().then((res: Appointment[]) => {
-                        setEvents(plannerData.concat(res));
-                      });
-                    } else if (res.status === 404) {
-                      Store.addNotification({
-                        title: "Could not find planner data",
-                        message: "User planner data not found",
-                        type: "danger",
-                        insert: "top",
-                        container: "top-center",
-                        animationIn: ["animate__animated", "animate__fadeIn"],
-                        animationOut: ["animate__animated", "animate__fadeOut"],
-                        dismiss: {
-                          duration: 5000,
-                          onScreen: true,
-                          pauseOnHover: true,
-                          showIcon: true,
-                        },
-                      });
-                    } else {
-                      Store.addNotification({
-                        title: "ERROR: Unexpected behavior",
-                        message: `${res.status}: ${res.statusText}`,
-                        type: "danger",
-                        insert: "top",
-                        container: "top-center",
-                        animationIn: ["animate__animated", "animate__fadeIn"],
-                        animationOut: ["animate__animated", "animate__fadeOut"],
-                        dismiss: {
-                          duration: 5000,
-                          onScreen: true,
-                          pauseOnHover: true,
-                          showIcon: true,
-                        },
-                      });
-                    }
-                  })
-                  .catch((error) => {
-                    Store.addNotification({
-                      title: "Client failed to connect to API",
-                      message: "Possible network error or disruption",
-                      type: "danger",
-                      insert: "top",
-                      container: "top-center",
-                      animationIn: ["animate__animated", "animate__fadeIn"],
-                      animationOut: ["animate__animated", "animate__fadeOut"],
-                      dismiss: {
-                        duration: 5000,
-                        onScreen: true,
-                        pauseOnHover: true,
-                        showIcon: true,
-                      },
-                    });
-
-                    console.log(error);
-                  });
-
-                router.push("/");
-              } else {
-                Store.addNotification({
-                  title: "Incorrect login",
-                  message: "Incorrect username or n-number",
-                  type: "danger",
-                  insert: "top",
-                  container: "top-center",
-                  animationIn: ["animate__animated", "animate__fadeIn"],
-                  animationOut: ["animate__animated", "animate__fadeOut"],
-                  dismiss: {
-                    duration: 5000,
-                    onScreen: true,
-                    pauseOnHover: true,
-                    showIcon: true,
-                  },
-                });
-              }
-            })
-            .catch((error) => {
-              Store.addNotification({
-                title: "ERROR: Unexpected behavior",
-                message: "Data processing error",
-                type: "danger",
-                insert: "top",
-                container: "top-center",
-                animationIn: ["animate__animated", "animate__fadeIn"],
-                animationOut: ["animate__animated", "animate__fadeOut"],
-                dismiss: {
-                  duration: 5000,
-                  onScreen: true,
-                  pauseOnHover: true,
-                  showIcon: true,
-                },
-              });
-
-              console.log(error);
-            });
-        } else if (res.status === 404) {
-          Store.addNotification({
-            title: "Invalid login",
-            message: "Incorrect username or n-number",
-            type: "danger",
-            insert: "top",
-            container: "top-center",
-            animationIn: ["animate__animated", "animate__fadeIn"],
-            animationOut: ["animate__animated", "animate__fadeOut"],
-            dismiss: {
-              duration: 5000,
-              onScreen: true,
-              pauseOnHover: true,
-              showIcon: true,
-            },
-          });
-        } else {
-          Store.addNotification({
-            title: "ERROR: Unexpected behavior",
-            message: `${res.status}: ${res.statusText}`,
-            type: "danger",
-            insert: "top",
-            container: "top-center",
-            animationIn: ["animate__animated", "animate__fadeIn"],
-            animationOut: ["animate__animated", "animate__fadeOut"],
-            dismiss: {
-              duration: 5000,
-              onScreen: true,
-              pauseOnHover: true,
-              showIcon: true,
-            },
-          });
-        }
+  function onSubmit(data: InputType) {
+    signInWithEmailAndPassword(auth, data.email, data.password)
+      .then(() => {
+        router.push("/");
       })
       .catch((error) => {
+        console.log(error);
+        
         Store.addNotification({
-          title: "Client failed to connect to API",
-          message: "Possible network error or disruption",
+          title: "Error",
+          message: "Invalid email or password, ensure use of correct login service",
           type: "danger",
           insert: "top",
           container: "top-center",
@@ -189,131 +55,70 @@ export default function Users() {
             showIcon: true,
           },
         });
-
-        console.log(error);
       });
   }
 
-  if (user) {
-    return (
-      <Head>
-        <title>Login User | UNF App</title>
-      </Head>
-    );
-  } else {
-    return (
-      <>
-        <Head>
-          <title>Login User | UNF App</title>
-        </Head>
-        <ContentLayout>
-          <Hero></Hero>
+  return (
+    <RouteProtector pageName="Login User | UNF App">
+      <ContentLayout>
+        <Hero></Hero>
 
-          <RegisterElement onSubmit={handleSubmit(onSubmit)}>
-            <FormTitle>Login</FormTitle>
-            <InputName>Username</InputName>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <FormTitle>Login</FormTitle>
+          <InputName>Email</InputName>
+          <StyledInput
+            placeholder="Example@domain.com"
+            type="email"
+            {...register("email", {
+              required: true,
+            })}
+          />
+          {errors.email && <ErrorMessage>Email is required</ErrorMessage>}
+
+          <br />
+
+          <InputName>Password</InputName>
+          <PasswordField>
             <StyledInput
-              placeholder="John Doe"
-              {...register("name", {
+              placeholder="Password"
+              type={passwordShown ? "text" : "password"}
+              autoComplete="password"
+              {...register("password", {
                 required: true,
-                pattern: /^[\w\s]{1,20}$/i,
               })}
             />
-            {errors.name && (
-              <ErrorMessage>Alphanumeric characters only</ErrorMessage>
-            )}
+            <ShowPasswordButton
+              onClick={() => setPasswordShown((prev) => !prev)}
+            >
+              {passwordShown ? <Eye color="#444" /> : <EyeOff color="#444" />}
+            </ShowPasswordButton>
+          </PasswordField>
+          <ForgotPassword href={"/users/login/forgot"}>
+            Forgot password?
+          </ForgotPassword>
 
-            <br />
+          {errors.password && <ErrorMessage>Password is required</ErrorMessage>}
 
-            <InputName>N-Number</InputName>
-            <StyledInput
-              placeholder="n01234567"
-              {...register("nNumber", {
-                required: true,
-                pattern: /^[nN][0-9]{8}$/i,
-              })}
-            />
-            {errors.nNumber && <ErrorMessage>Invalid n-number</ErrorMessage>}
+          <br />
 
-            <br />
-
-            <Buttons>
-              <SubmitButton type="submit" value="Login" />
-              <RegisterButton href="/users/create">Register</RegisterButton>
-            </Buttons>
-          </RegisterElement>
-        </ContentLayout>
-      </>
-    );
-  }
+          <SubmitButton type="submit" value="Login" />
+        </Form>
+        <Services page="login" />
+      </ContentLayout>
+    </RouteProtector>
+  );
 }
 
-const RegisterButton = styled(Link)`
-  all: unset;
-  background-color: #2d2d2d;
-  color: white;
-  padding: 0.75rem;
-  font-weight: 600;
-
-  width: max-content;
-
-  cursor: pointer;
-
-  &:focus {
-    outline: 1px solid blue;
-  }
-`;
-
-const Buttons = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const ErrorMessage = styled.div`
-  color: #c30000;
-  font-weight: 600;
-  margin: 0.25rem 0;
-`;
-
-const FormTitle = styled.div`
+const ForgotPassword = styled(Link)`
+  text-decoration: none;
   color: black;
-  text-align: center;
-  margin-top: 1rem;
-  margin-bottom: 2rem;
-  font-size: 2rem;
-  font-weight: 800;
-`;
 
-const StyledInput = styled.input`
-  width: 15rem;
-
-  font-family: inherit;
-  font-weight: 600;
-  font-size: 1rem;
-  padding: 0.25rem;
-  margin: 0.25rem 0;
-
-  border: 2px solid #ccc;
-  border-radius: 6px;
-`;
-
-const InputName = styled.label`
-  font-size: 1.25rem;
-`;
-
-const SubmitButton = styled.input`
-  all: unset;
-  background-color: #1c1cc1;
-  color: white;
-  padding: 0.75rem;
-  font-weight: 600;
-
-  width: max-content;
-
+  font-size: 0.8rem;
+  margin: 0.1rem 0 0 0.25rem;
   cursor: pointer;
 
-  &:focus {
-    outline: 1px solid blue;
+  &:hover {
+    text-decoration: underline;
   }
 `;
 
@@ -328,17 +133,4 @@ const ContentLayout = styled.main`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
-
-const RegisterElement = styled.form`
-  background-color: #eee;
-  padding: 3rem 2rem;
-  padding-top: 1rem;
-
-  border-radius: 1rem;
-
-  display: flex;
-  flex-direction: column;
-
-  border: 2px solid #e8e8e8;
 `;
