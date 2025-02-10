@@ -1,40 +1,30 @@
-After cloning, don't forget to run "npm i"
+# Osprey Productivity Tools
 
-This project uses Next 13, TypeScript, and styled components.
+## Overview
+Osprey Productivity Tools is a web-based platform designed to assist students at the University of North Florida (UNF) by providing a suite of academic tools. The platform includes a notecard study tool, planner, and a campus map, consolidating essential resources in one convenient location. The goal is to enhance student productivity and campus navigation while providing an intuitive and accessible interface.
 
-This project requires the following back-end storage:
+## Intended Audience
+This project is intended for developers and testers who need to understand the system's implementation, functionality, and maintenance. The documentation details the underlying mechanisms, guiding developers on how to modify, enhance, and troubleshoot the software.
 
-UNF Buildings with data {
-number: string; Ex. "41",
-name: string; Ex. "Building 41 - Police Building",
-coordinates: key-value pair of {latitude: float, longitude, float}; Ex. { latitude: 30.26714525333742, longitude: -81.51225882517198 },
-OR plain columns of latitude: float; longitude: float;
-}
+## System Features
+### Notecard Tool
+- Users can create, modify, and delete notecard sets.
+- Public sets available for shared learning.
+- Flip-through functionality for study purposes.
 
-Notecard collections with data {
-title: string; Ex. "Software Engineering",
-description: string; Ex. "Study scrum concepts, unit testing, and how to break production",
-img: string; Ex. "https://images.unsplash.com/photo-1580894908361-967195033215?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-creator: key-value pair of {img: string, name: string}; Ex. {img: "https://images.unsplash.com/photo-1589254065878-42c9da997008?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80", name: "Wall-E" },
-OR plain columns of img: string; name: string;
+### Planner Tool
+- Users can add, edit, and delete tasks.
+- Tasks displayed on a calendar with different viewing modes.
+- Optional descriptions and reminders for tasks.
 
-Notecards with data {
-question: string; Ex. "How many programmers does it take to change a light bulb?"
-answer: string; Ex. "None, that's a hardware problem"
-}
-}
+### Campus Map Tool
+- Interactive UNF campus map.
+- Select buildings to view detailed floor plans.
+- Multiple search methods available for building selection.
 
-Calendar dates with data {
-  startTime: date;
-  endTime: date;
-  title: string;
-  description: string;
-}
+## Other
+- This tool is not officially endorsed by UNF but is designed specifically to assist its students.
+- Database constraints from Elephant SQL (PostgreSQL variant) must be considered during migration or structural changes.
 
-
-Non-critical:
-User data {
-  name: string;
-  img: string;
-  password: string;
-}
+## Contribution & Maintenance
+This software is offcially **ARCHIVED** as of 04/25/2023
